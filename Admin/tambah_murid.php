@@ -1,148 +1,267 @@
-
+<?php include('../koneksi.php');?>
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
 <head>
-<title>SMK TERPADU</title>
-<!-- Meta tag Keywords -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="SMK TERPADU" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--// Meta tag Keywords -->
-<!-- css files -->
-<link rel="stylesheet" href="../css/bootstrap.css"> <!-- Bootstrap-Core-CSS -->
-<link rel="stylesheet" href="../css/style.css" type="text/css" media="all" /> <!-- Style-CSS --> 
-<link rel="stylesheet" href="../css/font-awesome.css"> <!-- Font-Awesome-Icons-CSS -->
-<link rel="stylesheet" href="../css/swipebox.css">
-<link rel="stylesheet" href="../css/jquery-ui.css" />
-<link rel="stylesheet" href="../css/roma.css"/>
-<!-- //css files -->
-<!-- online-fonts -->
-<link href="//fonts.googleapis.com/css?family=Exo+2:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=cyrillic,latin-ext" rel="stylesheet">
-<link href="//fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext" rel="stylesheet">
-<!-- //online-fonts -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>SMP AGAPE INDAH</title>
+
+  <!-- Custom fonts and styles for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+  <link href="css/sb-admin-2.min.css" rel="stylesheet" />
 </head>
-<body>
 
-<?php include ('navigasi3.php'); ?>
+<body id="page-top">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+      </a>
 
-<div class="clearfix"> </div> 
-<!-- Murid -->
-<div id="Edit_Murid">
-	<div class="container">
-    <h3 class="w3l-title cl"> Murid </h3>
-    <div class="container margin-atas">
-	
-    <?php
-include('../koneksi.php');
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0" />
 
-// Cek apakah NISN sudah ada (jika sedang mengedit data)
-$NISN = isset($_GET['NISN']) ? $_GET['NISN'] : '';
-$data_lama = [];
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="index.php">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
 
-if ($NISN) {
-    $query = "SELECT * FROM `murid` WHERE `NISN` = '$NISN'";
-    $result = mysqli_query($koneksi, $query);
+      <!-- Divider -->
+      <hr class="sidebar-divider" />
 
-    if (mysqli_num_rows($result) > 0) {
-        $data_lama = mysqli_fetch_assoc($result);
-    }
-}
-?>
+      <!-- Data Sekolah Section -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Data Sekolah</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Data Sekolah</h6>
+            <a class="collapse-item" href="akun.php">Akun</a>
+            <a class="collapse-item" href="guru.php">Guru</a>
+            <a class="collapse-item" href="murid.php">Siswa</a>
+            <a class="collapse-item" href="kelas.php">Kelas</a>
+            <a class="collapse-item" href="mata_pelajaran.php">mata pelajaran</a>
+            <a class="collapse-item" href="Nilai.php">Nilai</a>
+          </div>
+        </div>
+      </li>
 
-   <form class="form-group" action="Proses_Tambah_Murid.php" method="post" onSubmit="">
-    <table class="table">
-    
-    <tr>
-        <td> NISN : </td>
-        <td> <input type="text" name="NISN" maxlength="10" onkeypress="return hanyaAngka(event)" size="10" required="" 
-                    value="<?php echo isset($data_lama['NISN']) ? $data_lama['NISN'] : ''; ?>"> </td>
-    </tr>
-    
-    <tr>
-        <td> Nama : </td>
-        <td> <input type="text" name="Nama" 
-                    value="<?php echo isset($data_lama['Nama']) ? $data_lama['Nama'] : ''; ?>"> </td>
-    </tr>
-    
-    <tr>
-        <td>Username:</td>
-        <td>
-            <input type="text" name="Username" id="usernameInput" readonly
-                   value="<?php echo isset($data_lama['Username']) ? $data_lama['Username'] : ''; ?>">
-            <button type="button" class="btn btn-secondary" onclick="openUsernameModal()">Pilih</button>
-        </td>
-    </tr>
-    
-    <tr>
-        <td> Alamat : </td>
-        <td> <input type="text" name="Kota" 
-                    value="<?php echo isset($data_lama['Kota']) ? $data_lama['Kota'] : ''; ?>"> </td>
-    </tr>
-    
-    <tr>
-        <td> Jenis Kelamin : </td>
-        <td>
-            <select name="Jenis_Kelamin">
-                <option value="Laki-Laki" <?php echo isset($data_lama['Jenis_Kelamin']) && $data_lama['Jenis_Kelamin'] == 'Laki-Laki' ? 'selected' : ''; ?>>Laki-Laki</option>
-                <option value="Perempuan" <?php echo isset($data_lama['Jenis_Kelamin']) && $data_lama['Jenis_Kelamin'] == 'Perempuan' ? 'selected' : ''; ?>>Perempuan</option>
-            </select>
-        </td>
-    </tr>
-    
-    <tr>
-        <td> Agama : </td>
-        <td>
-            <select name="Agama">
-                <option value="Islam" <?php echo isset($data_lama['Agama']) && $data_lama['Agama'] == 'Islam' ? 'selected' : ''; ?>>Islam</option>
-                <option value="Kristen" <?php echo isset($data_lama['Agama']) && $data_lama['Agama'] == 'Kristen' ? 'selected' : ''; ?>>Kristen</option>
-                <option value="Katolik" <?php echo isset($data_lama['Agama']) && $data_lama['Agama'] == 'Katolik' ? 'selected' : ''; ?>>Katolik</option>
-                <option value="Hindu" <?php echo isset($data_lama['Agama']) && $data_lama['Agama'] == 'Hindu' ? 'selected' : ''; ?>>Hindu</option>
-                <option value="Buddha" <?php echo isset($data_lama['Agama']) && $data_lama['Agama'] == 'Buddha' ? 'selected' : ''; ?>>Buddha</option>
-                <option value="Kong_Hu_Cu" <?php echo isset($data_lama['Agama']) && $data_lama['Agama'] == 'Kong_Hu_Cu' ? 'selected' : ''; ?>>Kong Hu Cu</option>
-            </select>
-        </td>
-    </tr>
+      <!-- Divider -->
+      <hr class="sidebar-divider" />
 
-    <tr>
-        <td>Kelas:</td>
-        <td>
-            <input type="text" name="id_kelas" id="kelasInput" readonly 
-                   value="<?php echo isset($data_lama['id_kelas']) ? $data_lama['id_kelas'] : ''; ?>">
-            <button type="button" class="btn btn-secondary" onclick="openKelasModal()">Pilih</button>
-        </td>
-    </tr>
-    </table>
-    
-    <button class="btn btn-primary"> Simpan </button>
-    <a href="murid.php" class="btn btn-primary"> Batal </a>
-</form>
+      <!-- Nav Item - Renungan -->
+      <li class="nav-item">
+        <a class="nav-link" href="renungan.php">
+          <i class="fas fa-fw fa-book"></i>
+          <span>Renungan</span>
+        </a>
+      </li>
 
+      <!-- Sidebar Toggler -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+    </ul>
+    <!-- End of Sidebar -->
 
-    
-    </div>
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <!-- Main Content -->
+      <div id="content">
         
-    <div class="clearfix margin-bawah"></div>
-    </div>
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <h4 class="modal-title mx-auto">Form Tambah Siswa</h4>
+
+  <!-- Message Icon with separator -->
+  <a class="nav-link" href="pesan.php">
+    <i class="fas fa-envelope fa-fw"></i>
+    <!-- Counter - Messages (Optional) -->
+  </a>
+
+  <!-- Divider between Message and User icons -->
+  <div class="topbar-divider d-none d-sm-block"></div>
+
+  <!-- User Dropdown (aligned to right) -->
+  <ul class="navbar-nav ml-auto">
+    <?php
+    @session_start();
+    if (empty($_SESSION['username'])) {
+      echo "
+      <li class='nav-item'>
+        <a class='nav-link' href='#' data-toggle='modal' data-target='#myModal2'><i class='fa fa-sign-in' aria-hidden='true'></i> Masuk</a>
+      </li>";
+    } else {
+      echo "
+      <li class='nav-item dropdown'>
+        <a class='nav-link dropdown-toggle user-dropdown' href='#' id='userDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+          <span class='mr-2 d-none d-lg-inline text-gray-600 small'>$_SESSION[username]</span>
+          <i class='fas fa-user'></i>
+        </a>
+        <div class='dropdown-menu dropdown-menu-right shadow animated--grow-in' aria-labelledby='userDropdown'>
+          <a class='dropdown-item' href='../logout.php'><i class='fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>Logout</a>
+        </div>
+      </li>";
+    }
+    ?>
+  </ul>
+</nav>
+<!-- End of Topbar -->
+
+
+        
+ <!-- Konten -->
+<!-- Input Guru -->
+<!-- Konten -->
+<div class="container-fluid">
+    <?php 
+    include ('../koneksi.php');
+    $tampil = "SELECT * FROM `akun` WHERE `level` = '3' ORDER BY `username` ASC";
+    $hasil = mysqli_query($koneksi, $tampil);
+    ?>
+
+    <form class="form-group" action="Proses_Tambah_Murid.php" method="post">
+        <!-- Input NIP -->
+        <div class="form-group row">
+            <label for="inputnis" class="col-sm-2 col-form-label">NISN</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputnis" name="NISN" required>
+            </div>
+        </div>
+
+        
+        <!-- Input Nama -->
+        <div class="form-group row">
+            <label for="inputnama" class="col-sm-2 col-form-label">Nama</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputnama" name="Nama" required>
+            </div>
+        </div>
+
+        <!-- Username Selection -->
+        <div class="form-group row">
+            <label for="selectedUsername" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="selectedUsername" name="Username" readonly>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-secondary" onclick="openAccountModal()">Pilih</button>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputalamat" class="col-sm-2 col-form-label">Alamat</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="inputalamat" name="Kota" rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- Jenis Kelamin -->
+        <div class="form-group row">
+            <label for="jenis_kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="jenis_kelamin" name="Jenis_Kelamin">
+                    <option value="Laki-Laki" selected>Laki-Laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </div>
+        </div>
+
+                <!-- Kolom Agama -->
+					<div class="form-group row">
+						<label for="agama" class="col-sm-2 col-form-label">Agama</label>
+						<div class="col-sm-10">
+							<select name="Agama" class="form-control" id="agama">
+								<?php
+									$agama_options = ["Islam", "Kristen", "Katolik", "Hindu", "Buddha", "Kong Hu Cu"];
+									foreach ($agama_options as $agama) {
+										$selected = ($data['agama'] == $agama) ? 'selected' : '';
+										echo "<option value='$agama' $selected>$agama</option>";
+									}
+								?>
+							</select>
+						</div>
+					</div>
+
+                        <!-- Kelas -->
+                        <div class="form-group row">
+                        <label for="kelasInput" class="col-sm-2 col-form-label">Kelas</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="id_kelas" id="kelasInput" readonly>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-secondary" onclick="openKelasModal()">Pilih</button>
+                        </div>
+                    </div>
+
+        <!-- Submit and Cancel Buttons -->
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                <a href="murid.php" class="btn btn-secondary ml-2">Batal</a>
+            </div>
+        </div>
+    </form>
 </div>
 
-<!-- Modal untuk Pilih Kelas -->
-<div id="kelasModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeKelasModal()">&times;</span>
-        <h3>Pilih Kelas</h3>
-        
-        <table class="table table-bordered text-center">
+<!-- Overlay dan Modal untuk Pilih Username -->
+<div id="modalOverlay" onclick="closeAccountModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
+<div id="accountModal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, 0); background:white; padding:20px; border-radius:8px;">
+    <h3>Pilih Username</h3>
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td><b>ID Kelas</b></td>
-                <td><b>Nama Kelas</b></td>
-                <td><b>Aksi</b></td>
+                <th>Username</th>
+                <th>Aksi</th>
             </tr>
+        </thead>
+        <tbody>
+            <?php 
+            while ($data = mysqli_fetch_array($hasil)) {
+                echo "<tr>";
+                echo "<td>" . $data['username'] . "</td>";
+                echo "<td><button type='button' class='btn btn-primary' onclick=\"selectUsername('" . $data['username'] . "')\">Pilih</button></td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-secondary" onclick="closeAccountModal()">Tutup</button>
+</div>
 
+<!-- Overlay dan Modal untuk Pilih Kelas -->
+<div id="kelasModalOverlay" onclick="closeKelasModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
+<div id="kelasModal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, 0); background:white; padding:20px; border-radius:8px;">
+    <h3>Pilih Kelas</h3>
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th>ID Kelas</th>
+                <th>Nama Kelas</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
             <?php
-            // Query untuk menampilkan data kelas di modal
-            include('../koneksi.php');
             $tampil_kelas = "SELECT * FROM `kelas`";
             $hasil_kelas = mysqli_query($koneksi, $tampil_kelas);
 
@@ -150,244 +269,112 @@ if ($NISN) {
                 echo "<tr>
                         <td>{$data_kelas['id_kelas']}</td>
                         <td>{$data_kelas['nama_kelas']}</td>
-                        <td><button type='button' onclick=\"pilihKelas('{$data_kelas['id_kelas']}', '{$data_kelas['nama_kelas']}')\" class='btn btn-primary'>Pilih</button></td>
-                    </tr>";
+                        <td><button type='button' class='btn btn-primary' onclick=\"pilihKelas('{$data_kelas['id_kelas']}')\">Pilih</button></td>
+                      </tr>";
             }
             ?>
-        </table>
-    </div>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-secondary" onclick="closeKelasModal()">Tutup</button>
 </div>
 
-<!-- Modal untuk Pilih Username -->
-<div id="usernameModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeUsernameModal()">&times;</span>
-        <h3>Pilih Username (Level 3)</h3>
-        
-        <table class="table table-bordered text-center">
-            <tr>
-                <td><b>Username</b></td>
-                <td><b>Aksi</b></td>
-            </tr>
-
-            <?php
-            // Query untuk menampilkan akun dengan level 3
-            include('../koneksi.php');
-            $tampil_akun = "SELECT * FROM `akun` WHERE `level` = 3";  // Pastikan kolom level ada di tabel akun
-            $hasil_akun = mysqli_query($koneksi, $tampil_akun);
-
-            while ($data_akun = mysqli_fetch_array($hasil_akun)) {
-                echo "<tr>
-                        <td>{$data_akun['username']}</td>
-                        <td><button type='button' onclick=\"pilihUsername('{$data_akun['username']}')\" class='btn btn-primary'>Pilih</button></td>
-                    </tr>";
-            }
-            ?>
-        </table>
-    </div>
-</div>
-
+<!-- JavaScript untuk membuka dan menutup modal serta memilih username dan kelas -->
 <script>
-// Fungsi untuk membuka modal kelas
-function openKelasModal() {
-    document.getElementById('kelasModal').style.display = 'block';
-}
+    // Fungsi untuk membuka dan menutup modal username
+    function openAccountModal() {
+        document.getElementById("modalOverlay").style.display = "block";
+        document.getElementById("accountModal").style.display = "block";
+    }
 
-// Fungsi untuk menutup modal kelas
-function closeKelasModal() {
-    document.getElementById('kelasModal').style.display = 'none';
-}
+    function closeAccountModal() {
+        document.getElementById("modalOverlay").style.display = "none";
+        document.getElementById("accountModal").style.display = "none";
+    }
 
-// Fungsi untuk memilih kelas dan memasukkan ID kelas ke input
-function pilihKelas(id_kelas, nama_kelas) {
-    document.getElementById('kelasInput').value = id_kelas;  // Mengisi input dengan ID kelas
-    closeKelasModal();  // Menutup modal setelah memilih
-}
+    function selectUsername(username) {
+        document.getElementById("selectedUsername").value = username;
+        closeAccountModal();
+    }
 
+    // Fungsi untuk membuka dan menutup modal kelas
+    function openKelasModal() {
+        document.getElementById("kelasModalOverlay").style.display = "block";
+        document.getElementById("kelasModal").style.display = "block";
+    }
 
-// Fungsi untuk membuka modal
-function openGuruModal() {
-    document.getElementById('guruModal').style.display = 'block';
-}
+    function closeKelasModal() {
+        document.getElementById("kelasModalOverlay").style.display = "none";
+        document.getElementById("kelasModal").style.display = "none";
+    }
 
-// Fungsi untuk menutup modal
-function closeGuruModal() {
-    document.getElementById('guruModal').style.display = 'none';
-}
-
-// Fungsi untuk memilih guru dan memasukkan NIP ke input form
-function pilihGuru(nip) {
-    // Masukkan NIP guru ke input
-    document.getElementById('guruInput').value = nip;
-    closeGuruModal(); // Menutup modal setelah memilih
-}
-
-
-// Fungsi untuk membuka modal username
-function openUsernameModal() {
-    document.getElementById('usernameModal').style.display = 'block';
-}
-
-// Fungsi untuk menutup modal username
-function closeUsernameModal() {
-    document.getElementById('usernameModal').style.display = 'none';
-}
-
-// Fungsi untuk memilih username dan memasukkan ke input
-function pilihUsername(username) {
-    document.getElementById('usernameInput').value = username;  // Mengisi input dengan username
-    closeUsernameModal();  // Menutup modal setelah memilih
-}
-
+    // Fungsi untuk memilih kelas dan memasukkan ID kelas ke input
+    function pilihKelas(id_kelas) {
+        document.getElementById("kelasInput").value = id_kelas;
+        closeKelasModal();
+    }
 </script>
 
-<style>
-/* Style untuk modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-}
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 20% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 70%;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-</style>
-
+<!-- JavaScript untuk memastikan input hanya angka -->
 <script type="text/javascript">
 function hanyaAngka(evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode
-    if (charCode > 31 && (charCode < 48 || charCode > 57))
-
-    return false;
-    return true;
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    return (charCode >= 48 && charCode <= 57);
 }
 </script>
 
-<!-- //Murid -->
 
-<!-- Footer Section -->
-<footer>
-  <div class="footer">
-    <!-- Info Sekolah -->
-    <div class="footer-section">
-      <h3>SMP Agape Indah</h3>
-      <p class="fp">
-        SMP Agape Indah adalah sekolah menengah pertama yang berlokasi di [lokasi Anda]. Sama seperti SMP lainnya di Indonesia, SMP Agape Indah menawarkan program pendidikan untuk siswa dari kelas VII hingga kelas IX.
-      </p>
-      <p class="fp"><strong>Alamat:</strong> Jl. Contoh, Kota Contoh, Provinsi Contoh, Indonesia</p>
-      <p class="fp"><strong>Email:</strong> smpagapeindah@example.com</p>
-      <div class="social-icons">
+<!-- //Admin Pannel -->
+<!-- Akhir dari Konten -->
 
-      <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17445.841308163348!2d123.60862167630117!3d-10.16776760510314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c56835992a6fbf3%3A0xc4b28a965a40d8b!2sSekolah%20Menengah%20Pertama%20Agape%20Indah!5e0!3m2!1sid!2sid!4v1730387975655!5m2!1sid!2sid"
-      class="responsive-map"
-      style="border: 0"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-    ></iframe> 
+
+
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Ilmu komputer 2024</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+    </div>
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Footer Bottom -->
-  <div class="footer-bottom">
-    &copy; Copyright SMP Agape Indah 2024. All Rights Reserved.
-  </div>
-</footer>
-  <!-- //footer -->
-
-<!-- js-scripts -->			
-<!-- js-files -->
-<script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.js"></script> <!-- Necessary-JavaScript-File-For-Bootstrap --> 
-<!-- //js-files -->
-<!-- Baneer-js -->
-
-
-
-<!-- smooth scrolling -->
-<script src="../js/SmoothScroll.min.js"></script>
-<!-- //smooth scrolling -->
-<!-- stats -->
-<script type="text/javascript" src="../js/numscroller-1.0.js"></script>
-<!-- //stats -->
-<!-- moving-top scrolling -->
-<script type="text/javascript" src="../js/move-top.js"></script>
-<script type="text/javascript" src="../js/easing.js"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-		});
-	});
-</script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-		/*
-			var defaults = {
-			containerID: 'toTop', // fading element id
-			containerHoverID: 'toTopHover', // fading element hover id
-			scrollSpeed: 1200,
-			easingType: 'linear' 
-			};
-		*/								
-		$().UItoTop({ easingType: 'easeOutQuart' });
-		});
-	</script>
-	<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-<!-- //moving-top scrolling -->
-<!-- gallery popup -->
-<script src="../js/jquery.swipebox.min.js"></script> 
-<script type="text/javascript">
-jQuery(function($) {
-	$(".swipebox").swipebox();
-});
-</script>
-<!-- //gallery popup -->
-<!--/script-->
-	<script src="../js/simplePlayer.js"></script>
-			<script>
-				$("document").ready(function() {
-					$("#video").simplePlayer();
-				});
-			</script>
-<!-- //Baneer-js -->
-<!-- Calendar -->
-<script src="../js/jquery-ui.js"></script>
-	<script>
-	  $(function() {
-		$( "#datepicker" ).datepicker();
-	 });
-	</script>
-<!-- //Calendar -->	
-
-<!-- //js-scripts -->
+  <!-- Scripts -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/sb-admin-2.min.js"></script>
 </body>
 </html>

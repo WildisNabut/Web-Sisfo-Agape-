@@ -92,7 +92,7 @@ include ('../koneksi.php');
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Data Guru</h4>
+  <h4 class="modal-title mx-auto">Data Siswa </h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -132,7 +132,7 @@ include ('../koneksi.php');
 
 
         <!-- konten yang ingin di rubah -->
-            <div class="container-fluid">
+  <div class="container-fluid">
          <!-- Murid -->
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between align-items-center">
@@ -198,6 +198,11 @@ include ('../koneksi.php');
 
       <!-- End of Main Content -->
 
+    </div>
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -207,13 +212,6 @@ include ('../koneksi.php');
         </div>
       </footer>
       <!-- End of Footer -->
-    </div>
-    <!-- End of Content Wrapper -->
-
-
-  </div>
-  <!-- End of Page Wrapper -->
-
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>

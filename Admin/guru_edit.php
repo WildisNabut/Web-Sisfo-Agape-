@@ -134,7 +134,6 @@
 <!-- Edit Guru -->
 <div id="Edit_Akun">
     <div class="container">
-        <h3 class="w3l-title cl">Edit Guru</h3>
         <div class="container margin-atas">
             
             <?php
@@ -222,7 +221,7 @@
                 <div class="form-group row">
                     <div class="col-sm-10 offset-sm-2">
                         <button type="submit" class="btn btn-primary" id="Simpan">Simpan</button>
-						<a href="guru.php" class="btn btn-secondary ml-2">Batal</a>
+						          <a href="guru.php" class="btn btn-secondary ml-2">Batal</a>
                     </div>
                 </div>
             </form>

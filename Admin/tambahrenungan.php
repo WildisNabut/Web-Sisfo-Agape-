@@ -1,4 +1,7 @@
-<?php include('../koneksi.php');?>
+
+<?php
+include ('../koneksi.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,7 +93,9 @@
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Form Tambah Guru</h4>
+  <h4 class="modal-title mx-auto">Form Tambah data Renungan
+
+  </h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -126,147 +131,64 @@
   </ul>
 </nav>
 <!-- End of Topbar -->
+        <!-- End of Topbar -->
 
 
         
- <!-- Konten -->
-<!-- Input Guru -->
-<!-- Konten -->
-<div class="container-fluid">
-    <?php 
-    include ('../koneksi.php');
-    $tampil = "SELECT * FROM `akun` WHERE `level` = '2' ORDER BY `username` ASC";
-    $hasil = mysqli_query($koneksi, $tampil);
-    ?>
+        <!-- konten yang ingin di rubah -->
+        <div class="container-fluid">
+    
+    <form method="POST" action="trenungan.php">
 
-    <form class="form-group" action="Proses_Tambah_Guru.php" method="post">
-        <!-- Input NIP -->
+        <!-- Judul Renungan -->
         <div class="form-group row">
-            <label for="inputnip" class="col-sm-2 col-form-label">NIP</label>
+            <label for="inputjudul" class="col-sm-2 col-form-label">Judul</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputnip" name="nip" required>
+                <input type="text" class="form-control" id="inputjudul" name="judul">
             </div>
         </div>
+
+        <!-- Judul Renungan -->
+        <div class="form-group row">
+            <label for="inputayat" class="col-sm-2 col-form-label">Ayat Alkitab</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputjudul" name="ayat">
+            </div>
+        </div>
+
 
         
-        <!-- Input Nama -->
+        <!-- Tanggal Pengumuman -->
         <div class="form-group row">
-            <label for="inputnama" class="col-sm-2 col-form-label">Nama</label>
+            <label for="inputtanggal" class="col-sm-2 col-form-label">Tanggal</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputnama" name="nama_guru" required>
+                <input type="date" class="form-control" id="inputtanggal" name="tanggal">
             </div>
         </div>
 
-        <!-- Username Selection -->
-        <div class="form-group row">
-            <label for="selectedUsername" class="col-sm-2 col-form-label">Username</label>
-            <div class="col-sm-8">
-                <input type="text" class="form-control" id="selectedUsername" name="Username" readonly>
-            </div>
-            <div class="col-sm-2">
-                <button type="button" class="btn btn-secondary" onclick="openAccountModal()">Pilih</button>
-            </div>
-        </div>
+        <!-- Isi Renungan Harian -->
 
-        <!-- No Telepon -->
+        
+        <!-- Deskripsi Pengumuman -->
         <div class="form-group row">
-            <label for="No_HP" class="col-sm-2 col-form-label">No Telepon</label>
+            <label for="inputrenungan" class="col-sm-2 col-form-label">Renungan</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="No_HP" name="no_tlp" onkeypress="return hanyaAngka(event)">
+                <textarea class="form-control" id="inputrenungan" name="isi" rows="4"></textarea>
             </div>
         </div>
+        
+        
 
-        <!-- Jenis Kelamin -->
+        <!-- Tombol Submit -->
         <div class="form-group row">
-            <label for="jenis_kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
             <div class="col-sm-10">
-                <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
-                    <option value="Laki-Laki" selected>Laki-Laki</option>
-                    <option value="Perempuan">Perempuan</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Agama -->
-        <div class="form-group row">
-            <label for="agama" class="col-sm-2 col-form-label">Agama</label>
-            <div class="col-sm-10">
-                <select class="form-control" id="agama" name="agama">
-                    <option value="Islam" selected>Islam</option>
-                    <option value="Kristen">Kristen</option>
-                    <option value="Katolik">Katolik</option>
-                    <option value="Hindu">Hindu</option>
-                    <option value="Buddha">Buddha</option>
-                    <option value="Kong_Hu_Cu">Kong Hu Cu</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Submit and Cancel Buttons -->
-        <div class="form-group row">
-            <div class="col-sm-10 offset-sm-2">
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="guru.php" class="btn btn-secondary ml-2">Batal</a>
+                <button type="submit" class="btn btn-primary">Tambah Data</button>
             </div>
         </div>
     </form>
 </div>
 
-<!-- Overlay dan Modal untuk menampilkan tabel akun -->
-<div id="modalOverlay" onclick="closeAccountModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
-<div id="accountModal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, 0); background:white; padding:20px; border-radius:8px;">
-    <h3>Pilih Username</h3>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-            while ($data = mysqli_fetch_array($hasil)) {
-                echo "<tr>";
-                echo "<td>" . $data['username'] . "</td>";
-                echo "<td><button type='button' class='btn btn-primary' onclick=\"selectUsername('" . $data['username'] . "')\">Pilih</button></td>";
-                echo "</tr>";
-            }
-            ?>
-        </tbody>
-    </table>
-    <button type="button" class="btn btn-secondary" onclick="closeAccountModal()">Tutup</button>
-</div>
-
-<!-- JavaScript untuk membuka dan menutup modal serta memilih username -->
-<script>
-    function openAccountModal() {
-        document.getElementById("modalOverlay").style.display = "block";
-        document.getElementById("accountModal").style.display = "block";
-    }
-
-    function closeAccountModal() {
-        document.getElementById("modalOverlay").style.display = "none";
-        document.getElementById("accountModal").style.display = "none";
-    }
-
-    function selectUsername(username) {
-        document.getElementById("selectedUsername").value = username;
-        closeAccountModal();
-    }
-</script>
-
-<!-- JavaScript untuk memastikan input hanya angka -->
-<script type="text/javascript">
-function hanyaAngka(evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode;
-    return (charCode >= 48 && charCode <= 57);
-}
-</script>
-
-
-<!-- //Admin Pannel -->
-<!-- Akhir dari Konten -->
-
+        <!-- akhir dari konten -->
 
 
 

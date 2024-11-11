@@ -92,7 +92,7 @@ include ('../koneksi.php');
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Kontrol</h4>
+  <h4 class="modal-title mx-auto">Kontrol Akun </h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
