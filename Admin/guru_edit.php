@@ -1,4 +1,11 @@
 <?php include('../koneksi.php');?>
+<?php
+session_start();
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php"); // Redirect to the login page
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>SMP AGAPE INDAH</title>
+  <title>SMP AGAPE INDAH - Edit Guru</title>
 
   <!-- Custom fonts and styles for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -56,7 +63,6 @@
             <a class="collapse-item" href="murid.php">Siswa</a>
             <a class="collapse-item" href="kelas.php">Kelas</a>
             <a class="collapse-item" href="mata_pelajaran.php">mata pelajaran</a>
-            <a class="collapse-item" href="Nilai.php">Nilai</a>
           </div>
         </div>
       </li>
@@ -71,7 +77,16 @@
           <span>Renungan</span>
         </a>
       </li>
+      <!-- Divider -->
+      <hr class="sidebar-divider" />
 
+      <!-- Nav Item - Renungan -->
+      <li class="nav-item">
+        <a class="nav-link" href="pengumuman.php">
+          <i class="fas fa-fw fa-fill"></i>
+          <span>Pengumuman</span>
+        </a>
+      </li>
       <!-- Sidebar Toggler -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -134,7 +149,6 @@
 <!-- Edit Guru -->
 <div id="Edit_Akun">
     <div class="container">
-        <h3 class="w3l-title cl">Edit Guru</h3>
         <div class="container margin-atas">
             
             <?php
@@ -168,19 +182,6 @@
                     <label for="namaGuru" class="col-sm-2 col-form-label">Nama Guru</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="namaGuru" name="nama_guru" value="<?php echo $data['nama_guru']; ?>">
-                    </div>
-                </div>
-
-                <!-- Select Username -->
-                <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label">Username</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" id="username" name="Username">
-                            <option value="<?php echo $data['username']; ?>" selected><?php echo $data['username']; ?></option>
-                            <?php while ($data_akun = mysqli_fetch_array($hasil_akun)) { ?>
-                                <option value="<?php echo $data_akun['username']; ?>"><?php echo $data_akun['username']; ?></option>
-                            <?php } ?>
-                        </select>
                     </div>
                 </div>
 
@@ -222,7 +223,7 @@
                 <div class="form-group row">
                     <div class="col-sm-10 offset-sm-2">
                         <button type="submit" class="btn btn-primary" id="Simpan">Simpan</button>
-						<a href="guru.php" class="btn btn-secondary ml-2">Batal</a>
+						          <a href="guru.php" class="btn btn-secondary ml-2">Batal</a>
                     </div>
                 </div>
             </form>

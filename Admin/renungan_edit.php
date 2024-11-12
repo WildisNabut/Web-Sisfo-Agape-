@@ -1,7 +1,4 @@
-<?php
-include ('../koneksi.php');
-?>
-
+<?php include('../koneksi.php');?>
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
@@ -9,6 +6,7 @@ if (!isset($_SESSION["username"])) {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +15,7 @@ if (!isset($_SESSION["username"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Smp Agape Indah</title>
+  <title>SMP AGAPE INDAH</title>
 
   <!-- Custom fonts and styles for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -110,7 +108,7 @@ if (!isset($_SESSION["username"])) {
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Data Siswa </h4>
+  <h4 class="modal-title mx-auto">Form Edit Data Siswa</h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -149,75 +147,119 @@ if (!isset($_SESSION["username"])) {
         <!-- End of Topbar -->
 
 
-        <!-- konten yang ingin di rubah -->
-  <div class="container-fluid">
-         <!-- Murid -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <a href="tambah_murid.php" class="btn btn-primary">Tambah Data</a>
-        <form class="form-inline" method="POST" action="">
-            <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
+        
+<div class="container-fluid">
+    <div id="Edit_Akun">
+    <?php
+      $Kode = $_GET['kode'];
+      $query = mysqli_query($koneksi, "SELECT * FROM renungan WHERE judul='$Kode'");
+      $data = mysqli_fetch_array($query);
+      ?>
+        <div class="container">
+            <div class="container margin-atas">
+
+                <form class="form-group" action="Proses_edit_renungan.php" method="post">
+
+                    <!-- Judul -->
+                    <div class="form-group row">
+                        <label for="inputJudul" class="col-sm-2 col-form-label">Judul</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="judul" maxlength="100" placeholder="<?php echo "$data[judul]"; ?>">
+                        </div>
+                    </div>
+
+                    <!-- Ayat Alkitab -->
+                    <div class="form-group row">
+                        <label for="inputAyat" class="col-sm-2 col-form-label">Ayat Alkitab</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="ayat" placeholder="Ayat Alkitab" value="<?php echo $data['ayat']; ?>" required>
+                        </div>
+                    </div>
+
+                    <!-- Tanggal -->
+                    <div class="form-group row">
+                        <label for="inputTanggal" class="col-sm-2 col-form-label">Tanggal</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" name="tanggal" value="<?php echo $data['tanggal']; ?>" required>
+                        </div>
+                    </div>
+
+                    <!-- Isi Renungan -->
+                    <div class="form-group row">
+                        <label for="inputIsi" class="col-sm-2 col-form-label">Isi</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="isi" rows="5" placeholder="Isi Renungan" required><?php echo $data['isi']; ?></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Simpan dan Batal -->
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <a href="renungan.php" class="btn btn-secondary">Batal</a>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>NISN</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Agama</th>
-                        <th>Kelas</th>
-                        <th colspan="2"><b>Aksi</b></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $tampil = "SELECT * FROM `murid` ORDER BY `nisn` ASC";
-                    $hasil = mysqli_query($koneksi, $tampil);
 
-                    while ($data = mysqli_fetch_array($hasil)) {
-                        $tampil_kelas = "SELECT * FROM `kelas` WHERE id_kelas = '$data[id_kelas]'";
-                        $hasil_kelas = mysqli_query($koneksi, $tampil_kelas);
-                        $data_kelas = mysqli_fetch_array($hasil_kelas);
+    <!-- Modal untuk Pilih Kelas -->
+    <div id="kelasModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeKelasModal()">&times;</span>
+            <h3>Pilih Kelas</h3>
+            <table class="table table-bordered text-center">
+                <tr>
+                    <td><b>ID Kelas</b></td>
+                    <td><b>Nama Kelas</b></td>
+                    <td><b>Aksi</b></td>
+                </tr>
+                <?php
+                $tampil_kelas = "SELECT * FROM `kelas`";
+                $hasil_kelas = mysqli_query($koneksi, $tampil_kelas);
 
-                        echo "<tr>
-                            <td>$data[nisn]</td>
-                            <td class='text-left'>$data[nama_murid]</td>
-                            <td>$data[kota]</td>
-                            <td>$data[jenkel]</td>
-                            <td>$data[agama]</td>
-                            <td class='text-center'>$data_kelas[nama_kelas]</td>
-                            <td width='80'><a href='murid_edit.php?kode=$data[nisn]' class='btn btn-success'>Edit</a></td>
-                            <td width='80'><a href='Hapus_Murid.php?kode=$data[nisn]' class='btn btn-danger'>Hapus</a></td>
-                        </tr>";
-                    }
-                    ?>
-                </tbody>
+                while ($data_kelas = mysqli_fetch_array($hasil_kelas)) {
+                    echo "<tr>
+                            <td>{$data_kelas['id_kelas']}</td>
+                            <td>{$data_kelas['nama_kelas']}</td>
+                            <td><button type='button' onclick=\"pilihKelas('{$data_kelas['id_kelas']}')\" class='btn btn-primary'>Pilih</button></td>
+                          </tr>";
+                }
+                ?>
             </table>
         </div>
-        <div class="clearfix margin-bawah"></div>
     </div>
 </div>
-<!-- //Murid -->
 
 
+<script>
+// Fungsi untuk membuka dan menutup modal
+function openKelasModal() {
+    document.getElementById('kelasModal').style.display = 'block';
+}
+function closeKelasModal() {
+    document.getElementById('kelasModal').style.display = 'none';
+}
+function openUsernameModal() {
+    document.getElementById('usernameModal').style.display = 'block';
+}
+function closeUsernameModal() {
+    document.getElementById('usernameModal').style.display = 'none';
+}
 
-      <!-- End of Main Content -->
+// Fungsi untuk memilih kelas dan memasukkan ID kelas ke input
+function pilihKelas(id_kelas) {
+    document.getElementById('kelasInput').value = id_kelas;
+    closeKelasModal();
+}
+
+// Fungsi untuk memilih username dan memasukkan ke input
+function pilihUsername(username) {
+    document.getElementById('usernameInput').value = username;
+    closeUsernameModal();
+}
+</script>
+
 
     </div>
     <!-- End of Content Wrapper -->
-  </div>
-  <!-- End of Page Wrapper -->
 
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
@@ -228,6 +270,10 @@ if (!isset($_SESSION["username"])) {
         </div>
       </footer>
       <!-- End of Footer -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>

@@ -1,6 +1,13 @@
 <?php
 include ('../koneksi.php');
 ?>
+<?php
+session_start();
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php"); // Redirect to the login page
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +16,7 @@ include ('../koneksi.php');
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>SB Admin 2 - Dashboard</title>
+  <title>SMP AGAPE INDAH - Akun</title>
 
   <!-- Custom fonts and styles for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -92,7 +99,7 @@ include ('../koneksi.php');
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Kontrol</h4>
+  <h4 class="modal-title mx-auto">Kontrol Akun </h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -194,6 +201,9 @@ include ('../koneksi.php');
 	  <!-- akhir dari konten -->
       <!-- End of Main Content -->
 
+    </div>
+    <!-- End of Content Wrapper -->
+     
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -203,8 +213,6 @@ include ('../koneksi.php');
         </div>
       </footer>
       <!-- End of Footer -->
-    </div>
-    <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
 

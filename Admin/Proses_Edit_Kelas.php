@@ -2,28 +2,30 @@
 include('../koneksi.php');
 
 // Periksa apakah form telah disubmit
+$notification = ""; // Variabel untuk menyimpan status notifikasi
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Ambil data dari form
-    $id_kelas = mysqli_real_escape_string($koneksi, $_POST['id_kelas']);
-    $nama_kelas = mysqli_real_escape_string($koneksi, $_POST['nama_kelas']);
+    $judul = mysqli_real_escape_string($koneksi, $_POST['judul']);
+    $ayat = mysqli_real_escape_string($koneksi, $_POST['ayat']);
+    $tanggal = mysqli_real_escape_string($koneksi, $_POST['tanggal']);
+    $isi = mysqli_real_escape_string($koneksi, $_POST['isi']);
+    $kode = $_GET['kode']; // Kode untuk identifikasi data yang akan diubah
 
-    // Validasi data (misalnya, memastikan nama kelas tidak kosong)
-    if (empty($nama_kelas)) {
-        echo "<script>alert('Nama Kelas tidak boleh kosong.'); window.location.href='edit_kelas.php?kode=$id_kelas';</script>";
-        exit;
-    }
+    // Perbarui data di database
+    $sqlstr = "UPDATE renungan SET judul='$judul', ayat='$ayat', tanggal='$tanggal', isi='$isi' WHERE judul='$kode'";
 
-    // Update data kelas di database
-    $update = mysqli_query($koneksi, "UPDATE kelas SET nama_kelas = '$nama_kelas' WHERE id_kelas = '$id_kelas'");
-
-    if ($update) {
-        echo "<script>alert('Data kelas berhasil diupdate.'); window.location.href='kelas.php';</script>";
+    if (mysqli_query($koneksi, $sqlstr)) {
+        $notification = "success"; // Notifikasi sukses
     } else {
-        echo "<script>alert('Gagal mengupdate data kelas.'); window.location.href='edit_kelas.php?kode=$id_kelas';</script>";
+        $notification = "failed"; // Notifikasi gagal
     }
-} else {
-    // Jika tidak melalui metode POST, alihkan ke halaman kelas
-    header("Location: kelas.php");
-    exit;
+}
+
+// Ambil data untuk form edit
+if (isset($_GET['kode'])) {
+    $kode = $_GET['kode'];
+    $query = mysqli_query($koneksi, "SELECT * FROM renungan WHERE judul='$kode'");
+    $data = mysqli_fetch_array($query);
 }
 ?>

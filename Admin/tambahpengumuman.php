@@ -105,7 +105,7 @@ if (!isset($_SESSION["username"])) {
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Form Tambah Siswa</h4>
+  <h4 class="modal-title mx-auto">Form Tambah Pengumuman</h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -140,197 +140,70 @@ if (!isset($_SESSION["username"])) {
     ?>
   </ul>
 </nav>
+
 <!-- End of Topbar -->
 
 
         
- <!-- Konten -->
-<!-- Input Guru -->
 <!-- Konten -->
 <div class="container-fluid">
-    <?php 
-    include ('../koneksi.php');
-    $tampil = "SELECT * FROM `akun` WHERE `level` = '3' ORDER BY `username` ASC";
-    $hasil = mysqli_query($koneksi, $tampil);
-    ?>
-
-    <form class="form-group" action="Proses_Tambah_Murid.php" method="post">
-        <!-- Input NIP -->
+    <form method="POST" action="tpengumuman.php">
+        <!-- Judul Pengumuman -->
         <div class="form-group row">
-            <label for="inputnis" class="col-sm-2 col-form-label">NISN</label>
+            <label for="inputjudul" class="col-sm-2 col-form-label">Judul</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputnis" name="NISN" required>
+                <input type="text" class="form-control" id="inputjudul" name="judul">
+            </div>
+        </div>
+
+
+        <!-- Deskripsi Pengumuman -->
+        <div class="form-group row">
+            <label for="inputdeskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="inputdeskripsi" name="deskripsi" rows="4"></textarea>
             </div>
         </div>
 
         
-        <!-- Input Nama -->
+        <!-- Tanggal Pengumuman -->
         <div class="form-group row">
-            <label for="inputnama" class="col-sm-2 col-form-label">Nama</label>
+            <label for="inputtanggal" class="col-sm-2 col-form-label">Tanggal</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputnama" name="Nama" required>
+                <input type="date" class="form-control" id="inputtanggal" name="tanggal">
             </div>
         </div>
 
-
+        <!-- Status Pengumuman -->
+        
         <div class="form-group row">
-            <label for="inputalamat" class="col-sm-2 col-form-label">Alamat</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" id="inputalamat" name="Kota" rows="3"></textarea>
-            </div>
+    <label for="inputjeniskelamin" class="col-sm-2 col-form-label">Status</label>
+    <div class="col-sm-10">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="status" id="laki-laki" value="Laki-laki" checked>
+            <label class="form-check-label" for="Aktif">
+                Aktif
+            </label>
         </div>
-
-        <!-- Jenis Kelamin -->
-        <div class="form-group row">
-            <label for="jenis_kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
-            <div class="col-sm-10">
-                <select class="form-control" id="jenis_kelamin" name="Jenis_Kelamin">
-                    <option value="Laki-Laki" selected>Laki-Laki</option>
-                    <option value="Perempuan">Perempuan</option>
-                </select>
-            </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="status" id="perempuan" value="Perempuan">
+            <label class="form-check-label" for="Nonaktif">
+                Nonaktif
+            </label>
         </div>
+    </div>
+</div>
 
-                <!-- Kolom Agama -->
-					<div class="form-group row">
-						<label for="agama" class="col-sm-2 col-form-label">Agama</label>
-						<div class="col-sm-10">
-							<select name="Agama" class="form-control" id="agama">
-								<?php
-									$agama_options = ["Islam", "Kristen", "Katolik", "Hindu", "Buddha", "Kong Hu Cu"];
-									foreach ($agama_options as $agama) {
-										$selected = ($data['agama'] == $agama) ? 'selected' : '';
-										echo "<option value='$agama' $selected>$agama</option>";
-									}
-								?>
-							</select>
-						</div>
-					</div>
-
-                        <!-- Kelas -->
-                        <div class="form-group row">
-                        <label for="kelasInput" class="col-sm-2 col-form-label">Kelas</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="id_kelas" id="kelasInput" readonly>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-secondary" onclick="openKelasModal()">Pilih</button>
-                        </div>
-                    </div>
-
-        <!-- Submit and Cancel Buttons -->
+        <!-- Tombol Submit -->
         <div class="form-group row">
-            <div class="col-sm-10 offset-sm-2">
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="murid.php" class="btn btn-secondary ml-2">Batal</a>
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Tambah Data</button>
             </div>
         </div>
     </form>
 </div>
-
-<!-- Overlay dan Modal untuk Pilih Username -->
-<div id="modalOverlay" onclick="closeAccountModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
-<div id="accountModal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, 0); background:white; padding:20px; border-radius:8px;">
-    <h3>Pilih Username</h3>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-            while ($data = mysqli_fetch_array($hasil)) {
-                echo "<tr>";
-                echo "<td>" . $data['username'] . "</td>";
-                echo "<td><button type='button' class='btn btn-primary' onclick=\"selectUsername('" . $data['username'] . "')\">Pilih</button></td>";
-                echo "</tr>";
-            }
-            ?>
-        </tbody>
-    </table>
-    <button type="button" class="btn btn-secondary" onclick="closeAccountModal()">Tutup</button>
-</div>
-
-<!-- Overlay dan Modal untuk Pilih Kelas -->
-<div id="kelasModalOverlay" onclick="closeKelasModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
-<div id="kelasModal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, 0); background:white; padding:20px; border-radius:8px;">
-    <h3>Pilih Kelas</h3>
-    <table class="table table-bordered text-center">
-        <thead>
-            <tr>
-                <th>ID Kelas</th>
-                <th>Nama Kelas</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $tampil_kelas = "SELECT * FROM `kelas`";
-            $hasil_kelas = mysqli_query($koneksi, $tampil_kelas);
-
-            while ($data_kelas = mysqli_fetch_array($hasil_kelas)) {
-                echo "<tr>
-                        <td>{$data_kelas['id_kelas']}</td>
-                        <td>{$data_kelas['nama_kelas']}</td>
-                        <td><button type='button' class='btn btn-primary' onclick=\"pilihKelas('{$data_kelas['id_kelas']}')\">Pilih</button></td>
-                      </tr>";
-            }
-            ?>
-        </tbody>
-    </table>
-    <button type="button" class="btn btn-secondary" onclick="closeKelasModal()">Tutup</button>
-</div>
-
-<!-- JavaScript untuk membuka dan menutup modal serta memilih username dan kelas -->
-<script>
-    // Fungsi untuk membuka dan menutup modal username
-    function openAccountModal() {
-        document.getElementById("modalOverlay").style.display = "block";
-        document.getElementById("accountModal").style.display = "block";
-    }
-
-    function closeAccountModal() {
-        document.getElementById("modalOverlay").style.display = "none";
-        document.getElementById("accountModal").style.display = "none";
-    }
-
-    function selectUsername(username) {
-        document.getElementById("selectedUsername").value = username;
-        closeAccountModal();
-    }
-
-    // Fungsi untuk membuka dan menutup modal kelas
-    function openKelasModal() {
-        document.getElementById("kelasModalOverlay").style.display = "block";
-        document.getElementById("kelasModal").style.display = "block";
-    }
-
-    function closeKelasModal() {
-        document.getElementById("kelasModalOverlay").style.display = "none";
-        document.getElementById("kelasModal").style.display = "none";
-    }
-
-    // Fungsi untuk memilih kelas dan memasukkan ID kelas ke input
-    function pilihKelas(id_kelas) {
-        document.getElementById("kelasInput").value = id_kelas;
-        closeKelasModal();
-    }
-</script>
-
-
-<!-- JavaScript untuk memastikan input hanya angka -->
-<script type="text/javascript">
-function hanyaAngka(evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode;
-    return (charCode >= 48 && charCode <= 57);
-}
-</script>
-
-
-<!-- //Admin Pannel -->
 <!-- Akhir dari Konten -->
+
 
 
 

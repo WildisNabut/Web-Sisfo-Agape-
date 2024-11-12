@@ -1,6 +1,13 @@
 <?php
 include ('../koneksi.php');
 ?>
+<?php
+session_start();
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php"); // Redirect to the login page
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +65,6 @@ include ('../koneksi.php');
             <a class="collapse-item" href="murid.php">Siswa</a>
             <a class="collapse-item" href="kelas.php">Kelas</a>
             <a class="collapse-item" href="mata_pelajaran.php">mata pelajaran</a>
-            <a class="collapse-item" href="Nilai.php">Nilai</a>
           </div>
         </div>
       </li>
@@ -73,6 +79,18 @@ include ('../koneksi.php');
           <span>Renungan</span>
         </a>
       </li>
+
+       <!-- Divider -->
+       <hr class="sidebar-divider" />
+
+      <!-- Nav Item - Renungan -->
+      <li class="nav-item">
+        <a class="nav-link" href="pengumuman.php">
+          <i class="fas fa-fw fa-fill"></i>
+          <span>Pengumuman</span>
+        </a>
+      </li>
+
 
       <!-- Sidebar Toggler -->
       <div class="text-center d-none d-md-inline">
@@ -154,7 +172,6 @@ include ('../koneksi.php');
         <tr>
         	<th> NIP </th>
 			<th> Nama Guru </th>
-			<th> Username </th>
 			<th> Nomor Telepon </th>
 			<th> Jenis Kelamin </th>
 			<th> Agama </th>
@@ -189,7 +206,6 @@ while ($data=mysqli_fetch_array($hasil))
 	echo "<tr>
         	<td> $data[nip] </td>
 			<td class='text-left'> $data[nama_guru] </td>
-			<td class='text-left'> $data[username] </td>
 			<td class='text-left'> $data[no_hp] </td>
 			<td> $data[jenkel] </td>
 			<td> $Agama </td>

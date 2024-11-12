@@ -1,7 +1,4 @@
-<?php
-include ('../koneksi.php');
-?>
-
+<?php include('../koneksi.php');?>
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
@@ -17,7 +14,7 @@ if (!isset($_SESSION["username"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Smp Agape Indah</title>
+  <title>SMP AGAPE INDAH</title>
 
   <!-- Custom fonts and styles for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -110,7 +107,7 @@ if (!isset($_SESSION["username"])) {
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Data Siswa </h4>
+  <h4 class="modal-title mx-auto">Data Pengumuman</h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -145,79 +142,129 @@ if (!isset($_SESSION["username"])) {
     ?>
   </ul>
 </nav>
+
 <!-- End of Topbar -->
-        <!-- End of Topbar -->
 
 
-        <!-- konten yang ingin di rubah -->
-  <div class="container-fluid">
-         <!-- Murid -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <a href="tambah_murid.php" class="btn btn-primary">Tambah Data</a>
-        <form class="form-inline" method="POST" action="">
-            <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
+        
+<!-- Konten -->
+<div class="container-fluid">
+
+             <!-- Page Heading -->
+      <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+          <!-- Dropdown untuk memilih jumlah data per halaman -->
+          <form method="POST" action="" class="form-inline">
+              <div class="input-group mr-2">
+                  <label for="limit" class="mr-2">Tampilkan:</label>
+                  <select name="limit" id="limit" class="custom-select" onchange="this.form.submit()">
+                      <option value="10" <?php if (isset($_POST['limit']) && $_POST['limit'] == 10) echo 'selected'; ?>>10</option>
+                      <option value="15" <?php if (isset($_POST['limit']) && $_POST['limit'] == 25) echo 'selected'; ?>>15</option>
+                      <option value="20" <?php if (isset($_POST['limit']) && $_POST['limit'] == 50) echo 'selected'; ?>>20</option>
+                  </select>
+              </div>
+          </form>  
+
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
+          </div>
+            </form>  
+
+           <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <a href="tambahpengumuman.php" class="btn btn-primary">Tambah Data</a>
+            <form class="form-inline" method="POST" action="">
+                <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>NISN</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Agama</th>
-                        <th>Kelas</th>
-                        <th colspan="2"><b>Aksi</b></th>
+                        <th class="header-no">No</th>
+                        <th class="header-judul">Judul</th>
+                        <th class="header-konten">Deskripsi</th>
+                        <th class="header-tanggal">Tanggal</th>
+                        <th class="header-status">Status</th>
+                        <th class="header-aksi text-center" colspan="2"> Aksi</tt
                     </tr>
                 </thead>
+                <?php
+                  include '../koneksi.php';
+                  $i = 1;
+                  $data = mysqli_query($koneksi, "SELECT * FROM  pengumuman");
+                  while($d =  mysqli_fetch_array($data) ){
+                   ?>
                 <tbody>
+                    <tr>
+                    <th> <?php echo $i++; ?> </th>
+                    <th> <?php echo $d['judul']; ?> </th>
+                    <th> <?php echo $d['dekripsi']; ?> </th>
+                    <th> <?php echo $d['tanggal']; ?> </th>
+                    <th> <?php echo $d['status']; ?> </th>
+                    <th class='text-center' width='100'>
+                            <a href='renungan_edit.php?kode=<?php echo $d['judul']; ?>' class='btn btn-success'>Edit</a>
+                        </th>
+                        <th class='text-center' width='100'>
+                        <button class='btn btn-danger' onclick="showDeleteModal('<?php echo $d['judul']; ?>')">Hapus</button>
+                         </th>  
+                    </tr>
                     <?php
-                    $tampil = "SELECT * FROM `murid` ORDER BY `nisn` ASC";
-                    $hasil = mysqli_query($koneksi, $tampil);
-
-                    while ($data = mysqli_fetch_array($hasil)) {
-                        $tampil_kelas = "SELECT * FROM `kelas` WHERE id_kelas = '$data[id_kelas]'";
-                        $hasil_kelas = mysqli_query($koneksi, $tampil_kelas);
-                        $data_kelas = mysqli_fetch_array($hasil_kelas);
-
-                        echo "<tr>
-                            <td>$data[nisn]</td>
-                            <td class='text-left'>$data[nama_murid]</td>
-                            <td>$data[kota]</td>
-                            <td>$data[jenkel]</td>
-                            <td>$data[agama]</td>
-                            <td class='text-center'>$data_kelas[nama_kelas]</td>
-                            <td width='80'><a href='murid_edit.php?kode=$data[nisn]' class='btn btn-success'>Edit</a></td>
-                            <td width='80'><a href='Hapus_Murid.php?kode=$data[nisn]' class='btn btn-danger'>Hapus</a></td>
-                        </tr>";
-                    }
-                    ?>
+                     }
+                     ?>
                 </tbody>
             </table>
         </div>
-        <div class="clearfix margin-bawah"></div>
     </div>
 </div>
-<!-- //Murid -->
+</div>
 
-
-
-      <!-- End of Main Content -->
-
+<!-- Modal Konfirmasi Hapus -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <!-- Icon Peringatan Besar -->
+                <i class="fas fa-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
+            </div>
+            <div class="modal-body text-center">
+                <h5 class="modal-title mb-3" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                <p>Apakah Anda yakin ingin menghapus data ini?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a id="confirmDeleteBtn" href="#" class="btn btn-primary">Ya, Hapus</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
     </div>
-    <!-- End of Content Wrapper -->
-  </div>
-  <!-- End of Page Wrapper -->
+</div>
+
+<!-- JavaScript untuk Modal Hapus -->
+<script>
+    function showDeleteModal(id) {
+        // Set URL dengan ID data untuk dihapus
+        document.getElementById('confirmDeleteBtn').href = 'Hapus_pengumuman.php?kode=' + id;
+        
+        // Tampilkan modal
+        $('#deleteModal').modal('show');
+    }
+</script>
+<!-- Akhir dari Konten -->
+
+
+
+
+
+      </div>
+      <!-- End of Main Content -->
 
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
@@ -228,6 +275,11 @@ if (!isset($_SESSION["username"])) {
         </div>
       </footer>
       <!-- End of Footer -->
+    </div>
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>

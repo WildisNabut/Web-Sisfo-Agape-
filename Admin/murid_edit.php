@@ -1,4 +1,11 @@
 <?php include('../koneksi.php');?>
+<?php
+session_start();
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php"); // Redirect to the login page
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +63,6 @@
             <a class="collapse-item" href="murid.php">Siswa</a>
             <a class="collapse-item" href="kelas.php">Kelas</a>
             <a class="collapse-item" href="mata_pelajaran.php">mata pelajaran</a>
-            <a class="collapse-item" href="Nilai.php">Nilai</a>
           </div>
         </div>
       </li>
@@ -71,6 +77,17 @@
           <span>Renungan</span>
         </a>
       </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider" />
+
+          <!-- Nav Item - Renungan -->
+          <li class="nav-item">
+            <a class="nav-link" href="pengumuman.php">
+              <i class="fas fa-fw fa-fill"></i>
+              <span>Pengumuman</span>
+            </a>
+          </li>
 
       <!-- Sidebar Toggler -->
       <div class="text-center d-none d-md-inline">
@@ -165,17 +182,6 @@
                         </div>
                     </div>
 
-                    <!-- Username -->
-                    <div class="form-group row">
-                        <label for="usernameInput" class="col-sm-2 col-form-label">Username</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="Username" id="usernameInput" readonly>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-secondary" onclick="openUsernameModal()">Pilih</button>
-                        </div>
-                    </div>
-
                     <!-- Alamat -->
                     <div class="form-group row">
                         <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
@@ -227,31 +233,6 @@
                     <a href="murid.php" class="btn btn-secondary">Batal</a>
                 </form>
             </div>
-        </div>
-    </div>
-
-    <!-- Modal untuk Pilih Username -->
-    <div id="usernameModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeUsernameModal()">&times;</span>
-            <h3>Pilih Username (Level 3)</h3>
-            <table class="table table-bordered text-center">
-                <tr>
-                    <td><b>Username</b></td>
-                    <td><b>Aksi</b></td>
-                </tr>
-                <?php
-                $tampil_akun = "SELECT * FROM `akun` WHERE `level` = 3";
-                $hasil_akun = mysqli_query($koneksi, $tampil_akun);
-
-                while ($data_akun = mysqli_fetch_array($hasil_akun)) {
-                    echo "<tr>
-                            <td>{$data_akun['username']}</td>
-                            <td><button type='button' onclick=\"pilihUsername('{$data_akun['username']}')\" class='btn btn-primary'>Pilih</button></td>
-                          </tr>";
-                }
-                ?>
-            </table>
         </div>
     </div>
 

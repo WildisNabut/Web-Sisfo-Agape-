@@ -24,7 +24,6 @@
 		if (empty($_SESSION['username'])) {
 			echo "
 			<ul class='agile_forms'>
-				<li><a class='active' href='#' data-toggle='modal' data-target='#myModal2'><i class='fa fa-sign-in' aria-hidden='true'></i> Masuk </a></li>
 			</ul>";
 		} else {
 			echo "

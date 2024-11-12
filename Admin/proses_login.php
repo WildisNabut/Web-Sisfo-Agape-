@@ -1,5 +1,5 @@
 <?php
-include('koneksi.php');
+include('../koneksi.php');
 
 $user = $_POST['username'];
 $pass = md5($_POST['password']);
@@ -18,7 +18,7 @@ else
 	{
 		$_SESSION['username']=$user;
 		$_SESSION['level']='admin';
-		header("Location: Admin");
+		header("Location: index.php");
 	}
 	else if($row['level'] == 2)
 	{
