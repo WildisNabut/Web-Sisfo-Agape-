@@ -64,9 +64,7 @@
       <div class="item">
         <img src="images/3.jpg" alt="gambar 3" style="width:100%; height: 500px">
       </div>
-      <div class="item">
-        <img src="images/4.jpg" alt="gambar 3" style="width:100%; height: 500px">
-      </div>
+
     </div>
 
     <!-- Controls -->
@@ -139,10 +137,12 @@
       <p><strong>Alamat:</strong> Jl. Contoh, Kota Contoh, Provinsi Contoh, Indonesia</p>
       <p><strong>Email:</strong> smpagapeindah@example.com</p>
       <div class="social-icons">
-        <a href="#"><i data-feather="facebook" class="icon-small"></i></a>
-        <a href="#"><i data-feather="youtube" class="icon-small"></i></a>
-        <a href="https://www.instagram.com/smpkagapeindah?igsh=MThtejJxN3Ywem54aw==">
-          <i data-feather="instagram" class="icon-small"></i>
+      <a href="#"><i class="fa fa-facebook icon-small"></i></a>
+      <a href="#"><i class="fa fa-youtube icon-small"></i></a>
+      <a href="https://www.instagram.com/smpkagapeindah?igsh=MThtejJxN3Ywem54aw==">
+        <i class="fa fa-instagram icon-small"></i>
+</a>
+
       </div>
     </div>
     
@@ -156,7 +156,8 @@
       allowfullscreen=""
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"
-    ></iframe>    </div>
+    ></iframe>  
+    </div>
   </div>
 
   <!-- Footer Bottom -->

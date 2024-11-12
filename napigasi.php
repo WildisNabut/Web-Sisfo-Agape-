@@ -130,9 +130,10 @@
 					</div>
 					<div class="login-social-grids">
 						<ul>
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-rss"></i></a></li>
+						<a href="#"><i class="fa fa-facebook icon-small"></i></a>
+						<a href="#"><i class="fa fa-youtube icon-small"></i></a>
+						<a href="https://www.instagram.com/smpkagapeindah?igsh=MThtejJxN3Ywem54aw==">
+							<i class="fa fa-instagram icon-small"></i>
 						</ul>
 					</div>
 					<p><a href="#" data-toggle="modal" data-target="#myModal3" > Don't have an account?</a></p>
