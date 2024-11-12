@@ -1,0 +1,158 @@
+.footer {
+  padding: 3vw 5vw;
+  background-color: #03024b;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-family: Arial, sans-serif;
+  gap: 30px;
+  flex-wrap: nowrap; /* Tetap di satu baris */
+}
+
+.footer .responsive-map {
+  display: flex;
+  width: 10000 px; /* Pastikan peta tidak lebih lebar dari 40% */
+  transition: all 0.3s ease-in-out;
+}
+
+.footer .footer-section {
+  flex: 1; /* Elemen konten menempati sisa ruang */
+  max-width: 58%; /* Disesuaikan untuk menempati ruang tersisa */
+  transition: all 0.3s ease-in-out;
+}
+
+.footer h3 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  transition: font-size 0.3s ease-in-out;
+}
+
+.footer p {
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: aliceblue;
+  transition: font-size 0.3s ease-in-out;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+  color: #ffcc00;
+}
+
+.footer .social-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.footer .social-icons a {
+  display: inline-block;
+  background-color: #02002d;
+  border: 2px solid white;
+  padding: 10px;
+  border-radius: 5px;
+  color: white;
+  transition: all 0.3s;
+}
+
+.footer .social-icons a:hover {
+  background-color: white;
+  color: #022641;
+  transform: scale(1.1);
+}
+
+.footer .map iframe {
+  border: 0;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.footer-bottom {
+  background-color: #04021f;
+  color: #ccc;
+  padding: 15px 2vw;
+  text-align: center;
+  font-size: 1em;
+  transition: font-size 0.3s ease-in-out;
+}
+
+/* Media Queries - Ukuran disesuaikan untuk tampilan */
+@media (max-width: 768px) {
+  .footer {
+    padding: 5vw 3vw;
+    gap: 15px;
+  }
+
+  .footer h3 {
+    font-size: 1.4em;
+  }
+
+  .footer p {
+    font-size: 0.85em;
+  }
+
+  .footer .social-icons a {
+    padding: 7px;
+    font-size: 0.85em;
+  }
+
+  .footer-bottom {
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 6vw 2vw;
+    gap: 10px;
+  }
+
+  .footer h3 {
+    font-size: 1.2em;
+  }
+
+  .footer p {
+    font-size: 0.8em;
+  }
+
+  .footer .social-icons a {
+    padding: 5px;
+    font-size: 0.8em;
+  }
+
+  .footer-bottom {
+    font-size: 0.75em;
+  }
+}
+.footer .map iframe {
+  border: 0;
+  width: 900px; /* Ukuran default untuk layar besar */
+  height: 5500px; /* Ukuran default untuk layar besar */
+  max-width: 100%; /* Pastikan tidak melebihi lebar elemen induk */
+  height: auto; /* Menyesuaikan tinggi secara proporsional */
+}
+
+/* Media Queries untuk menyesuaikan ukuran iframe */
+@media (max-width: 768px) {
+  .footer .map iframe {
+    width: 100%; /* Penuhi lebar elemen induk pada layar sedang */
+    height: auto; /* Tinggi menyesuaikan secara proporsional */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer .map iframe {
+    width: 100%; /* Penuhi lebar elemen induk pada layar kecil */
+    height: auto; /* Tinggi menyesuaikan secara proporsional */
+  }
+}

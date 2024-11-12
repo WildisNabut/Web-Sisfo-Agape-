@@ -107,5 +107,39 @@
 		</nav>	
 		<div class="clearfix"> </div> 
 	</div>
-</div>	
+</div>
+
+<!-- Modal1 -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="signin-form profile">
+					<h3 class="agileinfo_sign">Masuk</h3>	
+					<div class="login-form">
+						<form action="proses_login.php" method="post">
+							<input type="text" name="username" placeholder="Username" required="">
+							<input type="password" name="password" placeholder="Password" required="">
+							<div class="tp">
+								<input type="submit" value="Masuk">
+							</div>
+						</form>
+					</div>
+					<div class="login-social-grids">
+						<ul>
+						<a href="#"><i class="fa fa-facebook icon-small"></i></a>
+						<a href="#"><i class="fa fa-youtube icon-small"></i></a>
+						<a href="https://www.instagram.com/smpkagapeindah?igsh=MThtejJxN3Ywem54aw==">
+							<i class="fa fa-instagram icon-small"></i>
+						</ul>
+					</div>
+					<p><a href="#" data-toggle="modal" data-target="#myModal3" > Don't have an account?</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- //Modal1 -->	
 
