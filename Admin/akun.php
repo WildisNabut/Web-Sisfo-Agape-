@@ -93,6 +93,9 @@ if (!isset($_SESSION["username"])) {
           </a>
         </li>
 
+         <!-- Divider -->
+         <hr class="sidebar-divider" />
+
       <!-- Sidebar Toggler -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -139,14 +142,15 @@ if (!isset($_SESSION["username"])) {
           <i class='fas fa-user'></i>
         </a>
         <div class='dropdown-menu dropdown-menu-right shadow animated--grow-in' aria-labelledby='userDropdown'>
-          <a class='dropdown-item' href='../logout.php'><i class='fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>Logout</a>
-        </div>
+        <a class='dropdown-item' href='#' data-toggle='modal' data-target='#logoutModal'>
+          <i class='fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>Logout
+        </a>
+      </div>
       </li>";
     }
     ?>
   </ul>
 </nav>
-<!-- End of Topbar -->
         <!-- End of Topbar -->
 
 
@@ -171,9 +175,9 @@ if (!isset($_SESSION["username"])) {
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
 					  <tr>
-							<th><b> Username </th>
-							<th width="150"><b> Level </th>
-							<th colspan="2"><b> Aksi </th>
+							<th class="text-center"><b> Username </th>
+							<th class="text-center" width="150"><b> Level </th>
+							<th  class="text-center" colspan="2"><b> Aksi </th>
 						</tr>
                       </thead>
                       <tbody>
@@ -196,10 +200,10 @@ if (!isset($_SESSION["username"])) {
 								$Level = "Murid";
 							}
 							
-							echo "<td class='text-left'>$data[username]</TD>";
-							echo "<td>$Level</TD>";
-							echo "<td width='100'><a href='akun_edit.php?kode=$data[username]' class='btn btn-success'>Edit </a></td>";
-              echo "<td width='100'>
+							echo "<td class='text-center'>$data[username]</TD>";
+							echo "<td class='text-center'>$Level</TD>";
+							echo "<td class='text-center' width='100'><a href='akun_edit.php?kode=$data[username]' class='btn btn-success'>Edit </a></td>";
+              echo "<td class='text-center' width='100'>
                      <button class='btn btn-danger' onclick='showDeleteModal(\"$data[username]\")'>Hapus</button>
                   </TR>";
 						}					
@@ -264,24 +268,27 @@ if (!isset($_SESSION["username"])) {
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
+
+<!-- Modal Konfirmasi Logout -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <!-- Icon Peringatan Besar -->
+                <i class="fas fa-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
+            </div>
+            <div class="modal-body text-center">
+                <h5 class="modal-title mb-3" id="logoutModalLabel">Apakah Anda yakin ingin keluar?</h5>
+            </div>
+            <div class="modal-footer justify-content-center">
+            <a id="confirmLogoutBtn" href="logout.php" class="btn btn-primary">
+            <i class="fa fa-sign-out-alt mr-2"></i> Ya, Keluar</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
 
   <!-- Scripts -->
   <script src="vendor/jquery/jquery.min.js"></script>
