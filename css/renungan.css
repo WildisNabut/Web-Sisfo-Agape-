@@ -1,0 +1,101 @@
+/* Reset dasar */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f4f9;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.carousel, .carousel-inner, .carousel-inner .item {
+    width: 100%;
+    height: 100vh; /* Tinggi penuh layar */
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-inner .item img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover; /* Gambar akan menyesuaikan dan mengisi layar */
+    display: block;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 20%;
+    left: 10%;
+    right: 10%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.carousel-caption h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffe57f;
+}
+
+.carousel-caption p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Tombol kontrol carousel */
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    color: #333;
+    background: #ffffffb3;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    text-align: center;
+    line-height: 40px;
+    transition: background 0.3s ease;
+}
+
+.carousel-control:hover {
+    background: #ff7043;
+    color: #fff;
+}
+
+.carousel-control.left {
+    left: 20px;
+}
+
+.carousel-control.right {
+    right: 20px;
+}
+
+/* Efek animasi pada teks */
+.carousel-inner .item.active .carousel-caption {
+    animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

@@ -96,6 +96,14 @@
 								<li><a href='kegiatan.php' >Kegiatan Sekolah</a></li>
 							</ul>
 						</li>
+
+						<li> <a class='effect-3 scroll' data-toggle='dropdown'>Motivasi<span class='caret'></span> </a>
+							<ul class='dropdown-menu'>
+								<li><a href='renungan.php' >Renungan</a></li>
+								<li><a href='kutipan.php' >Kutipan</a></li>
+							</ul>
+						</li>
+
 						<li><a href="fasilitas.php" class="effect-3">Fasilitas </a></li>
 						<li>
 						<a href="profile_sekolah.php" class="effect-3">Profil Sekolah</a>
