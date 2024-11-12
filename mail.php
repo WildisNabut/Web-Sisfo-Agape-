@@ -19,6 +19,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
 <link rel="stylesheet" href="css/jquery-ui.css" />
 <link rel="stylesheet" href="css/beranda.css" />
+<link rel="stylesheet" href=  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/kontak.css">
+
 <!-- //css files -->
 <!-- online-fonts -->
 <link href="//fonts.googleapis.com/css?family=Exo+2:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=cyrillic,latin-ext" rel="stylesheet">
@@ -28,43 +32,46 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <body>
 
 <?php include ('napigasi.php'); ?>
-
 <div class="clearfix"> </div> 
 
-<div id="mail" class="contact">
-    <div class="container">
-        <h3 class="w3l-title text-center">Mail Us</h3>
-        <form action="Proses_Kirim.php" method="post">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="name">Name*</label>
-                    <input type="text" class="form-control" id="name" name="Name" placeholder="Name" required>
+<div class="main-container">
+        <div class="contact-container">
+            <h2><i class="fas fa-envelope"></i> Hubungi Kami</h2>
+            <form action="Proses_Kirim.php" method="post">
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="name"><i class="fas fa-user form-icon"></i>Nama*</label>
+                        <input type="text" class="form-control" id="name" name="Name" placeholder="Nama Anda" required>
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="email">E-mail*</label>
-                    <input type="email" class="form-control" id="email" name="Email" placeholder="E-mail" required>
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="email"><i class="fas fa-envelope form-icon"></i>E-mail*</label>
+                        <input type="email" class="form-control" id="email" name="Email" placeholder="Email Anda" required>
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="phone">Phone Number*</label>
-                    <input type="text" class="form-control" id="phone" name="number" placeholder="Phone Number" required>
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="phone"><i class="fas fa-phone form-icon"></i>Nomor Telepon*</label>
+                        <input type="text" class="form-control" id="phone" name="number" placeholder="Nomor Telepon Anda" required>
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="subject">Subject*</label>
-                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="subject"><i class="fas fa-tag form-icon"></i>Subjek*</label>
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Subjek Pesan" required>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="message">Message*</label>
-                <textarea class="form-control" id="message" name="Message" rows="4" placeholder="Your message here..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Send</button>
-        </form>
+                <div class="message-box">
+                    <label for="message" class="d-block"><i class="fas fa-comment form-icon"></i>Pesan*</label>
+                    <textarea class="form-control message" id="message" name="Message" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                </div>
+                <div class="btn-container">
+                    <button type="submit" class="btn btn-primary">Kirim</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-
 <div id="map"></div>
 
 <!-- Footer Section -->
@@ -79,10 +86,10 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
       <p><strong>Alamat:</strong> Jl. Contoh, Kota Contoh, Provinsi Contoh, Indonesia</p>
       <p><strong>Email:</strong> smpagapeindah@example.com</p>
       <div class="social-icons">
-      <a href="#"><i class="fa fa-facebook icon-small"></i></a>
-      <a href="#"><i class="fa fa-youtube icon-small"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
       <a href="https://www.instagram.com/smpkagapeindah?igsh=MThtejJxN3Ywem54aw==">
-        <i class="fa fa-instagram icon-small"></i>
+        <i class="fab fa-instagram"></i>
 </a>
 
       </div>

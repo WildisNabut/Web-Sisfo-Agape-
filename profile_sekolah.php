@@ -17,6 +17,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
 <link rel="stylesheet" href="css/jquery-ui.css" />
 <link rel="stylesheet" href="css/beranda.css" />
+<link rel="stylesheet" href="css/profil.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <!-- //css files -->
 <!-- online-fonts -->
 <link href="//fonts.googleapis.com/css?family=Exo+2:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=cyrillic,latin-ext" rel="stylesheet">
@@ -40,37 +42,42 @@ h3 {
 
 </style>
 </head>
-<body>
+
 
 <?php include ('napigasi.php'); ?>
 
-<!--- gambar -->
-				
-				<div class="jumbotron">
-					<div class="container">
-						<div class="gallery-item" >
-							<center><h2>Sejarah Sekolah</h2></center>
-								<img src="images/icon_gambar.ico" alt="sekolah">
-					<p align = "justify">SMK Negeri Terpadu Jakarta merupakan SMK Negeri pertama yang ada di Jakarta dan diresmikan pada tahun 1963. Dahulu alamatnya berada di Jl. KH Agus Salim no 77. Namun telah berganti menjadi Jl. KH Agus Salim no 181. Sampai tahun 2010, sekitar 45 angkatan alumni telah berhasil lulus dengan jumlah alumninya yang begitu besar. SMK Negeri Terpadu Jakarta telah mencetak alumni-alumni yang berhasil bersaing di universitas-universitas ternama .</p></align>
-				</div>
-				</div>
-				</div>
-				<div class="jumbotron">
-					<div class="container">
-						<center><h2>Visi dan Misi</h2></center>
-						<h3> VISI</h3>
-						<p>- Berwawasan global dalam IPTEK, kompetitif, aktual, berbudaya lingkungan berlandaskan iman  dan taqwa</p></align>
-						<h3> MISI</h3>
-						<p align = "justify">- Mengaktualisasikan sains, teknologi, sosial, seni dan budaya, dalam meningkatkan nilai tambah sehingga </p></align>
-						<p align = "justify">- menghasilkan siswa berkepribadian tangguh dan mandiri serta memiliki kemampuan berkomunikasi secara global.</p></align>
-						<p align = "justify">- Mengembangkan keunggulan ekstrakurikuler secara intensif dan berkelanjutan.</p></align>
-						<p align = "justify">- Mewujudkan sekolah peduli dan berbudaya lingkungan serta melakukan upaya perlindungan dan pengelolaan lingkungan hidup.</p></align>
-						<p align = "justify">- Menerapkan manajemen sekolah yang kooperatif dan terstandar</p></align>
-						<p align = "justify">- Menumbuhkan penghayatan dan pengamalan beribadah sebagai sumber kearifan dan nilai-nilai budi pekerti.</p></align>
-					</div>
-				</div>
-					
-<!--- //gambar -->
+<!-- Profil Sekolah -->
+<div class="jumbotron fade-in">
+        <div class="container">
+            <center><h2>Sejarah Sekolah</h2></center>
+            <img src="images/icon_gambar.ico" alt="SMP Agape Indah" class="img-fluid">
+			
+            <h6>	SMP Agape Indah adalah sekolah swasta terkemuka yang berdiri sejak tahun 1963 di Kupang. Sekolah ini awalnya terletak di Jl. KH Agus Salim no 77 dan kemudian berpindah ke Jl. KH Agus Salim no 181. Hingga tahun 2010, SMP Agape Indah telah mencetak lebih dari 45 angkatan alumni yang sukses melanjutkan pendidikan tinggi di universitas-universitas terkenal dan menorehkan prestasi di berbagai bidang.</h6>
+        </div>
+    </div>
+
+    <div class="jumbotron fade-in">
+        <div class="container">
+            <center><h2>Visi dan Misi</h2></center>
+            <h3><i class="fas fa-bullseye icon"></i>Visi</h3>
+            <h6>	Berwawasan global dalam IPTEK, kompetitif, aktual, dan berbudaya lingkungan yang berlandaskan iman dan takwa.</h6>
+
+            <h3><i class="fas fa-tasks icon"></i>Misi</h3>
+            <ul>
+                <li><i class="fas fa-check icon"></i>	Mengaktualisasikan sains, teknologi, sosial, seni, dan budaya untuk meningkatkan nilai tambah.</li>
+                <li><i class="fas fa-check icon"></i>	Menghasilkan siswa berkepribadian tangguh, mandiri, dan mampu berkomunikasi secara global.</li>
+                <li><i class="fas fa-check icon"></i>Mengembangkan keunggulan ekstrakurikuler secara intensif dan berkelanjutan.</li>
+                <li><i class="fas fa-check icon"></i>Mewujudkan sekolah yang peduli dan berbudaya lingkungan serta upaya perlindungan lingkungan hidup.</li>
+                <li><i class="fas fa-check icon"></i>Menerapkan manajemen sekolah yang kooperatif dan terstandar.</li>
+                <li><i class="fas fa-check icon"></i>Menumbuhkan penghayatan dan pengamalan ibadah sebagai sumber kearifan dan nilai-nilai budi pekerti.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- Footer Section -->
 <footer>
@@ -84,10 +91,10 @@ h3 {
       <p><strong>Alamat:</strong> Jl. Contoh, Kota Contoh, Provinsi Contoh, Indonesia</p>
       <p><strong>Email:</strong> smpagapeindah@example.com</p>
       <div class="social-icons">
-      <a href="#"><i class="fa fa-facebook icon-small"></i></a>
-      <a href="#"><i class="fa fa-youtube icon-small"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-youtube "></i></a>
       <a href="https://www.instagram.com/smpkagapeindah?igsh=MThtejJxN3Ywem54aw==">
-        <i class="fa fa-instagram icon-small"></i>
+        <i class="fab fa-instagram "></i>
 </a>
 
       </div>

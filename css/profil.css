@@ -1,0 +1,77 @@
+
+
+.jumbotron {
+    background-color: #060221e2;
+    padding: 3rem;
+    margin-bottom: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s;
+}
+.jumbotron:hover {
+    transform: translateY(-10px);
+}
+.jumbotron {
+    color: rgb(0, 0, 0); /* Mengatur semua teks dalam elemen jumbotron menjadi putih */
+    background-color: #ffffff; /* Latar belakang gelap untuk kontras yang baik */
+}
+
+.jumbotron h2, 
+
+.jumbotron
+.jumbotron p, 
+.jumbotron ul li {
+    color: rgb(0, 0, 0) !important; 
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.jumbotron ul li{
+    font-size: 20px;
+}
+.jumbotron h6{
+    font-size: 20px;
+}
+.jumbotron h3{
+    font-size: 50px;
+}
+
+.icon {
+    color: rgb(0, 0, 0); /* Ikon juga diatur menjadi putih */
+}
+
+
+ul li:hover {
+    color: #0055ff; /* Memberikan efek hover ringan pada teks */
+}
+
+.jumbotron img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1.5rem;
+    border-radius: 10px;
+}
+.icon {
+    font-size: 1.5rem;
+    color: #0a064d;
+    margin-right: 10px;
+}
+ul {
+    padding-left: 1.5rem;
+}
+
+.jumbotron ul li {
+    margin-bottom: 0.5rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+.fade-in {
+    animation: fadeIn 2s ease-in;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
