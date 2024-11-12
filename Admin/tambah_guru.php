@@ -172,17 +172,6 @@ if (!isset($_SESSION["username"])) {
             </div>
         </div>
 
-        <!-- Username Selection -->
-        <div class="form-group row">
-            <label for="selectedUsername" class="col-sm-2 col-form-label">Username</label>
-            <div class="col-sm-8">
-                <input type="text" class="form-control" id="selectedUsername" name="Username" readonly>
-            </div>
-            <div class="col-sm-2">
-                <button type="button" class="btn btn-secondary" onclick="openAccountModal()">Pilih</button>
-            </div>
-        </div>
-
         <!-- No Telepon -->
         <div class="form-group row">
             <label for="No_HP" class="col-sm-2 col-form-label">No Telepon</label>

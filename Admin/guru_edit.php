@@ -14,7 +14,7 @@ if (!isset($_SESSION["username"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>SMP AGAPE INDAH</title>
+  <title>SMP AGAPE INDAH - Edit Guru</title>
 
   <!-- Custom fonts and styles for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -182,19 +182,6 @@ if (!isset($_SESSION["username"])) {
                     <label for="namaGuru" class="col-sm-2 col-form-label">Nama Guru</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="namaGuru" name="nama_guru" value="<?php echo $data['nama_guru']; ?>">
-                    </div>
-                </div>
-
-                <!-- Select Username -->
-                <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label">Username</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" id="username" name="Username">
-                            <option value="<?php echo $data['username']; ?>" selected><?php echo $data['username']; ?></option>
-                            <?php while ($data_akun = mysqli_fetch_array($hasil_akun)) { ?>
-                                <option value="<?php echo $data_akun['username']; ?>"><?php echo $data_akun['username']; ?></option>
-                            <?php } ?>
-                        </select>
                     </div>
                 </div>
 

@@ -210,11 +210,12 @@ if (!isset($_SESSION["username"])) {
                     <th> <?php echo $d['dekripsi']; ?> </th>
                     <th> <?php echo $d['tanggal']; ?> </th>
                     <th> <?php echo $d['status']; ?> </th>
-                    <th>
-                        <a href="#" class="btn btn-success">Edit</a>
-                    </th>
-                    <th><a href="#" class="btn btn-danger">Hapus</a>
-                    </th>
+                    <th class='text-center' width='100'>
+                            <a href='renungan_edit.php?kode=<?php echo $d['judul']; ?>' class='btn btn-success'>Edit</a>
+                        </th>
+                        <th class='text-center' width='100'>
+                        <button class='btn btn-danger' onclick="showDeleteModal('<?php echo $d['judul']; ?>')">Hapus</button>
+                         </th>  
                     </tr>
                     <?php
                      }
@@ -225,6 +226,37 @@ if (!isset($_SESSION["username"])) {
     </div>
 </div>
 </div>
+
+<!-- Modal Konfirmasi Hapus -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <!-- Icon Peringatan Besar -->
+                <i class="fas fa-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
+            </div>
+            <div class="modal-body text-center">
+                <h5 class="modal-title mb-3" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                <p>Apakah Anda yakin ingin menghapus data ini?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a id="confirmDeleteBtn" href="#" class="btn btn-primary">Ya, Hapus</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript untuk Modal Hapus -->
+<script>
+    function showDeleteModal(id) {
+        // Set URL dengan ID data untuk dihapus
+        document.getElementById('confirmDeleteBtn').href = 'Hapus_pengumuman.php?kode=' + id;
+        
+        // Tampilkan modal
+        $('#deleteModal').modal('show');
+    }
+</script>
 <!-- Akhir dari Konten -->
 
 

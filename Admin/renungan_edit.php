@@ -6,6 +6,7 @@ if (!isset($_SESSION["username"])) {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -157,7 +158,7 @@ if (!isset($_SESSION["username"])) {
         <div class="container">
             <div class="container margin-atas">
 
-                <form class="form-group" action="Proses_Edit_Renungan.php" method="post">
+                <form class="form-group" action="Proses_edit_renungan.php" method="post">
 
                     <!-- Judul -->
                     <div class="form-group row">
@@ -193,7 +194,7 @@ if (!isset($_SESSION["username"])) {
 
                     <!-- Tombol Simpan dan Batal -->
                     <button type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="daftar_renungan.php" class="btn btn-secondary">Batal</a>
+                    <a href="renungan.php" class="btn btn-secondary">Batal</a>
                 </form>
             </div>
         </div>
@@ -257,6 +258,9 @@ function pilihUsername(username) {
 </script>
 
 
+    </div>
+    <!-- End of Content Wrapper -->
+
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -266,8 +270,7 @@ function pilihUsername(username) {
         </div>
       </footer>
       <!-- End of Footer -->
-    </div>
-    <!-- End of Content Wrapper -->
+
   </div>
   <!-- End of Page Wrapper -->
 

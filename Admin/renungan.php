@@ -1,7 +1,9 @@
 <?php
 include ('../koneksi.php');
 ?>
-<th?php
+
+
+<?php
 session_start();
 if (!isset($_SESSION["username"])) {
     header("Location: login.php"); // Redirect to the login page
@@ -102,7 +104,9 @@ if (!isset($_SESSION["username"])) {
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
       <div id="content">
-        
+      
+      
+
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -208,8 +212,12 @@ if (!isset($_SESSION["username"])) {
                        <th> <?php echo $d['ayat']; ?> </th>
                        <th> <?php echo $d['tanggal']; ?> </th>
                        <th> <?php echo $d['isi']; ?> </th>
-                       <th class='text-center' width='100'><a href='renungan_edit.php?kode=$data[judul]' class='btn btn-success'>Edit</a></th>
-						             <th class='text-center' width='100'><a href='Hapus_renungan.php?kode=$data[judul]' class='btn btn-danger'>Hapus</a></th>
+                       <th class='text-center' width='100'>
+                            <a href='renungan_edit.php?kode=<?php echo $d['judul']; ?>' class='btn btn-success'>Edit</a>
+                        </th>
+                        <th class='text-center' width='100'>
+                        <button class='btn btn-danger' onclick="showDeleteModal('<?php echo $d['judul']; ?>')">Hapus</button>
+                         </th>  
                        </tr>
                        <?php
                        }
@@ -220,7 +228,37 @@ if (!isset($_SESSION["username"])) {
        </div>
    </div>
  </div>
+<!-- Modal Konfirmasi Hapus -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menghapus data ini?
+            </div>
+            <div class="modal-footer">
+             <a id="confirmDeleteBtn" href="#" class="btn btn-primary">OK</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- JavaScript untuk Modal Hapus -->
+<script>
+    function showDeleteModal(id) {
+        // Set URL dengan ID data untuk dihapus
+        document.getElementById('confirmDeleteBtn').href = 'Hapus_renungan.php?kode=' + id;
+        
+        // Tampilkan modal
+        $('#deleteModal').modal('show');
+    }
+</script>
 
     <!-- End of Content Wrapper -->
   </div>
