@@ -1,7 +1,5 @@
+<?php include('../koneksi.php');?>
 <?php
-include ('../koneksi.php');
-?>
-<th?php
 session_start();
 if (!isset($_SESSION["username"])) {
     header("Location: login.php"); // Redirect to the login page
@@ -16,7 +14,7 @@ if (!isset($_SESSION["username"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Smp Agape Indah</title>
+  <title>SMP AGAPE INDAH</title>
 
   <!-- Custom fonts and styles for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -79,18 +77,16 @@ if (!isset($_SESSION["username"])) {
           <span>Renungan</span>
         </a>
       </li>
+      <!-- Divider -->
+      <hr class="sidebar-divider" />
 
-            <!-- Divider -->
-            <hr class="sidebar-divider" />
-
-        <!-- Nav Item - Renungan -->
-        <li class="nav-item">
-          <a class="nav-link" href="pengumuman.php">
-            <i class="fas fa-fw fa-fill"></i>
-            <span>Pengumuman</span>
-          </a>
-        </li>
-
+      <!-- Nav Item - Renungan -->
+      <li class="nav-item">
+        <a class="nav-link" href="pengumuman.php">
+          <i class="fas fa-fw fa-fill"></i>
+          <span>Pengumuman</span>
+        </a>
+      </li>
       <!-- Sidebar Toggler -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -109,7 +105,7 @@ if (!isset($_SESSION["username"])) {
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Data Renungan</h4>
+  <h4 class="modal-title mx-auto">Form Tambah Pengumuman</h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -144,89 +140,79 @@ if (!isset($_SESSION["username"])) {
     ?>
   </ul>
 </nav>
+
 <!-- End of Topbar -->
-        <!-- End of Topbar -->
 
-  <!-- Begin Page Content -->
-  <div class="container-fluid">
 
-<!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
+        
+<!-- Konten -->
+<div class="container-fluid">
+    <form method="POST" action="tpengumuman.php">
+        <!-- Judul Pengumuman -->
+        <div class="form-group row">
+            <label for="inputjudul" class="col-sm-2 col-form-label">Judul</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputjudul" name="judul">
+            </div>
+        </div>
 
-<!-- Dropdown untuk memilih jumlah data per halaman -->
-<form method="POST" action="" class="form-inline">
- <div class="input-group mr-2">
-     <label for="limit" class="mr-2">Tampilkan:</label>
-     <select name="limit" id="limit" class="custom-select" onchange="this.form.submit()">
-         <option value="10" <?php if (isset($_POST['limit']) && $_POST['limit'] == 10) echo 'selected'; ?>>10</option>
-         <option value="15" <?php if (isset($_POST['limit']) && $_POST['limit'] == 25) echo 'selected'; ?>>15</option>
-         <option value="20" <?php if (isset($_POST['limit']) && $_POST['limit'] == 50) echo 'selected'; ?>>20</option>
-     </select>
- </div>
-</form>  
 
-<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
+        <!-- Deskripsi Pengumuman -->
+        <div class="form-group row">
+            <label for="inputdeskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="inputdeskripsi" name="deskripsi" rows="4"></textarea>
+            </div>
+        </div>
+
+        
+        <!-- Tanggal Pengumuman -->
+        <div class="form-group row">
+            <label for="inputtanggal" class="col-sm-2 col-form-label">Tanggal</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="inputtanggal" name="tanggal">
+            </div>
+        </div>
+
+        <!-- Status Pengumuman -->
+        
+        <div class="form-group row">
+    <label for="inputjeniskelamin" class="col-sm-2 col-form-label">Status</label>
+    <div class="col-sm-10">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="status" id="laki-laki" value="Laki-laki" checked>
+            <label class="form-check-label" for="Aktif">
+                Aktif
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="status" id="perempuan" value="Perempuan">
+            <label class="form-check-label" for="Nonaktif">
+                Nonaktif
+            </label>
+        </div>
+    </div>
 </div>
-</form>  
 
-<div class="card shadow mb-4">
-<div class="card-header py-3 d-flex justify-content-between align-items-center">
-<a href="tambahrenungan.php" class="btn btn-primary">Tambah Data</a>
-<form class="form-inline" method="POST" action="">
-   <div class="input-group">
-       <input type="text" class="form-control bg-light border-0 small" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-       <div class="input-group-append">
-           <button class="btn btn-primary" type="submit">
-               <i class="fas fa-search fa-sm"></i>
-           </button>
-       </div>
-   </div>
-</form>
+        <!-- Tombol Submit -->
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Tambah Data</button>
+            </div>
+        </div>
+    </form>
 </div>
-       <div class="card-body">
-           <div class="table-responsive">
-               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                   <thead>
-                       <tr>
-                           <th class="header-no">No</th>
-                           <th class="header-judul">Judul</th>
-                           <th class="header-konten">Ayat Alkitab</th>
-                           <th class="header-tanggal">Tanggal</th>
-                           <th class="header-status">Isi Renungan</th>
-                           <th colspan="2"><b>Aksi</b></th>
-                       </tr>
-                   </thead>
-                   <?php include('../koneksi.php');
-                   $i = 1;
-                   $data = mysqli_query($koneksi, "SELECT * FROM  renungan");
-                   while($d =  mysqli_fetch_array($data) ){
-                   ?>
-                   <tbody>
-                       <tr>
-                       <th> <?php echo $i++; ?> </th>
-                       <th> <?php echo $d['judul']; ?> </th>
-                       <th> <?php echo $d['ayat']; ?> </th>
-                       <th> <?php echo $d['tanggal']; ?> </th>
-                       <th> <?php echo $d['isi']; ?> </th>
-                       <th class='text-center' width='100'><a href='renungan_edit.php?kode=$data[judul]' class='btn btn-success'>Edit</a></th>
-						             <th class='text-center' width='100'><a href='Hapus_renungan.php?kode=$data[judul]' class='btn btn-danger'>Hapus</a></th>
-                       </tr>
-                       <?php
-                       }
-                       ?>
-                   </tbody>
-               </table>
-           </div>
-       </div>
-   </div>
- </div>
+<!-- Akhir dari Konten -->
 
 
-    <!-- End of Content Wrapper -->
-  </div>
-  <!-- End of Page Wrapper -->
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
+
+
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; Ilmu komputer 2024</span>
@@ -234,6 +220,11 @@ if (!isset($_SESSION["username"])) {
         </div>
       </footer>
       <!-- End of Footer -->
+    </div>
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>

@@ -1,6 +1,13 @@
 <?php
 include ('../koneksi.php');
 ?>
+<?php
+session_start();
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php"); // Redirect to the login page
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +65,6 @@ include ('../koneksi.php');
             <a class="collapse-item" href="murid.php">Siswa</a>
             <a class="collapse-item" href="kelas.php">Kelas</a>
             <a class="collapse-item" href="mata_pelajaran.php">mata pelajaran</a>
-            <a class="collapse-item" href="Nilai.php">Nilai</a>
           </div>
         </div>
       </li>

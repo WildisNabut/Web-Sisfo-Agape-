@@ -1,6 +1,13 @@
 <?php
 include ('../koneksi.php');
 ?>
+<?php
+session_start();
+if (!isset($_SESSION["username"])) {
+    header("Location: login.php"); // Redirect to the login page
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -194,6 +201,9 @@ include ('../koneksi.php');
 	  <!-- akhir dari konten -->
       <!-- End of Main Content -->
 
+    </div>
+    <!-- End of Content Wrapper -->
+     
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -203,8 +213,6 @@ include ('../koneksi.php');
         </div>
       </footer>
       <!-- End of Footer -->
-    </div>
-    <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
 

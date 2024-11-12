@@ -1,4 +1,3 @@
-php
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
@@ -33,7 +32,7 @@ if (!isset($_SESSION["username"])) {
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">AGAPE<sup>indah</sup></div>
       </a>
 
       <!-- Divider -->
@@ -64,7 +63,6 @@ if (!isset($_SESSION["username"])) {
             <a class="collapse-item" href="murid.php">Siswa</a>
             <a class="collapse-item" href="kelas.php">Kelas</a>
             <a class="collapse-item" href="mata_pelajaran.php">mata pelajaran</a>
-            <a class="collapse-item" href="Nilai.php">Nilai</a>
           </div>
         </div>
       </li>
@@ -77,6 +75,17 @@ if (!isset($_SESSION["username"])) {
         <a class="nav-link" href="renungan.php">
           <i class="fas fa-fw fa-book"></i>
           <span>Renungan</span>
+        </a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider" />
+
+      <!-- Nav Item - Renungan -->
+      <li class="nav-item">
+        <a class="nav-link" href="pengumuman.php">
+          <i class="fas fa-fw fa-fill"></i>
+          <span>Pengumuman</span>
         </a>
       </li>
 
