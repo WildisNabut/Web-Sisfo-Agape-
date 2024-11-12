@@ -197,8 +197,10 @@ if (!isset($_SESSION["username"])) {
 						<td class='text-center'>$data_guru[nama_guru]</td>
 						<td class='text-center' width='100'>$data_kelas[nama_kelas]</td>
 						<td class='text-center' width='100'><a href='mata_pelajaran_edit.php?kode=$data[kode_mata_pelajaran]' class='btn btn-success'>Edit</a></td>
-						<td class='text-center' width='100'><a href='Hapus_Mata_Pelajaran.php?kode=$data[kode_mata_pelajaran]' class='btn btn-danger'>Hapus</a></td>
-					</tr>";
+            <td width='80'>
+                <button class='btn btn-danger' onclick='showDeleteModal(\"$data[kode_mata_pelajaran]\")'>Hapus</button>
+            </td>					
+            </tr>";
 				}
 				?>
 			</tbody>
@@ -209,6 +211,37 @@ if (!isset($_SESSION["username"])) {
   </div>
 </div>
 </div>
+
+ <!-- Modal Konfirmasi Hapus -->
+ <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <!-- Icon Peringatan Besar -->
+                <i class="fas fa-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
+            </div>
+            <div class="modal-body text-center">
+                <h5 class="modal-title mb-3" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                <p>Apakah Anda yakin ingin menghapus data ini?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a id="confirmDeleteBtn" href="#" class="btn btn-primary">Ya, Hapus</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript untuk Modal Hapus -->
+<script>
+    function showDeleteModal(id) {
+        // Set URL dengan ID data untuk dihapus
+        document.getElementById('confirmDeleteBtn').href = 'Haous_Mata_Pelajaranhapus_kelas.php?kode=' + id;
+        
+        // Tampilkan modal
+        $('#deleteModal').modal('show');
+    }
+</script>
     <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->

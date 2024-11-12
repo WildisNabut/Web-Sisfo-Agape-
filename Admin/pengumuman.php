@@ -211,7 +211,7 @@ if (!isset($_SESSION["username"])) {
                     <th> <?php echo $d['tanggal']; ?> </th>
                     <th> <?php echo $d['status']; ?> </th>
                     <th class='text-center' width='100'>
-                            <a href='renungan_edit.php?kode=<?php echo $d['judul']; ?>' class='btn btn-success'>Edit</a>
+                            <a href='pengumuman_edit.php?kode=<?php echo $d['judul']; ?>' class='btn btn-success'>Edit</a>
                         </th>
                         <th class='text-center' width='100'>
                         <button class='btn btn-danger' onclick="showDeleteModal('<?php echo $d['judul']; ?>')">Hapus</button>
@@ -257,7 +257,6 @@ if (!isset($_SESSION["username"])) {
         $('#deleteModal').modal('show');
     }
 </script>
-<!-- Akhir dari Konten -->
 
 
 

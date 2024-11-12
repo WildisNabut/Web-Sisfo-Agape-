@@ -81,6 +81,18 @@ if (!isset($_SESSION["username"])) {
         </a>
       </li>
 
+
+            <!-- Divider -->
+            <hr class="sidebar-divider" />
+
+        <!-- Nav Item - Renungan -->
+        <li class="nav-item">
+          <a class="nav-link" href="pengumuman.php">
+            <i class="fas fa-fw fa-fill"></i>
+            <span>Pengumuman</span>
+          </a>
+        </li>
+
       <!-- Sidebar Toggler -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -187,10 +199,10 @@ if (!isset($_SESSION["username"])) {
 							echo "<td class='text-left'>$data[username]</TD>";
 							echo "<td>$Level</TD>";
 							echo "<td width='100'><a href='akun_edit.php?kode=$data[username]' class='btn btn-success'>Edit </a></td>";
-							echo "<td width='100'><a href='Hapus_Akun.php?kode=$data[username]' class='btn btn-danger'> Hapus</a></td>
-						</TR>";
-						}
-								
+              echo "<td width='100'>
+                     <button class='btn btn-danger' onclick='showDeleteModal(\"$data[username]\")'>Hapus</button>
+                  </TR>";
+						}					
 						?>
                       </tbody>
                   </table>
@@ -198,6 +210,37 @@ if (!isset($_SESSION["username"])) {
           </div>
       </div>
     </div>
+
+    <!-- Modal Konfirmasi Hapus -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <!-- Icon Peringatan Besar -->
+                <i class="fas fa-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
+            </div>
+            <div class="modal-body text-center">
+                <h5 class="modal-title mb-3" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                <p>Apakah Anda yakin ingin menghapus data ini?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a id="confirmDeleteBtn" href="#" class="btn btn-primary">Ya, Hapus</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript untuk Modal Hapus -->
+<script>
+    function showDeleteModal(id) {
+        // Set URL dengan ID data untuk dihapus
+        document.getElementById('confirmDeleteBtn').href = 'Hapus_Akun.php?kode=' + id;
+        
+        // Tampilkan modal
+        $('#deleteModal').modal('show');
+    }
+</script>
 	  <!-- akhir dari konten -->
       <!-- End of Main Content -->
 

@@ -192,12 +192,12 @@ if (!isset($_SESSION["username"])) {
                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                    <thead>
                        <tr>
-                           <th class="header-no">No</th>
-                           <th class="header-judul">Judul</th>
-                           <th class="header-konten">Ayat Alkitab</th>
-                           <th class="header-tanggal">Tanggal</th>
-                           <th class="header-status">Isi Renungan</th>
-                           <th colspan="2"><b>Aksi</b></th>
+                           <th class="header-no text-center">No</th>
+                           <th class="header-judul text-center">Judul</th>
+                           <th class="header-konten text-center">Ayat Alkitab</th>
+                           <th class="header-tanggal text-center">Tanggal</th>
+                           <th class="header-status text-center">Isi Renungan</th>
+                           <th colspan="2" class="header-status text-center" ><b>Aksi</b></th>
                        </tr>
                    </thead>
                    <?php include('../koneksi.php');
@@ -228,37 +228,9 @@ if (!isset($_SESSION["username"])) {
        </div>
    </div>
  </div>
-<!-- Modal Konfirmasi Hapus -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Apakah Anda yakin ingin menghapus data ini?
-            </div>
-            <div class="modal-footer">
-             <a id="confirmDeleteBtn" href="#" class="btn btn-primary">OK</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- JavaScript untuk Modal Hapus -->
-<script>
-    function showDeleteModal(id) {
-        // Set URL dengan ID data untuk dihapus
-        document.getElementById('confirmDeleteBtn').href = 'Hapus_renungan.php?kode=' + id;
-        
-        // Tampilkan modal
-        $('#deleteModal').modal('show');
-    }
-</script>
+ <!-- Modal hapus  -->
+<?php include('konfirmasi_hapus.php'); ?>
 
     <!-- End of Content Wrapper -->
   </div>

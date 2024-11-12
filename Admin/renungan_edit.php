@@ -108,7 +108,7 @@ if (!isset($_SESSION["username"])) {
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Form Edit Data Siswa</h4>
+  <h4 class="modal-title mx-auto">Form Edit Renungan</h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -200,66 +200,13 @@ if (!isset($_SESSION["username"])) {
         </div>
     </div>
 
-    <!-- Modal untuk Pilih Kelas -->
-    <div id="kelasModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeKelasModal()">&times;</span>
-            <h3>Pilih Kelas</h3>
-            <table class="table table-bordered text-center">
-                <tr>
-                    <td><b>ID Kelas</b></td>
-                    <td><b>Nama Kelas</b></td>
-                    <td><b>Aksi</b></td>
-                </tr>
-                <?php
-                $tampil_kelas = "SELECT * FROM `kelas`";
-                $hasil_kelas = mysqli_query($koneksi, $tampil_kelas);
-
-                while ($data_kelas = mysqli_fetch_array($hasil_kelas)) {
-                    echo "<tr>
-                            <td>{$data_kelas['id_kelas']}</td>
-                            <td>{$data_kelas['nama_kelas']}</td>
-                            <td><button type='button' onclick=\"pilihKelas('{$data_kelas['id_kelas']}')\" class='btn btn-primary'>Pilih</button></td>
-                          </tr>";
-                }
-                ?>
-            </table>
-        </div>
-    </div>
-</div>
-
-
-<script>
-// Fungsi untuk membuka dan menutup modal
-function openKelasModal() {
-    document.getElementById('kelasModal').style.display = 'block';
-}
-function closeKelasModal() {
-    document.getElementById('kelasModal').style.display = 'none';
-}
-function openUsernameModal() {
-    document.getElementById('usernameModal').style.display = 'block';
-}
-function closeUsernameModal() {
-    document.getElementById('usernameModal').style.display = 'none';
-}
-
-// Fungsi untuk memilih kelas dan memasukkan ID kelas ke input
-function pilihKelas(id_kelas) {
-    document.getElementById('kelasInput').value = id_kelas;
-    closeKelasModal();
-}
-
-// Fungsi untuk memilih username dan memasukkan ke input
-function pilihUsername(username) {
-    document.getElementById('usernameInput').value = username;
-    closeUsernameModal();
-}
-</script>
-
-
+    
     </div>
     <!-- End of Content Wrapper -->
+
+
+  </div>
+  <!-- End of Page Wrapper -->
 
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
@@ -270,10 +217,6 @@ function pilihUsername(username) {
         </div>
       </footer>
       <!-- End of Footer -->
-
-  </div>
-  <!-- End of Page Wrapper -->
-
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>

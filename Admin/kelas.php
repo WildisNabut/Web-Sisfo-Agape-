@@ -169,9 +169,9 @@ if (!isset($_SESSION["username"])) {
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th> ID </th>
-                    <th> Nama Kelas </th>
-                    <th colspan="2"><b> Aksi </b></th>
+                    <th class='text-center'> ID </th>
+                    <th class='text-center'> Nama Kelas </th>
+                    <th colspan="2" class='text-center'><b> Aksi </b></th>
                 </tr>
             </thead>
             <tbody>
@@ -184,20 +184,53 @@ if (!isset($_SESSION["username"])) {
                 // Menampilkan data kelas dalam tabel
                 while ($data = mysqli_fetch_array($hasil)) {
                     echo "<tr>
-                            <td> $data[id_kelas] </td>
+                            <td class='text-center'> $data[id_kelas] </td>
                             <td class='text-center'> $data[nama_kelas] </td>
                             <td width='100'><a href='kelas_edit.php?kode=$data[id_kelas]' class='btn btn-success'> Edit </a></td>
-                            <td width='100'><a href='hapus_kelas.php?kode=$data[id_kelas]' class='btn btn-danger'> Hapus </a></td>
+                            <td width='80'>
+                            <button class='btn btn-danger' onclick='showDeleteModal(\"$data[id_kelas]\")'>Hapus</button>
+                            </td>
                           </tr>";
-                }
-                ?>
-                </tbody>
-            </table>
+                      }
+                      ?>
+                      </tbody>
+                  </table>
+              </div>
+              <div class="clearfix margin-bawah"></div>
+          </div>
+      </div>
+</div>
+
+ <!-- Modal Konfirmasi Hapus -->
+ <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <!-- Icon Peringatan Besar -->
+                <i class="fas fa-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
+            </div>
+            <div class="modal-body text-center">
+                <h5 class="modal-title mb-3" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                <p>Apakah Anda yakin ingin menghapus data ini?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a id="confirmDeleteBtn" href="#" class="btn btn-primary">Ya, Hapus</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
         </div>
-        <div class="clearfix margin-bawah"></div>
     </div>
 </div>
-</div>
+
+<!-- JavaScript untuk Modal Hapus -->
+<script>
+    function showDeleteModal(id) {
+        // Set URL dengan ID data untuk dihapus
+        document.getElementById('confirmDeleteBtn').href = 'hapus_kelas.php?kode=' + id;
+        
+        // Tampilkan modal
+        $('#deleteModal').modal('show');
+    }
+</script>
 
 
     <!-- End of Content Wrapper -->

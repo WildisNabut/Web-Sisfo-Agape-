@@ -5,28 +5,33 @@ include('../koneksi.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Ambil data dari form
     $judul = mysqli_real_escape_string($koneksi, $_POST['judul']);
-    $ayat = mysqli_real_escape_string($koneksi, $_POST['nama_kelas']);
+    $ayat = mysqli_real_escape_string($koneksi, $_POST['ayat']);  // Menggunakan 'ayat' alih-alih 'nama_kelas'
     $tanggal = mysqli_real_escape_string($koneksi, $_POST['tanggal']);
     $isi = mysqli_real_escape_string($koneksi, $_POST['isi']);
 
-    // Validasi data (misalnya, memastikan nama kelas tidak kosong)
-    if (empty($nama_kelas)) {
-        echo "<script>alert('Nama Kelas tidak boleh kosong.'); window.location.href='edit_kelas.php?kode=$id_kelas';</script>";
+    // Validasi data (misalnya, memastikan 'judul' tidak kosong)
+    if (empty($judul)) {
+        echo "<script>alert('Judul tidak boleh kosong.'); window.location.href='edit_renungan.php?kode=$judul';</script>";
+        exit;
+    }
+    
+    // Pastikan 'ayat' tidak kosong jika diperlukan
+    if (empty($ayat)) {
+        echo "<script>alert('Ayat Alkitab tidak boleh kosong.'); window.location.href='edit_renungan.php?kode=$judul';</script>";
         exit;
     }
 
-    // Update data kelas di database
-    $update = mysqli_query($koneksi, "UPDATE kelas SET nama_kelas = '$nama_kelas' WHERE id_kelas = '$id_kelas'");
+    // Update data di database
+    $update = mysqli_query($koneksi, "UPDATE renungan SET judul = '$judul', ayat = '$ayat', tanggal = '$tanggal', isi = '$isi' WHERE judul = '$judul'");
 
     if ($update) {
-        echo "<script>alert('Data kelas berhasil diupdate.'); window.location.href='kelas.php';</script>";
+        echo "<script>alert('Data renungan berhasil diupdate.'); window.location.href='renungan.php';</script>";
     } else {
-        echo "<script>alert('Gagal mengupdate data kelas.'); window.location.href='edit_kelas.php?kode=$id_kelas';</script>";
+        echo "<script>alert('Gagal mengupdate data renungan.'); window.location.href='edit_renungan.php?kode=$judul';</script>";
     }
 } else {
-    // Jika tidak melalui metode POST, alihkan ke halaman kelas
-    header("Location: kelas.php");
+    // Jika tidak melalui metode POST, alihkan ke halaman renungan
+    header("Location: renungan.php");
     exit;
 }
 ?>
-

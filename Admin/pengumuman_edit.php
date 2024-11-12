@@ -1,6 +1,4 @@
-<?php
-include ('../koneksi.php');
-?>
+<?php include('../koneksi.php');?>
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
@@ -8,6 +6,7 @@ if (!isset($_SESSION["username"])) {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +15,7 @@ if (!isset($_SESSION["username"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Smp Agape Indah</title>
+  <title>SMP AGAPE INDAH</title>
 
   <!-- Custom fonts and styles for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -80,17 +79,16 @@ if (!isset($_SESSION["username"])) {
         </a>
       </li>
 
-       <!-- Divider -->
-       <hr class="sidebar-divider" />
+            <!-- Divider -->
+            <hr class="sidebar-divider" />
 
-      <!-- Nav Item - Renungan -->
-      <li class="nav-item">
-        <a class="nav-link" href="pengumuman.php">
-          <i class="fas fa-fw fa-fill"></i>
-          <span>Pengumuman</span>
-        </a>
-      </li>
-
+          <!-- Nav Item - Renungan -->
+          <li class="nav-item">
+            <a class="nav-link" href="pengumuman.php">
+              <i class="fas fa-fw fa-fill"></i>
+              <span>Pengumuman</span>
+            </a>
+          </li>
 
       <!-- Sidebar Toggler -->
       <div class="text-center d-none d-md-inline">
@@ -110,7 +108,7 @@ if (!isset($_SESSION["username"])) {
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Data Guru</h4>
+  <h4 class="modal-title mx-auto">Form Edit Pengumuman</h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -149,114 +147,78 @@ if (!isset($_SESSION["username"])) {
         <!-- End of Topbar -->
 
 
-                          <!-- konten yang ingin di rubah -->
-                          <div class="container-fluid">
-                          <div class="card shadow mb-4">
-                          <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                              <a href="tambah_guru.php" class="btn btn-primary">Tambah Data</a>
-                              <form class="form-inline" method="POST" action="">
-                                  <div class="input-group">
-                                      <input type="text" class="form-control bg-light border-0 small" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                                      <div class="input-group-append">
-                                          <button class="btn btn-primary" type="submit">
-                                              <i class="fas fa-search fa-sm"></i>
-                                          </button>
-                                      </div>
-                                  </div>
-                              </form>
-                          </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
-                          <tr>
-                            <th> NIP </th>
-                        <th> Nama Guru </th>
-                        <th> Nomor Telepon </th>
-                        <th> Jenis Kelamin </th>
-                        <th> Agama </th>
-                              <th colspan="2" ><b> Aksi </th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                  <?php	
-                  $tampil="SELECT * FROM `guru`";
-                  $hasil=mysqli_query($koneksi, $tampil);
+        
+<div class="container-fluid">
+    <div id="Edit_Akun">
+    <?php
+      $Kode = $_GET['kode'];
+      $query = mysqli_query($koneksi, "SELECT * FROM pengumuman WHERE judul='$Kode'");
+      $data = mysqli_fetch_array($query);
+      ?>
+        <div class="container">
+            <div class="container margin-atas">
 
-                  while ($data=mysqli_fetch_array($hasil))
-                  {
-                        if ($data['agama'] == "Islam")
-                        {$Agama = "Islam";}
-                        
-                        else if ($data['agama'] == "Kristen")
-                        {$Agama = "Kristen";}
-                        
-                        else if ($data['agama'] == "Katolik")
-                        {$Agama = "Katolik";}
-                        
-                        else if ($data['agama'] == "Hindu")
-                        {$Agama = "Hindu";}
-                        
-                        else if ($data['agama'] == "Buddha")
-                        {$Agama = "Buddha";}
-                        
-                        else
-                        {$Agama = "Kong Hu Cu";}
-                    
-                    echo "<tr>
-                            <td> $data[nip] </td>
-                        <td class='text-left'> $data[nama_guru] </td>
-                        <td class='text-left'> $data[no_hp] </td>
-                        <td> $data[jenkel] </td>
-                        <td> $Agama </td>
-                            <td width='80'><a href='guru_edit.php?kode=$data[nip]' class='btn btn-success'>Edit</a></td>
-                          <td width='80'>
-                       <button class='btn btn-danger' onclick='showDeleteModal(\"$data[nip]\")'>Hapus</button>
-                       </td>
-                  </tr>";
-                  }
-                  ?>
-	        	</tbody>
-        </table>
-    </div>
-    <div class="clearfix margin-bawah"></div>
-   </div>
-</div>
+                <form class="form-group" action="Proses_edit_pengumuman.php" method="post">
 
-         <!-- Modal Konfirmasi Hapus -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header justify-content-center">
-                <!-- Icon Peringatan Besar -->
-                <i class="fas fa-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
-            </div>
-            <div class="modal-body text-center">
-                <h5 class="modal-title mb-3" id="deleteModalLabel">Konfirmasi Hapus</h5>
-                <p>Apakah Anda yakin ingin menghapus data ini?</p>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <a id="confirmDeleteBtn" href="#" class="btn btn-primary">Ya, Hapus</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <!-- Judul -->
+                    <div class="form-group row">
+                        <label for="inputJudul" class="col-sm-2 col-form-label">Judul</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="judul" maxlength="100" placeholder="<?php echo "$data[judul]"; ?>" required>
+                        </div>
+                    </div>
+
+                    <!-- Deskripsi Pengumuman -->
+                    <div class="form-group row">
+                        <label for="inputdekripsi" class="col-sm-2 col-form-label">Deskripsi</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="dekripsi" rows="5" placeholder="Deskripsi pengumuman" required><?php echo $data['dekripsi']; ?></textarea>
+                        </div>
+                    </div>
+
+
+                    <!-- Tanggal -->
+                    <div class="form-group row">
+                        <label for="inputTanggal" class="col-sm-2 col-form-label">Tanggal</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" name="tanggal" value="<?php echo $data['tanggal']; ?>" required>
+                        </div>
+                    </div>
+
+                    <!--Status -->
+                    <div class="form-group row">
+                    <label for="inputjeniskelamin" class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="laki-laki" value="<?php echo $data['status']; ?>" checked>
+                            <label class="form-check-label" for="Aktif">
+                                Aktif
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="perempuan" value="<?php echo $data['status']; ?>">
+                            <label class="form-check-label" for="Nonaktif">
+                                Nonaktif
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                    <!-- Tombol Simpan dan Batal -->
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <a href="pengumuman.php" class="btn btn-secondary">Batal</a>
+                </form>
             </div>
         </div>
     </div>
-</div>
 
-<!-- JavaScript untuk Modal Hapus -->
-<script>
-    function showDeleteModal(id) {
-        // Set URL dengan ID data untuk dihapus
-        document.getElementById('confirmDeleteBtn').href = 'Hapus_renungan.php?kode=' + id;
-        
-        // Tampilkan modal
-        $('#deleteModal').modal('show');
-    }
-</script>
-<!-- //Guru -->
+    
+    </div>
+    <!-- End of Content Wrapper -->
 
 
-      <!-- End of Main Content -->
+  </div>
+  <!-- End of Page Wrapper -->
 
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
@@ -267,11 +229,6 @@ if (!isset($_SESSION["username"])) {
         </div>
       </footer>
       <!-- End of Footer -->
-    </div>
-    <!-- End of Content Wrapper -->
-  </div>
-  <!-- End of Page Wrapper -->
-
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
