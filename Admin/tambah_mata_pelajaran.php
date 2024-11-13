@@ -28,72 +28,7 @@ if (!isset($_SESSION["username"])) {
   <!-- Page Wrapper -->
   <div id="wrapper">
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-      </a>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0" />
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="index.php">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider" />
-
-      <!-- Data Sekolah Section -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Data Sekolah</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Data Sekolah</h6>
-            <a class="collapse-item" href="akun.php">Akun</a>
-            <a class="collapse-item" href="guru.php">Guru</a>
-            <a class="collapse-item" href="murid.php">Siswa</a>
-            <a class="collapse-item" href="kelas.php">Kelas</a>
-            <a class="collapse-item" href="mata_pelajaran.php">mata pelajaran</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider" />
-
-      <!-- Nav Item - Renungan -->
-      <li class="nav-item">
-        <a class="nav-link" href="renungan.php">
-          <i class="fas fa-fw fa-book"></i>
-          <span>Renungan</span>
-        </a>
-      </li>
-      <!-- Divider -->
-      <hr class="sidebar-divider" />
-
-      <!-- Nav Item - Renungan -->
-      <li class="nav-item">
-        <a class="nav-link" href="pengumuman.php">
-          <i class="fas fa-fw fa-fill"></i>
-          <span>Pengumuman</span>
-        </a>
-      </li>
-      <!-- Sidebar Toggler -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-    </ul>
+    <?php include ('sidebar.php'); ?> 
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -135,8 +70,10 @@ if (!isset($_SESSION["username"])) {
           <i class='fas fa-user'></i>
         </a>
         <div class='dropdown-menu dropdown-menu-right shadow animated--grow-in' aria-labelledby='userDropdown'>
-          <a class='dropdown-item' href='../logout.php'><i class='fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>Logout</a>
-        </div>
+        <a class='dropdown-item' href='#' data-toggle='modal' data-target='#logoutModal'>
+          <i class='fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>Logout
+        </a>
+      </div>
       </li>";
     }
     ?>
@@ -327,24 +264,25 @@ function pilihGuru(nip) {
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
+<!-- Modal Konfirmasi Logout -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <!-- Icon Peringatan Besar -->
+                <i class="fas fa-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
+            </div>
+            <div class="modal-body text-center">
+                <h5 class="modal-title mb-3" id="logoutModalLabel">Apakah Anda yakin ingin keluar?</h5>
+            </div>
+            <div class="modal-footer justify-content-center">
+            <a id="confirmLogoutBtn" href="logout.php" class="btn btn-primary">
+            <i class="fa fa-sign-out-alt mr-2"></i> Ya, Keluar</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
   <!-- Scripts -->
   <script src="vendor/jquery/jquery.min.js"></script>

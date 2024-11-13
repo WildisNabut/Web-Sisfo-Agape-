@@ -1,4 +1,3 @@
-
 <?php
 include ('../koneksi.php');
 ?>
@@ -17,7 +16,7 @@ if (!isset($_SESSION["username"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>SMP AGAPE INDAH</title>
+  <title>Smp Agape Indah</title>
 
   <!-- Custom fonts and styles for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
@@ -28,6 +27,7 @@ if (!isset($_SESSION["username"])) {
 <body id="page-top">
   <!-- Page Wrapper -->
   <div id="wrapper">
+
     <!-- Sidebar -->
     <?php include ('sidebar.php'); ?> 
     <!-- End of Sidebar -->
@@ -43,9 +43,7 @@ if (!isset($_SESSION["username"])) {
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Form Tambah data Renungan
-
-  </h4>
+  <h4 class="modal-title mx-auto">Kutipan</h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -72,7 +70,7 @@ if (!isset($_SESSION["username"])) {
           <span class='mr-2 d-none d-lg-inline text-gray-600 small'>$_SESSION[username]</span>
           <i class='fas fa-user'></i>
         </a>
-       <div class='dropdown-menu dropdown-menu-right shadow animated--grow-in' aria-labelledby='userDropdown'>
+        <div class='dropdown-menu dropdown-menu-right shadow animated--grow-in' aria-labelledby='userDropdown'>
         <a class='dropdown-item' href='#' data-toggle='modal' data-target='#logoutModal'>
           <i class='fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>Logout
         </a>
@@ -85,70 +83,100 @@ if (!isset($_SESSION["username"])) {
 <!-- End of Topbar -->
         <!-- End of Topbar -->
 
-
+  <!-- konten yang ingin di rubah -->
         
-        <!-- konten yang ingin di rubah -->
-        <div class="container-fluid">
-    
-    <form method="POST" action="trenungan.php">
+  <div class="container-fluid">
+         <!-- Murid -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <a href="tambah_kutipan.php" class="btn btn-primary">Tambah Data</a>
+        <form class="form-inline" method="POST" action="">
+            <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th class='text-center'> No </th>
+                    <th class='text-center'> Judul </th>
+                    <th class='text-center'> Isi </th>
+                    <th colspan="2" class='text-center'><b> Aksi </b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php	
+                include('../koneksi.php');
+                $i = 1;
+                $tampil = "SELECT * FROM `kutipan`";
+                $hasil = mysqli_query($koneksi, $tampil);
 
-        <!-- Judul Renungan -->
-        <div class="form-group row">
-            <label for="inputjudul" class="col-sm-2 col-form-label">Judul</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputjudul" name="judul">
+                // Menampilkan data kelas dalam tabel
+                while ($data = mysqli_fetch_array($hasil)) {
+                    echo "<tr>
+                            <th class='text-center'>" . $i++ . "</th>
+                            <td class='text-center'> $data[judul] </td>
+                            <td class='text-center'> $data[deskripsi] </td>
+                            <td width='100'><a href='kutipan_edit.php?kode=$data[judul]' class='btn btn-success'> Edit </a></td>
+                            <td width='80'>
+                            <button class='btn btn-danger' onclick='showDeleteModal(\"$data[judul]\")'>Hapus</button>
+                            </td>
+                          </tr>";
+                        }
+                      ?>
+                    </tbody>
+                  </table>
+                </div>
+              <div class="clearfix margin-bawah"></div>
+           </div>
+         </div>
+       </div>
+
+ <!-- Modal Konfirmasi Hapus -->
+ <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <!-- Icon Peringatan Besar -->
+                <i class="fas fa-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
+            </div>
+            <div class="modal-body text-center">
+                <h5 class="modal-title mb-3" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                <p>Apakah Anda yakin ingin menghapus data ini?</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a id="confirmDeleteBtn" href="#" class="btn btn-primary">Ya, Hapus</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
             </div>
         </div>
-
-        <!-- Judul Renungan -->
-        <div class="form-group row">
-            <label for="inputayat" class="col-sm-2 col-form-label">Ayat Alkitab</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputjudul" name="ayat">
-            </div>
-        </div>
-
-
-        
-        <!-- Tanggal Pengumuman -->
-        <div class="form-group row">
-            <label for="inputtanggal" class="col-sm-2 col-form-label">Tanggal</label>
-            <div class="col-sm-10">
-                <input type="date" class="form-control" id="inputtanggal" name="tanggal">
-            </div>
-        </div>
-
-        <!-- Isi Renungan Harian -->
-
-        
-        <!-- Deskripsi Pengumuman -->
-        <div class="form-group row">
-            <label for="inputrenungan" class="col-sm-2 col-form-label">Renungan</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" id="inputrenungan" name="isi" rows="4"></textarea>
-            </div>
-        </div>
-        
-        
-
-        <!-- Tombol Submit -->
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Tambah Data</button>
-            </div>
-        </div>
-    </form>
+    </div>
 </div>
 
-        <!-- akhir dari konten -->
+<!-- JavaScript untuk Modal Hapus -->
+<script>
+    function showDeleteModal(id) {
+        // Set URL dengan ID data untuk dihapus
+        document.getElementById('confirmDeleteBtn').href = 'hapus_kutipan.php?kode=' + id;
+        
+        // Tampilkan modal
+        $('#deleteModal').modal('show');
+    }
+</script>
 
 
-
-      </div>
-      <!-- End of Main Content -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; Ilmu komputer 2024</span>
@@ -156,17 +184,12 @@ if (!isset($_SESSION["username"])) {
         </div>
       </footer>
       <!-- End of Footer -->
-    </div>
-    <!-- End of Content Wrapper -->
-  </div>
-  <!-- End of Page Wrapper -->
-
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Modal Konfirmasi Logout -->
+<!-- Modal Konfirmasi Logout -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

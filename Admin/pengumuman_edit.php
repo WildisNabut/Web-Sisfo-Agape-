@@ -6,6 +6,7 @@ if (!isset($_SESSION["username"])) {
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +41,7 @@ if (!isset($_SESSION["username"])) {
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Form Edit Data Siswa</h4>
+  <h4 class="modal-title mx-auto">Form Edit Pengumuman</h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -84,149 +85,75 @@ if (!isset($_SESSION["username"])) {
         
 <div class="container-fluid">
     <div id="Edit_Akun">
+    <?php
+      $Kode = $_GET['kode'];
+      $query = mysqli_query($koneksi, "SELECT * FROM pengumuman WHERE judul='$Kode'");
+      $data = mysqli_fetch_array($query);
+      ?>
         <div class="container">
             <div class="container margin-atas">
-                <?php
-                $Kode = $_GET['kode'];
-                $query = mysqli_query($koneksi, "SELECT * FROM murid WHERE nisn='$Kode'");
-                $data = mysqli_fetch_array($query);
-                ?>
 
-                <form class="form-group" action="Proses_Edit_Murid.php" method="post">
-                    <!-- NISN Lama -->
+                <form class="form-group" action="Proses_edit_pengumuman.php" method="post">
+
+                    <!-- Judul -->
                     <div class="form-group row">
-                        <label for="inputnis" class="col-sm-2 col-form-label">NISN Lama</label>
+                        <label for="inputJudul" class="col-sm-2 col-form-label">Judul</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputnis" name="NISN_Lama" size="8" value="<?php echo "$data[nisn]"; ?>" readonly>
+                            <input type="text" class="form-control" name="judul" maxlength="100" placeholder="<?php echo "$data[judul]"; ?>" required>
                         </div>
                     </div>
 
-                    <!-- NISN Baru -->
+                    <!-- Deskripsi Pengumuman -->
                     <div class="form-group row">
-                        <label for="inputnisbaru" class="col-sm-2 col-form-label">NISN Baru</label>
+                        <label for="inputdekripsi" class="col-sm-2 col-form-label">Deskripsi</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="NISN" maxlength="10" onkeypress="return hanyaAngka(event)" size="8" placeholder="<?php echo "$data[nisn]"; ?>">
+                            <textarea class="form-control" name="dekripsi" rows="5" placeholder="Deskripsi pengumuman" required><?php echo $data['dekripsi']; ?></textarea>
                         </div>
                     </div>
 
-                    <!-- Nama -->
+
+                    <!-- Tanggal -->
                     <div class="form-group row">
-                        <label for="inputnama" class="col-sm-2 col-form-label">Nama</label>
+                        <label for="inputTanggal" class="col-sm-2 col-form-label">Tanggal</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="Nama" value="<?php echo "$data[nama_murid]"; ?>">
+                            <input type="date" class="form-control" name="tanggal" value="<?php echo $data['tanggal']; ?>" required>
                         </div>
                     </div>
 
-                    <!-- Alamat -->
+                    <!--Status -->
                     <div class="form-group row">
-                        <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="Kota" value="<?php echo "$data[kota]"; ?>">
+                    <label for="inputjeniskelamin" class="col-sm-2 col-form-label">Status</label>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="laki-laki" value="<?php echo $data['status']; ?>" checked>
+                            <label class="form-check-label" for="Aktif">
+                                Aktif
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="status" id="perempuan" value="<?php echo $data['status']; ?>">
+                            <label class="form-check-label" for="Nonaktif">
+                                Nonaktif
+                            </label>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Kolom Jenis Kelamin -->
-					<div class="form-group row">
-						<label for="jenis_kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
-						<div class="col-sm-10">
-							<select name="Jenis_Kelamin" class="form-control" id="jenis_kelamin">
-								<option value="Laki-Laki" <?php echo $data['jenkel'] == "Laki-Laki" ? 'selected' : ''; ?>>Laki-Laki</option>
-								<option value="Perempuan" <?php echo $data['jenkel'] == "Perempuan" ? 'selected' : ''; ?>>Perempuan</option>
-							</select>
-						</div>
-					</div>
-
-                   <!-- Kolom Agama -->
-					<div class="form-group row">
-						<label for="agama" class="col-sm-2 col-form-label">Agama</label>
-						<div class="col-sm-10">
-							<select name="Agama" class="form-control" id="agama">
-								<?php
-									$agama_options = ["Islam", "Kristen", "Katolik", "Hindu", "Buddha", "Kong Hu Cu"];
-									foreach ($agama_options as $agama) {
-										$selected = ($data['agama'] == $agama) ? 'selected' : '';
-										echo "<option value='$agama' $selected>$agama</option>";
-									}
-								?>
-							</select>
-						</div>
-					</div>
-
-                    <!-- Kelas -->
-                    <div class="form-group row">
-                        <label for="kelasInput" class="col-sm-2 col-form-label">Kelas</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="id_kelas" id="kelasInput" readonly>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-secondary" onclick="openKelasModal()">Pilih</button>
-                        </div>
-                    </div>
-
-                    <!-- Submit and Cancel buttons -->
+                    <!-- Tombol Simpan dan Batal -->
                     <button type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="murid.php" class="btn btn-secondary">Batal</a>
+                    <a href="pengumuman.php" class="btn btn-secondary">Batal</a>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Modal untuk Pilih Kelas -->
-    <div id="kelasModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeKelasModal()">&times;</span>
-            <h3>Pilih Kelas</h3>
-            <table class="table table-bordered text-center">
-                <tr>
-                    <td><b>ID Kelas</b></td>
-                    <td><b>Nama Kelas</b></td>
-                    <td><b>Aksi</b></td>
-                </tr>
-                <?php
-                $tampil_kelas = "SELECT * FROM `kelas`";
-                $hasil_kelas = mysqli_query($koneksi, $tampil_kelas);
-
-                while ($data_kelas = mysqli_fetch_array($hasil_kelas)) {
-                    echo "<tr>
-                            <td>{$data_kelas['id_kelas']}</td>
-                            <td>{$data_kelas['nama_kelas']}</td>
-                            <td><button type='button' onclick=\"pilihKelas('{$data_kelas['id_kelas']}')\" class='btn btn-primary'>Pilih</button></td>
-                          </tr>";
-                }
-                ?>
-            </table>
-        </div>
+    
     </div>
-</div>
+    <!-- End of Content Wrapper -->
 
-<script>
-// Fungsi untuk membuka dan menutup modal
-function openKelasModal() {
-    document.getElementById('kelasModal').style.display = 'block';
-}
-function closeKelasModal() {
-    document.getElementById('kelasModal').style.display = 'none';
-}
-function openUsernameModal() {
-    document.getElementById('usernameModal').style.display = 'block';
-}
-function closeUsernameModal() {
-    document.getElementById('usernameModal').style.display = 'none';
-}
 
-// Fungsi untuk memilih kelas dan memasukkan ID kelas ke input
-function pilihKelas(id_kelas) {
-    document.getElementById('kelasInput').value = id_kelas;
-    closeKelasModal();
-}
-
-// Fungsi untuk memilih username dan memasukkan ke input
-function pilihUsername(username) {
-    document.getElementById('usernameInput').value = username;
-    closeUsernameModal();
-}
-</script>
-
+  </div>
+  <!-- End of Page Wrapper -->
 
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
@@ -237,11 +164,6 @@ function pilihUsername(username) {
         </div>
       </footer>
       <!-- End of Footer -->
-    </div>
-    <!-- End of Content Wrapper -->
-  </div>
-  <!-- End of Page Wrapper -->
-
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
