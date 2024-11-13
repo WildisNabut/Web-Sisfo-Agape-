@@ -40,7 +40,7 @@ if (!isset($_SESSION["username"])) {
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Form Tambah Guru</h4>
+  <h4 class="modal-title mx-auto">Form Tambah Kutipan</h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -77,139 +77,38 @@ if (!isset($_SESSION["username"])) {
     ?>
   </ul>
 </nav>
+
 <!-- End of Topbar -->
-
-
         
- <!-- Konten -->
-<!-- Input Guru -->
 <!-- Konten -->
 <div class="container-fluid">
-    <?php 
-    include ('../koneksi.php');
-    $tampil = "SELECT * FROM `akun` WHERE `level` = '2' ORDER BY `username` ASC";
-    $hasil = mysqli_query($koneksi, $tampil);
-    ?>
-
-    <form class="form-group" action="Proses_Tambah_Guru.php" method="post">
-        <!-- Input NIP -->
+    <form method="POST" action="Proses_Tambah_Kutipan.php">
+        <!-- Judul Pengumuman -->
         <div class="form-group row">
-            <label for="inputnip" class="col-sm-2 col-form-label">NIP</label>
+            <label for="inputjudul" class="col-sm-2 col-form-label">Judul</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputnip" name="nip" required>
+                <input type="text" class="form-control" id="inputjudul" name="judul" required placeholder="Masukkan judul kutipan">
             </div>
         </div>
 
-        
-        <!-- Input Nama -->
+        <!-- Deskripsi Pengumuman -->
         <div class="form-group row">
-            <label for="inputnama" class="col-sm-2 col-form-label">Nama</label>
+            <label for="inputdeskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputnama" name="nama_guru" required>
+                <textarea class="form-control" id="inputdeskripsi" name="deskripsi" rows="4" required placeholder="Masukkan deskripsi kutipan"></textarea>
             </div>
         </div>
 
-        <!-- No Telepon -->
-        <div class="form-group row">
-            <label for="No_HP" class="col-sm-2 col-form-label">No Telepon</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="No_HP" name="no_tlp" onkeypress="return hanyaAngka(event)">
-            </div>
-        </div>
-
-        <!-- Jenis Kelamin -->
-        <div class="form-group row">
-            <label for="jenis_kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
-            <div class="col-sm-10">
-                <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
-                    <option value="Laki-Laki" selected>Laki-Laki</option>
-                    <option value="Perempuan">Perempuan</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Agama -->
-        <div class="form-group row">
-            <label for="agama" class="col-sm-2 col-form-label">Agama</label>
-            <div class="col-sm-10">
-                <select class="form-control" id="agama" name="agama">
-                    <option value="Islam" selected>Islam</option>
-                    <option value="Kristen">Kristen</option>
-                    <option value="Katolik">Katolik</option>
-                    <option value="Hindu">Hindu</option>
-                    <option value="Buddha">Buddha</option>
-                    <option value="Kong_Hu_Cu">Kong Hu Cu</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Submit and Cancel Buttons -->
+        <!-- Buttons for Save and Cancel -->
         <div class="form-group row">
             <div class="col-sm-10 offset-sm-2">
                 <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="guru.php" class="btn btn-secondary ml-2">Batal</a>
+                <a href="kutipan.php" class="btn btn-secondary">Batal</a>
             </div>
         </div>
     </form>
 </div>
-
-<!-- Overlay dan Modal untuk menampilkan tabel akun -->
-<div id="modalOverlay" onclick="closeAccountModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
-<div id="accountModal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, 0); background:white; padding:20px; border-radius:8px;">
-    <h3>Pilih Username</h3>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-            while ($data = mysqli_fetch_array($hasil)) {
-                echo "<tr>";
-                echo "<td>" . $data['username'] . "</td>";
-                echo "<td><button type='button' class='btn btn-primary' onclick=\"selectUsername('" . $data['username'] . "')\">Pilih</button></td>";
-                echo "</tr>";
-            }
-            ?>
-        </tbody>
-    </table>
-    <button type="button" class="btn btn-secondary" onclick="closeAccountModal()">Tutup</button>
-</div>
-
-<!-- JavaScript untuk membuka dan menutup modal serta memilih username -->
-<script>
-    function openAccountModal() {
-        document.getElementById("modalOverlay").style.display = "block";
-        document.getElementById("accountModal").style.display = "block";
-    }
-
-    function closeAccountModal() {
-        document.getElementById("modalOverlay").style.display = "none";
-        document.getElementById("accountModal").style.display = "none";
-    }
-
-    function selectUsername(username) {
-        document.getElementById("selectedUsername").value = username;
-        closeAccountModal();
-    }
-</script>
-
-<!-- JavaScript untuk memastikan input hanya angka -->
-<script type="text/javascript">
-function hanyaAngka(evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode;
-    return (charCode >= 48 && charCode <= 57);
-}
-</script>
-
-
-<!-- //Admin Pannel -->
 <!-- Akhir dari Konten -->
-
-
-
 
       </div>
       <!-- End of Main Content -->
@@ -232,7 +131,6 @@ function hanyaAngka(evt) {
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
 <!-- Modal Konfirmasi Logout -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog">

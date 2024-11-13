@@ -1,4 +1,7 @@
-<?php include('../koneksi.php');?>
+
+<?php
+include ('../koneksi.php');
+?>
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
@@ -40,7 +43,8 @@ if (!isset($_SESSION["username"])) {
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Form Tambah Guru</h4>
+  <h4 class="modal-title mx-auto">Form Tambah data Kegiatan
+  </h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -67,7 +71,7 @@ if (!isset($_SESSION["username"])) {
           <span class='mr-2 d-none d-lg-inline text-gray-600 small'>$_SESSION[username]</span>
           <i class='fas fa-user'></i>
         </a>
-        <div class='dropdown-menu dropdown-menu-right shadow animated--grow-in' aria-labelledby='userDropdown'>
+       <div class='dropdown-menu dropdown-menu-right shadow animated--grow-in' aria-labelledby='userDropdown'>
         <a class='dropdown-item' href='#' data-toggle='modal' data-target='#logoutModal'>
           <i class='fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>Logout
         </a>
@@ -79,135 +83,61 @@ if (!isset($_SESSION["username"])) {
 </nav>
 <!-- End of Topbar -->
 
+ <!-- konten yang ingin di rubah -->
+  <div class="container-fluid">
+  <form action="Proses_Tambah_Kegiatan.php" method="post" enctype="multipart/form-data">
 
+        <!-- Judul Renungan -->
+        <div class="form-group row">
+            <label for="inputjudul" class="col-sm-2 col-form-label">Judul</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputjudul" name="judul">
+            </div>
+        </div>
         
- <!-- Konten -->
-<!-- Input Guru -->
-<!-- Konten -->
-<div class="container-fluid">
-    <?php 
-    include ('../koneksi.php');
-    $tampil = "SELECT * FROM `akun` WHERE `level` = '2' ORDER BY `username` ASC";
-    $hasil = mysqli_query($koneksi, $tampil);
-    ?>
-
-    <form class="form-group" action="Proses_Tambah_Guru.php" method="post">
-        <!-- Input NIP -->
+        <!-- Deskripsi kegiatan -->
         <div class="form-group row">
-            <label for="inputnip" class="col-sm-2 col-form-label">NIP</label>
+            <label for="inputdeskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputnip" name="nip" required>
+                <textarea class="form-control" id="inputdeskripsi" name="deskripsi" rows="4"></textarea>
             </div>
         </div>
-
         
-        <!-- Input Nama -->
+        <!-- Deskripsi kegiatan -->
         <div class="form-group row">
-            <label for="inputnama" class="col-sm-2 col-form-label">Nama</label>
+            <label for="inputtempat" class="col-sm-2 col-form-label">Tempat</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputnama" name="nama_guru" required>
+                <textarea class="form-control" id="inputtempat" name="tempat" rows="4"></textarea>
             </div>
         </div>
 
-        <!-- No Telepon -->
+        <!-- Tanggal Pengumuman -->
         <div class="form-group row">
-            <label for="No_HP" class="col-sm-2 col-form-label">No Telepon</label>
+            <label for="inputtanggal" class="col-sm-2 col-form-label">Tanggal</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="No_HP" name="no_tlp" onkeypress="return hanyaAngka(event)">
+                <input type="date" class="form-control" id="inputtanggal" name="tanggal">
             </div>
         </div>
 
-        <!-- Jenis Kelamin -->
+         <!-- Gambar -->
         <div class="form-group row">
-            <label for="jenis_kelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+            <label for="inputgambar" class="col-sm-2 col-form-label">Gambar</label>
             <div class="col-sm-10">
-                <select class="form-control" id="jenis_kelamin" name="jenis_kelamin">
-                    <option value="Laki-Laki" selected>Laki-Laki</option>
-                    <option value="Perempuan">Perempuan</option>
-                </select>
+                <input type="file" class="form-control-file" id="inputgambar" name="gambar" required>
             </div>
         </div>
-
-        <!-- Agama -->
-        <div class="form-group row">
-            <label for="agama" class="col-sm-2 col-form-label">Agama</label>
-            <div class="col-sm-10">
-                <select class="form-control" id="agama" name="agama">
-                    <option value="Islam" selected>Islam</option>
-                    <option value="Kristen">Kristen</option>
-                    <option value="Katolik">Katolik</option>
-                    <option value="Hindu">Hindu</option>
-                    <option value="Buddha">Buddha</option>
-                    <option value="Kong_Hu_Cu">Kong Hu Cu</option>
-                </select>
+        
+         <!-- Tombol Simpan -->
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <a href="kegiatan.php" class="btn btn-secondary">Batal</a>
+                </div>
             </div>
-        </div>
-
-        <!-- Submit and Cancel Buttons -->
-        <div class="form-group row">
-            <div class="col-sm-10 offset-sm-2">
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="guru.php" class="btn btn-secondary ml-2">Batal</a>
-            </div>
-        </div>
     </form>
 </div>
 
-<!-- Overlay dan Modal untuk menampilkan tabel akun -->
-<div id="modalOverlay" onclick="closeAccountModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
-<div id="accountModal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, 0); background:white; padding:20px; border-radius:8px;">
-    <h3>Pilih Username</h3>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-            while ($data = mysqli_fetch_array($hasil)) {
-                echo "<tr>";
-                echo "<td>" . $data['username'] . "</td>";
-                echo "<td><button type='button' class='btn btn-primary' onclick=\"selectUsername('" . $data['username'] . "')\">Pilih</button></td>";
-                echo "</tr>";
-            }
-            ?>
-        </tbody>
-    </table>
-    <button type="button" class="btn btn-secondary" onclick="closeAccountModal()">Tutup</button>
-</div>
-
-<!-- JavaScript untuk membuka dan menutup modal serta memilih username -->
-<script>
-    function openAccountModal() {
-        document.getElementById("modalOverlay").style.display = "block";
-        document.getElementById("accountModal").style.display = "block";
-    }
-
-    function closeAccountModal() {
-        document.getElementById("modalOverlay").style.display = "none";
-        document.getElementById("accountModal").style.display = "none";
-    }
-
-    function selectUsername(username) {
-        document.getElementById("selectedUsername").value = username;
-        closeAccountModal();
-    }
-</script>
-
-<!-- JavaScript untuk memastikan input hanya angka -->
-<script type="text/javascript">
-function hanyaAngka(evt) {
-    var charCode = (evt.which) ? evt.which : event.keyCode;
-    return (charCode >= 48 && charCode <= 57);
-}
-</script>
-
-
-<!-- //Admin Pannel -->
-<!-- Akhir dari Konten -->
-
+        <!-- akhir dari konten -->
 
 
 
@@ -233,7 +163,7 @@ function hanyaAngka(evt) {
     <i class="fas fa-angle-up"></i>
   </a>
 
-<!-- Modal Konfirmasi Logout -->
+  <!-- Modal Konfirmasi Logout -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

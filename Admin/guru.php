@@ -28,75 +28,7 @@ if (!isset($_SESSION["username"])) {
   <!-- Page Wrapper -->
   <div id="wrapper">
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-      </a>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0" />
-
-      <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
-        <a class="nav-link" href="index.php">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider" />
-
-      <!-- Data Sekolah Section -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Data Sekolah</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Data Sekolah</h6>
-            <a class="collapse-item" href="akun.php">Akun</a>
-            <a class="collapse-item" href="guru.php">Guru</a>
-            <a class="collapse-item" href="murid.php">Siswa</a>
-            <a class="collapse-item" href="kelas.php">Kelas</a>
-            <a class="collapse-item" href="mata_pelajaran.php">mata pelajaran</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider" />
-
-      <!-- Nav Item - Renungan -->
-      <li class="nav-item">
-        <a class="nav-link" href="renungan.php">
-          <i class="fas fa-fw fa-book"></i>
-          <span>Renungan</span>
-        </a>
-      </li>
-
-       <!-- Divider -->
-       <hr class="sidebar-divider" />
-
-      <!-- Nav Item - Renungan -->
-      <li class="nav-item">
-        <a class="nav-link" href="pengumuman.php">
-          <i class="fas fa-fw fa-fill"></i>
-          <span>Pengumuman</span>
-        </a>
-      </li>
-
-
-      <!-- Sidebar Toggler -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-    </ul>
+    <?php include ('sidebar.php'); ?> 
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -148,13 +80,26 @@ if (!isset($_SESSION["username"])) {
   </ul>
 </nav>
 <!-- End of Topbar -->
-        <!-- End of Topbar -->
 
+<?php
+include('../koneksi.php');
 
-                          <!-- konten yang ingin di rubah -->
-                          <div class="container-fluid">
-                          <div class="card shadow mb-4">
-                          <div class="card-header py-3 d-flex justify-content-between align-items-center">
+// Cek apakah form pencarian telah disubmit
+$search = '';
+if (isset($_POST['search']) && !empty($_POST['search'])) {
+    $search = mysqli_real_escape_string($koneksi, $_POST['search']);
+}
+
+// Modifikasi query untuk menambahkan filter pencarian
+$tampil = "SELECT * FROM `guru` WHERE `nama_guru` LIKE '$search%' OR `nip` LIKE '$search%'";
+$hasil = mysqli_query($koneksi, $tampil);
+?>
+          
+          
+          <!-- konten yang ingin di rubah -->
+            <div class="container-fluid">
+              <div class="card shadow mb-4">
+               <div class="card-header py-3 d-flex justify-content-between align-items-center">
                               <a href="tambah_guru.php" class="btn btn-primary">Tambah Data</a>
                               <form class="form-inline" method="POST" action="">
                                   <div class="input-group">
@@ -166,17 +111,17 @@ if (!isset($_SESSION["username"])) {
                                       </div>
                                   </div>
                               </form>
-                          </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
+              </div>
+                 <div class="card-body">
+                     <div class="table-responsive">
+                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
                           <tr>
-                            <th> NIP </th>
-                        <th> Nama Guru </th>
-                        <th> Nomor Telepon </th>
-                        <th> Jenis Kelamin </th>
-                        <th> Agama </th>
+                             <th> NIP </th>
+                             <th> Nama Guru </th>
+                             <th> Nomor Telepon </th>
+                             <th> Jenis Kelamin </th>
+                             <th> Agama </th>
                               <th colspan="2" ><b> Aksi </th>
                           </tr>
                     </thead>
@@ -269,8 +214,10 @@ if (!isset($_SESSION["username"])) {
         </div>
       </footer>
       <!-- End of Footer -->
-    </div>
-    <!-- End of Content Wrapper -->
+         </div>
+  
+
+         
   </div>
   <!-- End of Page Wrapper -->
 

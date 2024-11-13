@@ -2,6 +2,7 @@
 include ('../koneksi.php');
 ?>
 
+
 <?php
 session_start();
 if (!isset($_SESSION["username"])) {
@@ -36,14 +37,16 @@ if (!isset($_SESSION["username"])) {
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
       <div id="content">
-        
+      
+      
+
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
   <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Data Siswa </h4>
+  <h4 class="modal-title mx-auto">Data Kegiatan</h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -83,71 +86,93 @@ if (!isset($_SESSION["username"])) {
 <!-- End of Topbar -->
         <!-- End of Topbar -->
 
-
-        <!-- konten yang ingin di rubah -->
+  <!-- Begin Page Content -->
   <div class="container-fluid">
-         <!-- Murid -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex justify-content-between align-items-center">
-        <a href="tambah_murid.php" class="btn btn-primary">Tambah Data</a>
-        <form class="form-inline" method="POST" action="">
-            <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>NISN</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Agama</th>
-                        <th>Kelas</th>
-                        <th colspan="2"><b>Aksi</b></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $tampil = "SELECT * FROM `murid` ORDER BY `nisn` ASC";
-                    $hasil = mysqli_query($koneksi, $tampil);
 
-                    while ($data = mysqli_fetch_array($hasil)) {
-                        $tampil_kelas = "SELECT * FROM `kelas` WHERE id_kelas = '$data[id_kelas]'";
-                        $hasil_kelas = mysqli_query($koneksi, $tampil_kelas);
-                        $data_kelas = mysqli_fetch_array($hasil_kelas);
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
 
-                        echo "<tr>
-                            <td>$data[nisn]</td>
-                            <td class='text-left'>$data[nama_murid]</td>
-                            <td>$data[kota]</td>
-                            <td>$data[jenkel]</td>
-                            <td>$data[agama]</td>
-                            <td class='text-center'>$data_kelas[nama_kelas]</td>
-                            <td width='80'><a href='murid_edit.php?kode=$data[nisn]' class='btn btn-success'>Edit</a></td>
-                            <td width='80'>
-                       <button class='btn btn-danger' onclick='showDeleteModal(\"$data[nisn]\")'>Hapus</button>
-                       </td>
-                        </tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-        <div class="clearfix margin-bawah"></div>
-    </div>
+<!-- Dropdown untuk memilih jumlah data per halaman -->
+<form method="POST" action="" class="form-inline">
+ <div class="input-group mr-2">
+     <label for="limit" class="mr-2">Tampilkan:</label>
+     <select name="limit" id="limit" class="custom-select" onchange="this.form.submit()">
+         <option value="10" <?php if (isset($_POST['limit']) && $_POST['limit'] == 10) echo 'selected'; ?>>10</option>
+         <option value="15" <?php if (isset($_POST['limit']) && $_POST['limit'] == 25) echo 'selected'; ?>>15</option>
+         <option value="20" <?php if (isset($_POST['limit']) && $_POST['limit'] == 50) echo 'selected'; ?>>20</option>
+     </select>
+ </div>
+</form>  
+
+<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
 </div>
+</form>  
 
+<div class="card shadow mb-4">
+<div class="card-header py-3 d-flex justify-content-between align-items-center">
+<a href="tambah_kegiatan.php" class="btn btn-primary">Tambah Data</a>
+<form class="form-inline" method="POST" action="#">
+   <div class="input-group">
+       <input type="text" class="form-control bg-light border-0 small" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+       <div class="input-group-append">
+           <button class="btn btn-primary" type="submit">
+               <i class="fas fa-search fa-sm"></i>
+           </button>
+      </div>
+   </div>
+</form>
+</div>
+       <div class="card-body">
+           <div class="table-responsive">
+               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                   <thead>
+                       <tr>
+                           <th class="header-no text-center">ID</th>
+                           <th class="header-judul text-center">Judul</th>
+                           <th class="header-konten text-center">Deskripsi</th>
+                           <th class="header-tanggal text-center">Tempat</th>
+                           <th class="header-status text-center">Tanggal</th>
+                           <th class="header-status text-center">Gambar</th>
+                           <th colspan="2" class="header-status text-center" ><b>Aksi</b></th>
+                       </tr>
+                   </thead>
+                   <?php include('../koneksi.php');
+                   $data = mysqli_query($koneksi, "SELECT * FROM  kegiatan");
+                   while($d =  mysqli_fetch_array($data) ){
+                   ?>
+                   <tbody>
+                    <tr>
+                        <th> <?php echo $d['id_kegiatan']; ?> </th>
+                        <th> <?php echo $d['judul']; ?> </th>
+                        <th> <?php echo $d['deskripsi']; ?> </th>
+                        <th> <?php echo $d['tempat']; ?> </th>
+                        <th> <?php echo $d['tanggal']; ?> </th>
+                        <th> 
+                            <!-- Menampilkan gambar jika ada -->
+                            <?php if (!empty($d['gambar'])): ?>
+                                <img src="<?php echo $d['gambar']; ?>" alt="Gambar Kegiatan" width="100">
+                            <?php else: ?>
+                                <span>Gambar Tidak Tersedia</span>
+                            <?php endif; ?>
+                        </th>
+                        <th class='text-center' width='100'>
+                            <a href='kegiatan_edit.php?kode=<?php echo $d['id_kegiatan']; ?>' class='btn btn-success'>Edit</a>
+                        </th>
+                        <th class='text-center' width='100'>
+                            <button class='btn btn-danger' onclick="showDeleteModal('<?php echo $d['id_kegiatan']; ?>')">Hapus</button>
+                        </th>
+                    </tr>
+                <?php
+                }
+                ?>
+                </tbody>
+               </table>
+           </div>
+       </div>
+   </div>
+ </div>
  <!-- Modal Konfirmasi Hapus -->
-  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+ <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header justify-content-center">
@@ -170,26 +195,18 @@ if (!isset($_SESSION["username"])) {
 <script>
     function showDeleteModal(id) {
         // Set URL dengan ID data untuk dihapus
-        document.getElementById('confirmDeleteBtn').href = 'Hapus_Murid.php?kode=' + id;
+        document.getElementById('confirmDeleteBtn').href = 'hapus_kegiatan.php?kode=' + id;
         
         // Tampilkan modal
         $('#deleteModal').modal('show');
     }
 </script>
 
-<!-- //Murid -->
-
-
-
-      <!-- End of Main Content -->
-
-    </div>
     <!-- End of Content Wrapper -->
   </div>
   <!-- End of Page Wrapper -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; Ilmu komputer 2024</span>
