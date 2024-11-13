@@ -42,7 +42,7 @@ if (!isset($_SESSION["username"])) {
     <i class="fa fa-bars"></i>
   </button>
 
-  <h4 class="modal-title mx-auto">Data Guru</h4>
+  <h4 class="modal-title mx-auto">Data Vidio</h4>
 
   <!-- Message Icon with separator -->
   <a class="nav-link" href="pesan.php">
@@ -80,97 +80,73 @@ if (!isset($_SESSION["username"])) {
   </ul>
 </nav>
 <!-- End of Topbar -->
+        <!-- End of Topbar -->
 
-<?php
-include('../koneksi.php');
-
-// Cek apakah form pencarian telah disubmit
-$search = '';
-if (isset($_POST['search']) && !empty($_POST['search'])) {
-    $search = mysqli_real_escape_string($koneksi, $_POST['search']);
-}
-
-// Modifikasi query untuk menambahkan filter pencarian
-$tampil = "SELECT * FROM `guru` WHERE `nama_guru` LIKE '$search%' OR `nip` LIKE '$search%'";
-$hasil = mysqli_query($koneksi, $tampil);
-?>
-         
-          <!-- konten yang ingin di rubah -->
-            <div class="container-fluid">
-              <div class="card shadow mb-4">
-               <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                              <a href="tambah_guru.php" class="btn btn-primary">Tambah Data</a>
-                              <form class="form-inline" method="POST" action="">
-                                  <div class="input-group">
-                                      <input type="text" class="form-control bg-light border-0 small" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                                      <div class="input-group-append">
-                                          <button class="btn btn-primary" type="submit">
-                                              <i class="fas fa-search fa-sm"></i>
-                                          </button>
-                                      </div>
-                                  </div>
-                              </form>
-              </div>
-                 <div class="card-body">
-                     <div class="table-responsive">
-                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                          <tr>
-                             <th> NIP </th>
-                             <th> Nama Guru </th>
-                             <th> Nomor Telepon </th>
-                             <th> Jenis Kelamin </th>
-                             <th> Agama </th>
-                              <th colspan="2" ><b> Aksi </th>
-                          </tr>
-                    </thead>
-                    <tbody>
-                  <?php	
-                  $tampil="SELECT * FROM `guru`";
-                  $hasil=mysqli_query($koneksi, $tampil);
-
-                  while ($data=mysqli_fetch_array($hasil))
-                  {
-                        if ($data['agama'] == "Islam")
-                        {$Agama = "Islam";}
-                        
-                        else if ($data['agama'] == "Kristen")
-                        {$Agama = "Kristen";}
-                        
-                        else if ($data['agama'] == "Katolik")
-                        {$Agama = "Katolik";}
-                        
-                        else if ($data['agama'] == "Hindu")
-                        {$Agama = "Hindu";}
-                        
-                        else if ($data['agama'] == "Buddha")
-                        {$Agama = "Buddha";}
-                        
-                        else
-                        {$Agama = "Kong Hu Cu";}
-                    
-                    echo "<tr>
-                            <td> $data[nip] </td>
-                        <td class='text-left'> $data[nama_guru] </td>
-                        <td class='text-left'> $data[no_hp] </td>
-                        <td> $data[jenkel] </td>
-                        <td> $Agama </td>
-                            <td width='80'><a href='guru_edit.php?kode=$data[nip]' class='btn btn-success'>Edit</a></td>
-                          <td width='80'>
-                       <button class='btn btn-danger' onclick='showDeleteModal(\"$data[nip]\")'>Hapus</button>
-                       </td>
-                  </tr>";
-                  }
-                  ?>
-	        	</tbody>
-        </table>
+  <!-- konten yang ingin di rubah -->
+        
+  <div class="container-fluid">
+         <!-- Murid -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <a href="tambah_vidio.php" class="btn btn-primary">Tambah Data</a>
+        <form class="form-inline" method="POST" action="">
+            <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" name="search" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="clearfix margin-bawah"></div>
-   </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th class='text-center'> ID </th>
+                    <th class='text-center'>Keterangan</th>
+                    <th class='text-center'> URL Vidio </th>
+                    <th colspan="2" class='text-center'><b> Aksi </b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php  
+                include('../koneksi.php');
+
+                $tampil = "SELECT * FROM `vidio`";
+                $hasil = mysqli_query($koneksi, $tampil);
+
+                // Menampilkan data kelas dalam tabel
+                while ($data = mysqli_fetch_array($hasil)) {
+                    // Menyusun URL video YouTube embed
+                    $url_vidio = $data['url_vidio'];
+                    $embed_url = str_replace("watch?v=", "embed/", $url_vidio); // Mengganti URL YouTube dengan format embed
+
+                    echo "<tr>
+                            <td class='text-center'> $data[id_vidio] </td>
+                            <td class='text-center'> $data[judul] </td>
+                            <td class='text-center'> 
+                                <iframe width='200' height='150' src='$embed_url' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>
+                            </td>
+                            <td width='100'><a href='vidio_edit.php?kode=$data[id_vidio]' class='btn btn-success'> Edit </a></td>
+                            <td width='80'>
+                                <button class='btn btn-danger' onclick='showDeleteModal(\"$data[id_vidio]\")'>Hapus</button>
+                            </td>
+                        </tr>";
+                }
+                ?>
+                </tbody>
+                  </table>
+              </div>
+              <div class="clearfix margin-bawah"></div>
+          </div>
+      </div>
 </div>
 
-         <!-- Modal Konfirmasi Hapus -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+ <!-- Modal Konfirmasi Hapus -->
+ <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header justify-content-center">
@@ -193,19 +169,19 @@ $hasil = mysqli_query($koneksi, $tampil);
 <script>
     function showDeleteModal(id) {
         // Set URL dengan ID data untuk dihapus
-        document.getElementById('confirmDeleteBtn').href = 'Hapus_renungan.php?kode=' + id;
+        document.getElementById('confirmDeleteBtn').href = 'hapus_vidio.php?kode=' + id;
         
         // Tampilkan modal
         $('#deleteModal').modal('show');
     }
 </script>
-<!-- //Guru -->
 
 
-      <!-- End of Main Content -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+    <!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; Ilmu komputer 2024</span>
@@ -213,13 +189,6 @@ $hasil = mysqli_query($koneksi, $tampil);
         </div>
       </footer>
       <!-- End of Footer -->
-         </div>
-  
-
-
-  </div>
-  <!-- End of Page Wrapper -->
-
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>

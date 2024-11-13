@@ -97,6 +97,13 @@
 							</ul>
 						</li>
 
+						<li> <a class='effect-3 scroll' data-toggle='dropdown'>Galery<span class='caret'></span> </a>
+							<ul class='dropdown-menu'>
+								<li><a href='galeri_vidio.php' >Vidio</a></li>
+								<li><a href='#' >Foto</a></li>
+							</ul>
+						</li>
+
 						<li> <a class='effect-3 scroll' data-toggle='dropdown'>Motivasi<span class='caret'></span> </a>
 							<ul class='dropdown-menu'>
 								<li><a href='renungan.php' >Renungan</a></li>
