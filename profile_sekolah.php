@@ -50,7 +50,7 @@ h3 {
 <div class="jumbotron fade-in">
         <div class="container">
             <center><h2>Sejarah Sekolah</h2></center>
-            <img src="images/icon_gambar.ico" alt="SMP Agape Indah" class="img-fluid">
+    
 			
             <h6>	SMP Agape Indah adalah sekolah swasta terkemuka yang berdiri sejak tahun 1963 di Kupang. Sekolah ini awalnya terletak di Jl. KH Agus Salim no 77 dan kemudian berpindah ke Jl. KH Agus Salim no 181. Hingga tahun 2010, SMP Agape Indah telah mencetak lebih dari 45 angkatan alumni yang sukses melanjutkan pendidikan tinggi di universitas-universitas terkenal dan menorehkan prestasi di berbagai bidang.</h6>
         </div>
