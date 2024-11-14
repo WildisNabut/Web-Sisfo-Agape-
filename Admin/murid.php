@@ -1,14 +1,7 @@
 <?php
 include ('../koneksi.php');
 ?>
-
-<?php
-session_start();
-if (!isset($_SESSION["username"])) {
-    header("Location: login.php"); // Redirect to the login page
-    exit();
-}
-?>
+<?php include ('autentikasi.php'); ?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -108,6 +101,7 @@ if (!isset($_SESSION["username"])) {
                     <tr>
                         <th>NISN</th>
                         <th>Nama</th>
+                        <th>Username</th>
                         <th>Alamat</th>
                         <th>Jenis Kelamin</th>
                         <th>Agama</th>
@@ -126,11 +120,12 @@ if (!isset($_SESSION["username"])) {
                         $data_kelas = mysqli_fetch_array($hasil_kelas);
 
                         echo "<tr>
-                            <td>$data[nisn]</td>
-                            <td class='text-left'>$data[nama_murid]</td>
-                            <td>$data[kota]</td>
-                            <td>$data[jenkel]</td>
-                            <td>$data[agama]</td>
+                            <td class='text-center'>$data[nisn]</td>
+                            <td class='text-center'>$data[nama_murid]</td>
+                            <td class='text-center'>$data[username]</td>
+                            <td class='text-center'>$data[kota]</td>
+                            <td class='text-center'>$data[jenkel]</td>
+                            <td class='text-center'>$data[agama]</td>
                             <td class='text-center'>$data_kelas[nama_kelas]</td>
                             <td width='80'><a href='murid_edit.php?kode=$data[nisn]' class='btn btn-success'>Edit</a></td>
                             <td width='80'>

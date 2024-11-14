@@ -83,7 +83,6 @@ if (!isset($_SESSION["username"])) {
         
  <!-- Konten -->
 <!-- Input Guru -->
-<!-- Konten -->
 <div class="container-fluid">
     <?php 
     include ('../koneksi.php');
@@ -100,12 +99,22 @@ if (!isset($_SESSION["username"])) {
             </div>
         </div>
 
-        
         <!-- Input Nama -->
         <div class="form-group row">
             <label for="inputnama" class="col-sm-2 col-form-label">Nama</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="inputnama" name="nama_guru" required>
+            </div>
+        </div>
+
+        <!-- Kelas -->
+        <div class="form-group row">
+            <label for="usernameInput" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="username" id="usernameInput" readonly>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-secondary" onclick="openAccountModal()">Pilih</button>
             </div>
         </div>
 
@@ -191,10 +200,11 @@ if (!isset($_SESSION["username"])) {
     }
 
     function selectUsername(username) {
-        document.getElementById("selectedUsername").value = username;
+        document.getElementById("usernameInput").value = username;
         closeAccountModal();
     }
 </script>
+
 
 <!-- JavaScript untuk memastikan input hanya angka -->
 <script type="text/javascript">

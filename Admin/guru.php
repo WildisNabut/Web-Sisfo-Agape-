@@ -1,13 +1,7 @@
 <?php
 include ('../koneksi.php');
 ?>
-<?php
-session_start();
-if (!isset($_SESSION["username"])) {
-    header("Location: login.php"); // Redirect to the login page
-    exit();
-}
-?>
+<?php include ('autentikasi.php'); ?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -116,12 +110,13 @@ $hasil = mysqli_query($koneksi, $tampil);
                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                           <tr>
-                             <th> NIP </th>
-                             <th> Nama Guru </th>
-                             <th> Nomor Telepon </th>
-                             <th> Jenis Kelamin </th>
-                             <th> Agama </th>
-                              <th colspan="2" ><b> Aksi </th>
+                             <th class="text-center"> NIP </th>
+                             <th  class="text-center"> Username </th>
+                             <th  class="text-center"> Nama Guru </th>
+                             <th  class="text-center"> Nomor Telepon </th>
+                             <th class="text-center"> Jenis Kelamin </th>
+                             <th class="text-center"> Agama </th>
+                              <th class="text-center" colspan="2" ><b> Aksi </th>
                           </tr>
                     </thead>
                     <tbody>
@@ -150,13 +145,14 @@ $hasil = mysqli_query($koneksi, $tampil);
                         {$Agama = "Kong Hu Cu";}
                     
                     echo "<tr>
-                            <td> $data[nip] </td>
-                        <td class='text-left'> $data[nama_guru] </td>
-                        <td class='text-left'> $data[no_hp] </td>
-                        <td> $data[jenkel] </td>
-                        <td> $Agama </td>
-                            <td width='80'><a href='guru_edit.php?kode=$data[nip]' class='btn btn-success'>Edit</a></td>
-                          <td width='80'>
+                            <td class='text-center'> $data[nip] </td>
+                            <td class='text-center'> $data[username] </td>
+                        <td class='text-center'> $data[nama_guru] </td>
+                        <td class='text-center'> $data[no_hp] </td>
+                        <td class='text-center'> $data[jenkel] </td>
+                        <td class='text-center'> $Agama </td>
+                            <td class='text-center' width='80'><a href='guru_edit.php?kode=$data[nip]' class='btn btn-success'>Edit</a></td>
+                          <td  width='80'>
                        <button class='btn btn-danger' onclick='showDeleteModal(\"$data[nip]\")'>Hapus</button>
                        </td>
                   </tr>";
@@ -193,7 +189,7 @@ $hasil = mysqli_query($koneksi, $tampil);
 <script>
     function showDeleteModal(id) {
         // Set URL dengan ID data untuk dihapus
-        document.getElementById('confirmDeleteBtn').href = 'Hapus_renungan.php?kode=' + id;
+        document.getElementById('confirmDeleteBtn').href = 'Hapus_Guru.php?kode=' + id;
         
         // Tampilkan modal
         $('#deleteModal').modal('show');
@@ -201,9 +197,57 @@ $hasil = mysqli_query($koneksi, $tampil);
 </script>
 <!-- //Guru -->
 
+<!-- Overlay dan Modal untuk Pilih Username -->
+<div id="modalOverlay" onclick="closeAccountModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
+<div id="accountModal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, 0); background:white; padding:20px; border-radius:8px;">
+    <h3>Pilih Username</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            while ($data = mysqli_fetch_array($hasil)) {
+                echo "<tr>";
+                echo "<td>" . $data['username'] . "</td>";
+                echo "<td><button type='button' class='btn btn-primary' onclick=\"selectUsername('" . $data['username'] . "')\">Pilih</button></td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-secondary" onclick="closeAccountModal()">Tutup</button>
+</div>
+
+<!-- JavaScript untuk membuka dan menutup modal serta memilih username dan kelas -->
+<script>
+    // Fungsi untuk membuka dan menutup modal username
+    function openAccountModal() {
+        document.getElementById("modalOverlay").style.display = "block";
+        document.getElementById("accountModal").style.display = "block";
+    }
+
+    function closeAccountModal() {
+        document.getElementById("modalOverlay").style.display = "none";
+        document.getElementById("accountModal").style.display = "none";
+    }
+
+    function selectUsername(username) {
+        document.getElementById("selectedUsername").value = username;
+        closeAccountModal();
+    }
+</script>
+
 
       <!-- End of Main Content -->
+      <!-- End of Footer -->
+         </div>
 
+  </div>
+  <!-- End of Page Wrapper -->
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -212,14 +256,6 @@ $hasil = mysqli_query($koneksi, $tampil);
           </div>
         </div>
       </footer>
-      <!-- End of Footer -->
-         </div>
-  
-
-
-  </div>
-  <!-- End of Page Wrapper -->
-
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>

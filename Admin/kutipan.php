@@ -1,13 +1,7 @@
 <?php
 include ('../koneksi.php');
 ?>
-<?php
-session_start();
-if (!isset($_SESSION["username"])) {
-    header("Location: login.php"); // Redirect to the login page
-    exit();
-}
-?>
+<?php include ('autentikasi.php'); ?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,7 +132,7 @@ if (!isset($_SESSION["username"])) {
               <div class="clearfix margin-bawah"></div>
            </div>
          </div>
-       </div>
+ </div>
 
  <!-- Modal Konfirmasi Hapus -->
  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">

@@ -1,10 +1,4 @@
-<?php
-session_start();
-if (!isset($_SESSION["username"])) {
-    header("Location: login.php"); // Redirect to the login page
-    exit();
-}
-?>
+<?php include ('autentikasi.php'); ?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -124,7 +118,6 @@ if (!isset($_SESSION["username"])) {
         "Siswa" => "murid.php",
         "Kelas" => "kelas.php",
         "Mata Pelajaran" => "mata_pelajaran.php",
-        
     ];
 
     // Loop through each type and generate a card

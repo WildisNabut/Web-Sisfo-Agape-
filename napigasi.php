@@ -18,73 +18,7 @@
 					
 				</form>
 			</div>
-			
-		<?php
-		@session_start();
-		if (empty($_SESSION['username'])) {
-			echo "
-			<ul class='agile_forms'>
-			</ul>";
-		} else {
-			echo "
-			<ul class='agile_forms'>
-				<div class='dropdown'>
-					<button class='btn btn-success dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-						<i class='fa fa-user' aria-hidden='true'></i> $_SESSION[username] <span class='caret'></span>
-					</button>
-					<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
-						<table class='table'>
-			";
 
-			if ($_SESSION['level'] == "admin") {
-				echo "
-							<tr>
-								<td><a class='dropdown-item' href='Admin'><i class='fa fa-home' aria-hidden='true'></i> Dashboard </a></td>
-							</tr>
-							<tr>
-								<td><a class='dropdown-item' href='Admin/akun.php'><i class='fa fa-user-circle' aria-hidden='true'></i> Akun</a></td>
-							</tr>
-							<tr>
-								<td><a class='dropdown-item' href='Admin/murid.php'><i class='fa fa-users' aria-hidden='true'></i> Murid</a></td>
-							</tr>
-							<tr>
-								<td><a class='dropdown-item' href='Admin/guru.php'><i class='fa fa-users' aria-hidden='true'></i> Guru</a></td>
-							</tr>
-							<tr>
-								<td><a class='dropdown-item' href='Admin/Nilai.php'><i class='fa fa-clipboard' aria-hidden='true'></i> Nilai</a></td>
-							</tr>
-							<tr>
-								<td><a class='dropdown-item' href='Admin/pesan.php'><i class='fa fa-envelope' aria-hidden='true'></i> Pesan</a></td>
-							</tr>
-							<tr>
-								<td><a class='dropdown-item' href='Admin/mata_pelajaran.php'><i class='fa fa-book' aria-hidden='true'></i> Mata Pelajaran</a></td>
-							</tr>
-				";
-			} else if ($_SESSION['level'] == "guru") {
-				echo "
-							<tr>
-								<td><a class='dropdown-item' href='Guru'><i class='fa fa-pencil-alt' aria-hidden='true'></i> Input Nilai</a></td>
-							</tr>
-				";
-			} else {
-				echo "
-							<tr>
-								<td><a class='dropdown-item' href='Murid'><i class='fa fa-check-circle' aria-hidden='true'></i> Cek Nilai</a></td>
-							</tr>
-				";
-			}
-
-			echo "
-							<tr>
-								<td><a class='dropdown-item' href='logout.php'><i class='fa fa-sign-out-alt' aria-hidden='true'></i> Logout</a></td>
-							</tr>
-						</table>
-					</div>
-				</div>
-			</ul>";
-		}
-		?>
-			
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 				<nav class="link-effect-2" id="link-effect-2">
