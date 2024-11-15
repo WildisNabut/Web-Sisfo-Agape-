@@ -100,8 +100,6 @@ include ('../koneksi.php');
 				<tr class="mapel text-center">
 					<th>Kode Mata Pelajaran</th>
 					<th>Nama Mata Pelajaran</th>
-					<th>Nama Guru</th>
-					<th width="100">Kelas</th>
 					<th colspan="2">Aksi</th>
 				</tr>
 			</thead>
@@ -112,19 +110,10 @@ include ('../koneksi.php');
 				$hasil = mysqli_query($koneksi, $tampil);
 
 				while ($data = mysqli_fetch_array($hasil)) {
-					$tampil_guru = "SELECT * FROM `guru` WHERE nip = '$data[nip]'";
-					$hasil_guru = mysqli_query($koneksi, $tampil_guru);
-					$data_guru = mysqli_fetch_array($hasil_guru);
-
-					$tampil_kelas = "SELECT * FROM `kelas` WHERE id_kelas = '$data[id_kelas]'";
-					$hasil_kelas = mysqli_query($koneksi, $tampil_kelas);
-					$data_kelas = mysqli_fetch_array($hasil_kelas);
 
 					echo "<tr>
 						<td class='text-center'>$data[kode_mata_pelajaran]</td>
 						<td class='text-center'>$data[nama_matapelajaran]</td>
-						<td class='text-center'>$data_guru[nama_guru]</td>
-						<td class='text-center' width='100'>$data_kelas[nama_kelas]</td>
 						<td class='text-center' width='100'><a href='mata_pelajaran_edit.php?kode=$data[kode_mata_pelajaran]' class='btn btn-success'>Edit</a></td>
             <td width='80'>
                 <button class='btn btn-danger' onclick='showDeleteModal(\"$data[kode_mata_pelajaran]\")'>Hapus</button>
@@ -165,7 +154,7 @@ include ('../koneksi.php');
 <script>
     function showDeleteModal(id) {
         // Set URL dengan ID data untuk dihapus
-        document.getElementById('confirmDeleteBtn').href = 'Haous_Mata_Pelajaranhapus_kelas.php?kode=' + id;
+        document.getElementById('confirmDeleteBtn').href = 'Hapus_Mata_Pelajaran.php?kode=' + id;
         
         // Tampilkan modal
         $('#deleteModal').modal('show');

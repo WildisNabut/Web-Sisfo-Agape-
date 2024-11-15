@@ -105,22 +105,6 @@ include ('../koneksi.php');
                 <input type="text" name="Nama_Mata_Pelajaran" class="form-control" id="namaMapel" value="<?php echo "$data[nama_matapelajaran]"; ?>">
             </div>
 
-            <div class="mb-3">
-                <label for="guruInput" class="form-label">Nama Guru:</label>
-                <div class="input-group">
-                    <input type="text" name="NIP" class="form-control" id="guruInput" readonly>
-                    <button type="button" class="btn btn-secondary" onclick="openGuruModal()">Pilih</button>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label for="kelasInput" class="form-label">Kelas:</label>
-                <div class="input-group">
-                    <input type="text" name="id_kelas" class="form-control" id="kelasInput" readonly>
-                    <button type="button" class="btn btn-secondary" onclick="openKelasModal()">Pilih</button>
-                </div>
-            </div>
-
             <button type="submit" class="btn btn-primary">Simpan</button>
             <a href="mata_pelajaran.php" class="btn btn-danger">Batal</a>
         </form>

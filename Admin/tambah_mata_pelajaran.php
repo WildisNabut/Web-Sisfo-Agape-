@@ -104,29 +104,7 @@ include ('../koneksi.php');
                 <input type="text" class="form-control" name="Nama_Mata_Pelajaran" required>
             </div>
         </div>
-
-        <!-- Nama Guru -->
-        <div class="form-group row mb-3">
-            <label for="guruInput" class="col-sm-3 col-form-label">Nama Guru</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" id="guruInput" name="NIP" readonly>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-secondary" onclick="openGuruModal()">Pilih</button>
-            </div>
-        </div>
-
-        <!-- Kelas -->
-        <div class="form-group row mb-3">
-            <label for="kelasInput" class="col-sm-3 col-form-label">Kelas</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" id="kelasInput" name="id_kelas" readonly>
-            </div>
-            <div class="col-sm-3">
-                <button type="button" class="btn btn-secondary" onclick="openKelasModal()">Pilih</button>
-            </div>
-        </div>
-
+        
         <!-- Tombol Simpan dan Batal -->
         <div class="form-group row">
             <div class="col-sm-9 offset-sm-3">

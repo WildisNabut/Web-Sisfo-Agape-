@@ -173,7 +173,6 @@ if (!isset($_SESSION['username'])) {
     <table class="table table-bordered text-center">
         <thead>
             <tr>
-                <th>Nama Kelas</th>
                 <th>Mata Pelajaran</th>
                 <th>Aksi</th>
             </tr>
@@ -191,7 +190,6 @@ if (!isset($_SESSION['username'])) {
 
             while ($data_mapel = mysqli_fetch_array($hasil_mapel)) {
                 echo "<tr>
-                        <td>{$data_mapel['nama_kelas']}</td>
                         <td>{$data_mapel['nama_matapelajaran']}</td>
                         <td><button type='button' class='btn btn-primary' onclick=\"pilihMapel('{$data_mapel['kode_mata_pelajaran']}')\">Pilih</button></td>
                     </tr>";
