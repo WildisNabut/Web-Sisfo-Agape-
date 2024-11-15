@@ -75,9 +75,11 @@
 			}
 
 			echo "
-							<tr>
-								<td><a class='dropdown-item' href='logout.php'><i class='fa fa-sign-out-alt' aria-hidden='true'></i> Logout</a></td>
-							</tr>
+							 <div class='dropdown-menu dropdown-menu-right shadow animated--grow-in' aria-labelledby='userDropdown'>
+								<a class='dropdown-item' href='#' data-toggle='modal' data-target='#logoutModal'>
+								<i class='fa fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>Logout
+								</a>
+							</div>
 						</table>
 					</div>
 				</div>
@@ -90,13 +92,13 @@
 				<nav class="link-effect-2" id="link-effect-2">
 					<ul class="nav navbar-nav">
 						<li><a href="index.php" class="effect-3">Beranda</a></li>
+
 						<li> <a class='effect-3 scroll' data-toggle='dropdown'>Informasi<span class='caret'></span> </a>
 							<ul class='dropdown-menu'>
 								<li><a href='pengumuman.php' >Pengumuman</a></li>
 								<li><a href='kegiatan.php' >Kegiatan Sekolah</a></li>
 							</ul>
 						</li>
-
 						<li> <a class='effect-3 scroll' data-toggle='dropdown'>Motivasi<span class='caret'></span> </a>
 							<ul class='dropdown-menu'>
 								<li><a href='renungan.php' >Renungan</a></li>
@@ -116,6 +118,27 @@
 		<div class="clearfix"> </div> 
 	</div>
 </div>
+
+<!-- Modal Konfirmasi Logout -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <!-- Icon Peringatan Besar -->
+                <i class="fas fa-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
+            </div>
+            <div class="modal-body text-center">
+                <h5 class="modal-title mb-3" id="logoutModalLabel">Apakah Anda yakin ingin keluar?</h5>
+            </div>
+            <div class="modal-footer justify-content-center">
+            <a id="confirmLogoutBtn" href="../Admin/logout.php" class="btn btn-primary">
+            <i class="fa fa-sign-out-alt mr-2"></i> Ya, Keluar</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+   
 
 <!-- Modal1 -->
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog">

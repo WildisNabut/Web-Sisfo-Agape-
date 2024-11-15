@@ -41,30 +41,28 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
     <li data-target="#carousel-example-generic" data-slide-to="2"></li>
   </ol>
 
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
+ <!-- Wrapper for slides -->
+<div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="images/rpl/rpl.jpg"alt="...">
-      <div class="carousel-caption">
-	  <h1><b>Rekayasa Perangkat Lunak</b> </h1>
-              <p>adalah satu bidang profesi yang mendalami cara-cara pengembangan perangkat lunak termasuk pembuatan, pemeliharaan, manajemen organisasi pengembanganan perangkat lunak dan manajemen kualitas.</p>
-      </div>
+        <div class="video-section">
+            <h3>Proses Pemakaman Penganut Jingitiu</h3>
+            <iframe src="https://www.youtube.com/embed/4TCU2mKmi-U" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
     <div class="item">
-      <img src="images/rpl/rpl2.jpg" alt="...">
-      <div class="carousel-caption">
-	  <h1><b>Rekayasa Perangkat Lunak</b> </h1>
-              <p>IEEE Computer Society mendefinisikan rekayasa perangkat lunak sebagai penerapan suatu pendekatan yang sistematis, disiplin dan terkuantifikasi atas pengembangan, penggunaan dan pemeliharaan perangkat lunak, serta studi atas pendekatan-pendekatan ini, yaitu penerapan pendekatan engineering atas perangkat lunak.</p>
-      </div>
+        <div class="video-section">
+            <h3>Jingitiu, Kepercayaan Adat Sabu Raijua</h3>
+            <iframe src="https://www.youtube.com/embed/Rz39002wSNQ" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
-	<div class="item">
-      <img src="images/rpl/rpl3.jpg" alt="...">
-      <div class="carousel-caption">
-	  <h1><b>Rekayasa Perangkat Lunak</b> </h1>
-              <p>rekayasa perangkat lunak adalah pengubahan perangkat lunak itu sendiri guna mengembangkan, memelihara, dan membangun kembali dengan menggunakan prinsip reakayasa untuk menghasilkan perangkat lunak yang dapat bekerja lebih efisien dan efektif untuk pengguna.</p>
-      </div>
+    <div class="item">
+        <div class="video-section">
+            <h3>Jingitiu, Penjaga Budaya Sabu Raijua</h3>
+            <iframe src="https://www.youtube.com/embed/Rz39002wSNQ" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
-  </div>
+</div>
+
 
   <!-- Controls -->
   <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -79,44 +77,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //Slideshoww -->
  
 <!-- Footer Section -->
-<footer>
-  <div class="footer">
-    <!-- Info Sekolah -->
-    <div class="footer-section">
-      <h3>SMP Agape Indah</h3>
-      <p>
-        SMP Agape Indah adalah sekolah menengah pertama yang berlokasi di [lokasi Anda]. Sama seperti SMP lainnya di Indonesia, SMP Agape Indah menawarkan program pendidikan untuk siswa dari kelas VII hingga kelas IX.
-      </p>
-      <p><strong>Alamat:</strong> Jl. Contoh, Kota Contoh, Provinsi Contoh, Indonesia</p>
-      <p><strong>Email:</strong> smpagapeindah@example.com</p>
-      <div class="social-icons">
-      <a href="#"><i class="fa fa-facebook icon-small"></i></a>
-      <a href="#"><i class="fa fa-youtube icon-small"></i></a>
-      <a href="https://www.instagram.com/smpkagapeindah?igsh=MThtejJxN3Ywem54aw==">
-        <i class="fa fa-instagram icon-small"></i>
-</a>
+<?php include('footer.php'); ?>
 
-      </div>
-    </div>
-    
-    <!-- Peta Lokasi -->
-    <div class="footer-section map">
-
-      <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17445.841308163348!2d123.60862167630117!3d-10.16776760510314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c56835992a6fbf3%3A0xc4b28a965a40d8b!2sSekolah%20Menengah%20Pertama%20Agape%20Indah!5e0!3m2!1sid!2sid!4v1730387975655!5m2!1sid!2sid"
-      class="responsive-map"
-      style="border: 0"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-    ></iframe>    </div>
-  </div>
-
-  <!-- Footer Bottom -->
-  <div class="footer-bottom">
-    &copy; Copyright SMP Agape Indah 2024. All Rights Reserved.
-  </div>
-</footer>
 <!-- //footer -->
 
 <!-- js-scripts -->			

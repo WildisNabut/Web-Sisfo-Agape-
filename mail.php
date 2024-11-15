@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-<title>SMK TERPADU</title>
+<title>SMP AGAPE INDAH</title>
 <!-- Meta tag Keywords -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -18,101 +17,87 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link rel="stylesheet" href="css/roma.css">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
 <link rel="stylesheet" href="css/jquery-ui.css" />
-<link rel="stylesheet" href="css/beranda.css" />
-<link rel="stylesheet" href=  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="css/kontak.css">
 
 <!-- //css files -->
 <!-- online-fonts -->
 <link href="//fonts.googleapis.com/css?family=Exo+2:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=cyrillic,latin-ext" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext" rel="stylesheet">
 <!-- //online-fonts -->
+<style>
+.contact-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+ 
+    width: 100%;
+}
+
+        .contact-container img {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .contact-container h2 {
+            font-size: 18px;
+            color: #4a3aff;
+            margin: 0;
+        }
+        .contact-container p {
+            font-size: 16px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .contact-container .email {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .contact-container .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .contact-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            color: #fff;
+            background-color: #4a3aff;
+        }
+        .contact-container button:hover {
+            background-color: #382bff;
+        }
+        </style>
+
+
 </head>
 <body>
 
 <?php include ('napigasi.php'); ?>
-<div class="clearfix"> </div> 
 
-<div class="main-container">
-        <div class="contact-container">
-            <h2><i class="fas fa-envelope"></i> Hubungi Kami</h2>
-            <form action="Proses_Kirim.php" method="post">
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <label for="name"><i class="fas fa-user form-icon"></i>Nama*</label>
-                        <input type="text" class="form-control" id="name" name="Name" placeholder="Nama Anda" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <label for="email"><i class="fas fa-envelope form-icon"></i>E-mail*</label>
-                        <input type="email" class="form-control" id="email" name="Email" placeholder="Email Anda" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <label for="phone"><i class="fas fa-phone form-icon"></i>Nomor Telepon*</label>
-                        <input type="text" class="form-control" id="phone" name="number" placeholder="Nomor Telepon Anda" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-12">
-                        <label for="subject"><i class="fas fa-tag form-icon"></i>Subjek*</label>
-                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Subjek Pesan" required>
-                    </div>
-                </div>
-                <div class="message-box">
-                    <label for="message" class="d-block"><i class="fas fa-comment form-icon"></i>Pesan*</label>
-                    <textarea class="form-control message" id="message" name="Message" placeholder="Tulis pesan Anda di sini..." required></textarea>
-                </div>
-                <div class="btn-container">
-                    <button type="submit" class="btn btn-primary">Kirim</button>
-                </div>
-            </form>
-        </div>
-    </div>
-<div id="map"></div>
-
-<!-- Footer Section -->
-<footer>
-  <div class="footer">
-    <!-- Info Sekolah -->
-    <div class="footer-section">
-      <h3>SMP Agape Indah</h3>
-      <p>
-        SMP Agape Indah adalah sekolah menengah pertama yang berlokasi di [lokasi Anda]. Sama seperti SMP lainnya di Indonesia, SMP Agape Indah menawarkan program pendidikan untuk siswa dari kelas VII hingga kelas IX.
-      </p>
-      <p><strong>Alamat:</strong> Jl. Contoh, Kota Contoh, Provinsi Contoh, Indonesia</p>
-      <p><strong>Email:</strong> smpagapeindah@example.com</p>
-      <div class="social-icons">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.instagram.com/smpkagapeindah?igsh=MThtejJxN3Ywem54aw==">
-        <i class="fab fa-instagram"></i>
-</a>
-
-      </div>
-    </div>
+<div class="Konten">
+<div class="contact-container">
+    <!-- Gambar animasi (gantikan dengan URL gambar yang sesuai) -->
+    <img src="https://i.pinimg.com/originals/3b/e2/f4/3be2f445535301ebc8d739576ce8b36d.gif" alt="Animasi Kontak">
     
-    <!-- Peta Lokasi -->
-    <div class="footer-section map">
+    <h2>Silahkan kontak Email berikut</h2>
+    <p class="email">siteunc22@gmail.com</p>
+    
+    <div class="button-container">
+        <button onclick="window.location.href='mailto:siteunc22@gmail.com'">Kirim Email</button>
+        <button onclick="window.location.href='https://wa.me/6282144893442?text=Halo,%20saya%20ingin%20menghubungi%'">Hubungi via WhatsApp</button>
+    </div>
+</div>
+</div>
+ <!-- Footer Section -->
+ <?php include('footer.php'); ?>
 
-      <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17445.841308163348!2d123.60862167630117!3d-10.16776760510314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c56835992a6fbf3%3A0xc4b28a965a40d8b!2sSekolah%20Menengah%20Pertama%20Agape%20Indah!5e0!3m2!1sid!2sid!4v1730387975655!5m2!1sid!2sid"
-      class="responsive-map"
-      style="border: 0"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-    ></iframe>    </div>
-  </div>
-
-  <!-- Footer Bottom -->
-  <div class="footer-bottom">
-    &copy; Copyright SMP Agape Indah 2024. All Rights Reserved.
-  </div>
-</footer>
 <!-- //footer -->
 
 <!-- js-scripts -->			

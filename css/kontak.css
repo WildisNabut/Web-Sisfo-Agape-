@@ -1,104 +1,93 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-body, html {
-    height: 100%;
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #070027, #acb6e5);
-    color: #333;
-    overflow: hidden;
-}
-.main-container {
+.footer-kontak {
+    padding: 3vw 5vw;
+    background-color: #03024b;
+    color: white;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    height: 100%;
-    padding: 20px;
-}
-.contact-container {
-    width: 100%;
-    max-width: 900px;
-    background-color: #fffdfd;
-    border-radius: 15px;
-    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.2);
-    padding: 40px;
-    animation: fadeIn 1.2s ease-out;
-    overflow: auto;
-}
-h2 {
-    font-weight: 700;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #000024;
+    font-family: Arial, sans-serif;
+    gap: 30px;
+    flex-wrap: nowrap; /* Tetap di satu baris */
 }
 
-h3 {
-    font-weight: 700;
-    margin-bottom: 20px;
+/* Kontainer kontak memanjang ke samping */
+#kontak {
+    background-color: #a8a9d19f;
+    padding: 15px;
+    border-radius: 6px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Ubah ke kolom agar lebih rapi */
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+#kontak h2 {
+    font-size: 18px; /* Ukuran judul lebih kecil */
+    color: #333;
+    margin-bottom: 12px;
     text-align: center;
-    color: #ffffff;
 }
-.form-row {
-    margin-bottom: 15px;
+
+.contact-container .form-row {
+    margin-bottom: 8px;
+    width: 100%; /* Agar elemen dalam form-row mengisi lebar kontainer */
 }
-label {
-    font-weight: 500;
+
+.contact-container label {
+    font-weight: bold;
+    color: #555;
+    font-size: 13px;
+    margin-bottom: 3px;
+    display: block; /* Membuat label berada di atas input */
 }
-.form-icon {
-    color: #024287;
-    margin-right: 8px;
+
+.contact-container .form-control {
+    width: 100%; /* Mengatur lebar agar sesuai dengan lebar #kontak */
+
 }
-.form-group input {
-    width: 100%;
-    height: 50px;
-    font-size: 16px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+
+.contact-container .message-box {
+    margin-bottom: 10px;
 }
-.message-box {
-    margin-top: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
+
+.contact-container .message {
+    min-height: 80px;
+    resize: vertical;
+    padding: 8px;
+    font-size: 12px;
+    width: 100%; /* Mengatur lebar message box agar mengikuti lebar kontainer */
+    box-sizing: border-box;
 }
-.form-control.message {
-    width: 100%;
-    height: 150px;
-    font-size: 16px;
-    padding: 10px;
-    border: none;
-    border-radius: 0;
-}
+
 .btn-container {
     text-align: center;
-    margin-top: 20px;
-}
-.btn-primary {
-    width: 100%;
-    max-width: 200px;
-    background-color: #061424;
-    border: none;
-    font-weight: 500;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    transition: all 0.3s;
-}
-.btn-primary:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+    width: 100%; /* Agar tombol sesuai lebar kontainer */
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+.btn-container .btn-primary {
+    width: 100%; /* Agar tombol mengikuti lebar kontainer */
+}
+
+.btn-container .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    #kontak {
+        padding: 10px;
+        max-width: 100%; /* Lebar penuh di perangkat kecil */
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    #kontak h2 {
+        font-size: 16px;
+    }
+    .contact-container .form-control {
+        font-size: 11px;
+    }
+    .btn-container .btn-primary {
+        font-size: 11px;
     }
 }

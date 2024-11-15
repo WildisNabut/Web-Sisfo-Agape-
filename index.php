@@ -27,6 +27,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
   <link rel="stylesheet" href="css/jquery-ui.css" />
   <link rel="stylesheet" href="css/beranda.css" />
+  <link rel="stylesheet" href="css/kontak.css" />
 
 
   <script src="https://unpkg.com/feather-icons"></script>
@@ -85,86 +86,99 @@
       <h1>EVENT SEKOLAH</h1>
       <!-- Thumbniell-->
 
-      <div class="row margin-atas">
-        <div class="col-sm-6 col-md-3">
-          <div class="thumbnail">
-            <img src="images/FUTSALL.jpg" alt="Lomba Futsal" he>
-            <div class="caption">
-              <h3>Lomba Futsal antar kelas</h3>
+      <div class="content">
+            <!-- Video 1 -->
+            <div class="video-section">
+                <h3>Proses Pemakaman Penganut Jingitiu</h3>
+                <iframe src="https://www.youtube.com/embed/4TCU2mKmi-U" allowfullscreen></iframe>
+            </div>
 
+            <!-- Video 2 -->
+            <div class="video-section">
+                <h3>Jingitiu, Kepercayaan Adat Sabu Raijua</h3>
+                <iframe src="https://www.youtube.com/embed/Rz39002wSNQ" allowfullscreen></iframe>
             </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <div class="thumbnail">
-            <img src="images/basket.jpg" alt="Lomba Basket">
-            <div class="caption">
-              <h3>Lomba Basket antar smk </h3>
+
+            <!-- Video 3 -->
+            <div class="video-section">
+                <h3>Jingitiu, Penjaga Budaya Sabu Raijua</h3>
+                <iframe src="https://www.youtube.com/embed/Rz39002wSNQ" allowfullscreen></iframe>
             </div>
-          </div>
         </div>
-        <div class="col-sm-6 col-md-3">
-          <div class="thumbnail">
-            <img src="images/tanaman.jpg" alt="Hari Pohon Sedunia">
-            <div class="caption">
-              <h3>Memperingati Hari Pohon Sedunia</h3>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
-          <div class="thumbnail">
-            <img src="images/voly.jpg" alt="Lomba voly">
-            <div class="caption">
-              <h3>Lomba voly persahabatan</h3>
-            </div>
-          </div>
-        </div>
-      </div>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            color: #d9534f;
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #d9534f;
+            padding-bottom: 10px;
+        }
+        .menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .menu a:hover {
+            background-color: #d9534f;
+            color: #fff;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .video-section {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .video-section h3 {
+            color: #337ab7;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+            border-radius: 10px;
+        }
+    </style>
+
+
+
       <!-- //Thumbniell-->
     </div>
+
+
   </div>
 
 
  <!-- Footer Section -->
- <footer>
-  <div class="footer">
-    <!-- Info Sekolah -->
-    <div class="footer-section">
-      <h3>SMP Agape Indah</h3>
-      <p>
-        SMP Agape Indah adalah sekolah menengah pertama yang berlokasi di [lokasi Anda]. Sama seperti SMP lainnya di Indonesia, SMP Agape Indah menawarkan program pendidikan untuk siswa dari kelas VII hingga kelas IX.
-      </p>
-      <p><strong>Alamat:</strong> Jl. Contoh, Kota Contoh, Provinsi Contoh, Indonesia</p>
-      <p><strong>Email:</strong> smpagapeindah@example.com</p>
-      <div class="social-icons">
-      <a href="#"><i class="fa fa-facebook icon-small"></i></a>
-      <a href="#"><i class="fa fa-youtube icon-small"></i></a>
-      <a href="https://www.instagram.com/smpkagapeindah?igsh=MThtejJxN3Ywem54aw==">
-        <i class="fa fa-instagram icon-small"></i>
-</a>
-
-      </div>
-    </div>
-    
-    <!-- Peta Lokasi -->
-    <div class="footer-section map">
-
-      <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17445.841308163348!2d123.60862167630117!3d-10.16776760510314!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c56835992a6fbf3%3A0xc4b28a965a40d8b!2sSekolah%20Menengah%20Pertama%20Agape%20Indah!5e0!3m2!1sid!2sid!4v1730387975655!5m2!1sid!2sid"
-      class="responsive-map"
-      style="border: 0"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-    ></iframe>  
-    </div>
-  </div>
-
-  <!-- Footer Bottom -->
-  <div class="footer-bottom">
-    &copy; Copyright SMP Agape Indah 2024. All Rights Reserved.
-  </div>
-</footer>
+ <?php include('footer.php'); ?>
 
   <!-- js-scripts -->
   <!-- js-files -->
