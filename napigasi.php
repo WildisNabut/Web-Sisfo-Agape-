@@ -80,8 +80,7 @@
 								<li><a href='kegiatan.php' >Kegiatan Sekolah</a></li>
 							</ul>
 						</li>
-<<<<<<< HEAD
-=======
+
 
 						<li> <a class='effect-3 scroll' data-toggle='dropdown'>Galery<span class='caret'></span> </a>
 							<ul class='dropdown-menu'>
@@ -89,8 +88,6 @@
 								<li><a href='#' >Foto</a></li>
 							</ul>
 						</li>
-
->>>>>>> d9576e449677dd9d03e763f3c1af3d0359884195
 						<li> <a class='effect-3 scroll' data-toggle='dropdown'>Motivasi<span class='caret'></span> </a>
 							<ul class='dropdown-menu'>
 								<li><a href='renungan.php' >Renungan</a></li>
