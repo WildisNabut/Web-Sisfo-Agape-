@@ -1,11 +1,5 @@
 <?php include('../koneksi.php');?>
-<?php
-session_start();
-if (!isset($_SESSION["username"])) {
-    header("Location: login.php"); // Redirect to the login page
-    exit();
-}
-?>
+<?php include ('autentikasi.php'); ?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,6 +103,17 @@ if (!isset($_SESSION["username"])) {
             </div>
         </div>
 
+          <!-- Form Username dengan tombol Pilih -->
+          <div class="form-group row">
+              <label for="usernameInput" class="col-sm-2 col-form-label">Username</label>
+              <div class="col-sm-8">
+                  <input type="text" class="form-control" name="username" id="username" readonly>
+              </div>
+              <div class="col-sm-2">
+                  <button type="button" class="btn btn-secondary" onclick="openAccountModal()">Pilih</button>
+              </div>
+          </div>
+
 
         <div class="form-group row">
             <label for="inputalamat" class="col-sm-2 col-form-label">Alamat</label>
@@ -166,8 +171,9 @@ if (!isset($_SESSION["username"])) {
 </div>
 
 <!-- Overlay dan Modal untuk Pilih Username -->
-<div id="modalOverlay" onclick="closeAccountModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
-<div id="accountModal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, 0); background:white; padding:20px; border-radius:8px;">
+<div id="modalOverlay" onclick="closeAccountModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+
+<div id="accountModal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, 0); background:white; padding:20px; border-radius:8px; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); z-index: 1000;">
     <h3>Pilih Username</h3>
     <table class="table table-bordered">
         <thead>
@@ -189,6 +195,7 @@ if (!isset($_SESSION["username"])) {
     </table>
     <button type="button" class="btn btn-secondary" onclick="closeAccountModal()">Tutup</button>
 </div>
+
 
 <!-- Overlay dan Modal untuk Pilih Kelas -->
 <div id="kelasModalOverlay" onclick="closeKelasModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
@@ -222,38 +229,41 @@ if (!isset($_SESSION["username"])) {
 
 <!-- JavaScript untuk membuka dan menutup modal serta memilih username dan kelas -->
 <script>
-    // Fungsi untuk membuka dan menutup modal username
-    function openAccountModal() {
-        document.getElementById("modalOverlay").style.display = "block";
-        document.getElementById("accountModal").style.display = "block";
-    }
+// Fungsi untuk membuka dan menutup modal username
+function openAccountModal() {
+    document.getElementById("modalOverlay").style.display = "block";
+    document.getElementById("accountModal").style.display = "block";
+}
 
-    function closeAccountModal() {
-        document.getElementById("modalOverlay").style.display = "none";
-        document.getElementById("accountModal").style.display = "none";
-    }
+function closeAccountModal() {
+    document.getElementById("modalOverlay").style.display = "none";
+    document.getElementById("accountModal").style.display = "none";
+}
 
-    function selectUsername(username) {
-        document.getElementById("selectedUsername").value = username;
-        closeAccountModal();
-    }
+// Fungsi untuk memilih username dan menutup modal
+function selectUsername(username) {
+    // Mengisi input username dengan username yang dipilih
+    document.getElementById("username").value = username;
+    closeAccountModal();
+}
 
-    // Fungsi untuk membuka dan menutup modal kelas
-    function openKelasModal() {
-        document.getElementById("kelasModalOverlay").style.display = "block";
-        document.getElementById("kelasModal").style.display = "block";
-    }
+// Fungsi untuk membuka dan menutup modal kelas (jika diperlukan)
+function openKelasModal() {
+    document.getElementById("kelasModalOverlay").style.display = "block";
+    document.getElementById("kelasModal").style.display = "block";
+}
 
-    function closeKelasModal() {
-        document.getElementById("kelasModalOverlay").style.display = "none";
-        document.getElementById("kelasModal").style.display = "none";
-    }
+function closeKelasModal() {
+    document.getElementById("kelasModalOverlay").style.display = "none";
+    document.getElementById("kelasModal").style.display = "none";
+}
 
-    // Fungsi untuk memilih kelas dan memasukkan ID kelas ke input
-    function pilihKelas(id_kelas) {
-        document.getElementById("kelasInput").value = id_kelas;
-        closeKelasModal();
-    }
+// Fungsi untuk memilih kelas dan memasukkan ID kelas ke input
+function pilihKelas(id_kelas) {
+    document.getElementById("kelasInput").value = id_kelas;
+    closeKelasModal();
+}
+
 </script>
 
 

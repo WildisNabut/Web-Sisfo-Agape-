@@ -4,16 +4,14 @@ include "../koneksi.php";
 $Kode_Lama = $_POST['Kode_lama'];
 $Kode_Baru = $_POST['Kode_mapel'];
 $Nama_Mata_Pelajaran = $_POST['Nama_Mata_Pelajaran'];
-$NIP = $_POST['NIP'];
-$id_kelas = $_POST['id_kelas']; 
 
 if ($_POST['Kode_mapel'] == "")
 {
-	$sqlstr="UPDATE `mata_pelajaran` SET `nama_matapelajaran` = '$Nama_Mata_Pelajaran', `id_kelas` = '$id_kelas', `nip` = '$NIP' WHERE `kode_mata_pelajaran` = '$Kode_Lama' ;";
+	$sqlstr="UPDATE `mata_pelajaran` SET `nama_matapelajaran` = '$Nama_Mata_Pelajaran' WHERE `kode_mata_pelajaran` = '$Kode_Lama' ;";
 }
 else
 {
-	$sqlstr="UPDATE `mata_pelajaran` SET kode_mata_pelajaran = '$Kode_Baru', `nama_matapelajaran` = '$Nama_Mata_Pelajaran', `id_kelas` = '$id_kelas', `nip` = '$NIP' WHERE `kode_mata_pelajaran` = '$Kode_Lama' ;";
+	$sqlstr="UPDATE `mata_pelajaran` SET kode_mata_pelajaran = '$Kode_Baru', `nama_matapelajaran` = '$Nama_Mata_Pelajaran' WHERE `kode_mata_pelajaran` = '$Kode_Lama' ;";
 }
 
 (mysqli_query($koneksi, $sqlstr));

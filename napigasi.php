@@ -18,12 +18,12 @@
 					
 				</form>
 			</div>
-			
-		<?php
+			<?php
 		@session_start();
 		if (empty($_SESSION['username'])) {
 			echo "
 			<ul class='agile_forms'>
+				<li><a class='active' href='#' data-toggle='modal' data-target='#myModal2'><i class='fa fa-sign-in' aria-hidden='true'></i> Masuk </a></li>
 			</ul>";
 		} else {
 			echo "
@@ -41,35 +41,17 @@
 							<tr>
 								<td><a class='dropdown-item' href='Admin'><i class='fa fa-home' aria-hidden='true'></i> Dashboard </a></td>
 							</tr>
-							<tr>
-								<td><a class='dropdown-item' href='Admin/akun.php'><i class='fa fa-user-circle' aria-hidden='true'></i> Akun</a></td>
-							</tr>
-							<tr>
-								<td><a class='dropdown-item' href='Admin/murid.php'><i class='fa fa-users' aria-hidden='true'></i> Murid</a></td>
-							</tr>
-							<tr>
-								<td><a class='dropdown-item' href='Admin/guru.php'><i class='fa fa-users' aria-hidden='true'></i> Guru</a></td>
-							</tr>
-							<tr>
-								<td><a class='dropdown-item' href='Admin/Nilai.php'><i class='fa fa-clipboard' aria-hidden='true'></i> Nilai</a></td>
-							</tr>
-							<tr>
-								<td><a class='dropdown-item' href='Admin/pesan.php'><i class='fa fa-envelope' aria-hidden='true'></i> Pesan</a></td>
-							</tr>
-							<tr>
-								<td><a class='dropdown-item' href='Admin/mata_pelajaran.php'><i class='fa fa-book' aria-hidden='true'></i> Mata Pelajaran</a></td>
-							</tr>
 				";
 			} else if ($_SESSION['level'] == "guru") {
 				echo "
 							<tr>
-								<td><a class='dropdown-item' href='Guru'><i class='fa fa-pencil-alt' aria-hidden='true'></i> Input Nilai</a></td>
+								<td><a class='dropdown-item' href='Guru'><i class='fa fa-pencil-alt' aria-hidden='true'></i>Dashboard</a></td>
 							</tr>
 				";
 			} else {
 				echo "
 							<tr>
-								<td><a class='dropdown-item' href='Murid'><i class='fa fa-check-circle' aria-hidden='true'></i> Cek Nilai</a></td>
+								<td><a class='dropdown-item' href='Murid'><i class='fa fa-check-circle' aria-hidden='true'></i>Lihat Tugas </a></td>
 							</tr>
 				";
 			}
@@ -86,7 +68,6 @@
 			</ul>";
 		}
 		?>
-			
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 				<nav class="link-effect-2" id="link-effect-2">
@@ -99,6 +80,17 @@
 								<li><a href='kegiatan.php' >Kegiatan Sekolah</a></li>
 							</ul>
 						</li>
+<<<<<<< HEAD
+=======
+
+						<li> <a class='effect-3 scroll' data-toggle='dropdown'>Galery<span class='caret'></span> </a>
+							<ul class='dropdown-menu'>
+								<li><a href='galeri_vidio.php' >Vidio</a></li>
+								<li><a href='#' >Foto</a></li>
+							</ul>
+						</li>
+
+>>>>>>> d9576e449677dd9d03e763f3c1af3d0359884195
 						<li> <a class='effect-3 scroll' data-toggle='dropdown'>Motivasi<span class='caret'></span> </a>
 							<ul class='dropdown-menu'>
 								<li><a href='renungan.php' >Renungan</a></li>

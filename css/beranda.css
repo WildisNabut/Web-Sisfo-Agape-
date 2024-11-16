@@ -157,6 +157,21 @@
   }
 }
 
+/* Membuat setiap video memiliki lebar penuh */
+.carousel-inner {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+.card-body iframe {
+  width: 100%;
+  height: 200px; /* Sesuaikan dengan ukuran yang Anda inginkan */
+}
 
 .content {
   margin-top: 20px;
