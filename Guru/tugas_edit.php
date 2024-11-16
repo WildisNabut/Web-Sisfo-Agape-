@@ -89,6 +89,17 @@ if (!isset($_SESSION['username'])) {
         </div>
     </div>
 
+    <!-- Mata Pelajaran -->
+    <div class="form-group row">
+            <label for="mapelInput" class="col-sm-2 col-form-label">Mata Pelajaran</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="kode_mata_pelajaran" id="mapelInput" value="<?php echo $data['kode_mata_pelajaran']; ?>"  readonly>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-secondary" onclick="openMapelModal()">Pilih</button>
+            </div>
+       </div>
+
     <!-- Nama Tugas -->
     <div class="form-group row">
         <label for="inputNamaTugas" class="col-sm-2 col-form-label">Nama Tugas</label>
@@ -110,14 +121,6 @@ if (!isset($_SESSION['username'])) {
         <label for="inputTanggalSelesai" class="col-sm-2 col-form-label">Tanggal & Waktu Selesai</label>
         <div class="col-sm-10">
             <input type="datetime-local" class="form-control" id="inputTanggalSelesai" name="tanggal_selesai" value="<?php echo date('Y-m-d\TH:i', strtotime($data['tanggal_selesai'])); ?>" required>
-        </div>
-    </div>
-
-    <!-- Status -->
-    <div class="form-group row">
-        <label for="inputStatus" class="col-sm-2 col-form-label">Status</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputStatus" name="status" value="<?php echo $data['status']; ?>" readonly>
         </div>
     </div>
 
@@ -182,7 +185,57 @@ function pilihKelas(id_kelas) {
     document.getElementById("kelasInput").value = id_kelas;
     closeKelasModal();
 }
+
+// Fungsi untuk membuka dan menutup modal mata pelajaran
+function openMapelModal() {
+    document.getElementById("mapelModalOverlay").style.display = "block";
+    document.getElementById("mapelModal").style.display = "block";
+}
+
+function closeMapelModal() {
+    document.getElementById("mapelModalOverlay").style.display = "none";
+    document.getElementById("mapelModal").style.display = "none";
+}
+
+// Fungsi untuk memilih mata pelajaran dan memasukkan kode mata pelajaran ke input
+function pilihMapel(kode_mata_pelajaran) {
+    document.getElementById("mapelInput").value = kode_mata_pelajaran;
+    closeMapelModal();
+}
+
+
 </script>
+
+<!-- Overlay dan Modal untuk Pilih Mata Pelajaran -->
+<div id="mapelModalOverlay" onclick="closeMapelModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
+<div id="mapelModal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, 0); background:white; padding:20px; border-radius:8px;">
+    <h3>Pilih Mata Pelajaran</h3>
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Mata Pelajaran</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php            
+            // Query untuk mengambil data mata pelajaran dan nama kelas terkait
+            $tampil_mapel = "SELECT * FROM `mata_pelajaran`";
+            $hasil_mapel = mysqli_query($koneksi, $tampil_mapel);
+
+            while ($data_mapel = mysqli_fetch_array($hasil_mapel)) {
+                echo "<tr>
+                        <td>{$data_mapel['nama_matapelajaran']}</td>
+                        <td><button type='button' class='btn btn-primary' onclick=\"pilihMapel('{$data_mapel['kode_mata_pelajaran']}')\">Pilih</button></td>
+                    </tr>";
+            }
+            ?>
+        </tbody>
+
+    </table>
+    <button type="button" class="btn btn-secondary" onclick="closeMapelModal()">Tutup</button>
+</div>
+
 
  <!-- Modal Konfirmasi Hapus -->
 

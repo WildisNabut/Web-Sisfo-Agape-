@@ -7,6 +7,7 @@ if (isset($_POST['id_tugas'])) {
     // Ambil data dari form
     $id_tugas = $_POST['id_tugas'];
     $id_kelas = $_POST['id_kelas'];
+    $kode_mata_pelajaran = $_POST['kode_mata_pelajaran'];
     $nama_tugas = $_POST['nama_tugas'];
     $deskripsi = $_POST['deskripsi'];
     $tanggal_selesai = $_POST['tanggal_selesai'];
@@ -15,6 +16,7 @@ if (isset($_POST['id_tugas'])) {
     // Query untuk memperbarui data tugas
     $query = "UPDATE tugas 
               SET id_kelas = '$id_kelas', 
+                  kode_mata_pelajaran = '$kode_mata_pelajaran',
                   nama_tugas = '$nama_tugas', 
                   deskripsi = '$deskripsi', 
                   tanggal_selesai = '$tanggal_selesai', 

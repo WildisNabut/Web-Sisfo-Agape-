@@ -63,40 +63,37 @@ if (!isset($_SESSION['username'])) {
   </ul>
 </nav>
 <!-- End of Topbar -->
-
-<!-- konten yang ingin diubah -->
 <div class="container-fluid">
-
-    <!-- Form untuk Tambah Tugas -->
-    <form class="form-group" action="Proses_Tambah_Tugas.php" method="post">
+        <!-- Form untuk Tambah Tugas -->
+        <form class="form-group" action="Proses_Tambah_Tugas.php" method="post">
         
         <!-- Input tersembunyi untuk Username -->
         <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
         
         <!-- Input tersembunyi untuk ID Tugas -->
         <input type="hidden" name="id_tugas" value="<?php echo uniqid(); ?>">
-        
-                    <!-- Kelas -->
-                        <div class="form-group row">
-                        <label for="kelasInput" class="col-sm-2 col-form-label">Kelas</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="id_kelas" id="kelasInput" readonly>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-secondary" onclick="openKelasModal()">Pilih</button>
-                        </div>
-                    </div>
 
-                    <!-- Mata Pelajaran -->
-                        <div class="form-group row">
-                        <label for="mapelInput" class="col-sm-2 col-form-label">Mata Pelajaran</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="kode_mata_pelajaran" id="mapelInput" readonly>
-                        </div>
-                        <div class="col-sm-2">
-                        <button type="button" class="btn btn-secondary" onclick="openMapelModal()">Pilih</button>
-                        </div>
-                    </div>
+        <!-- Kelas -->
+        <div class="form-group row">
+          <label for="kelasInput" class="col-sm-2 col-form-label">Kelas</label>
+           <div class="col-sm-8">
+                <input type="text" class="form-control" name="id_kelas" id="kelasInput" readonly>
+             </div>
+           <div class="col-sm-2">
+         <button type="button" class="btn btn-secondary" onclick="openKelasModal()">Pilih</button>
+        </div>
+      </div>
+
+        <!-- Mata Pelajaran -->
+        <div class="form-group row">
+            <label for="mapelInput" class="col-sm-2 col-form-label">Mata Pelajaran</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="kode_mata_pelajaran" id="mapelInput" readonly>
+            </div>
+            <div class="col-sm-2">
+                <button type="button" class="btn btn-secondary" onclick="openMapelModal()">Pilih</button>
+            </div>
+       </div>
 
         <!-- Nama Tugas -->
         <div class="form-group row">
@@ -134,7 +131,74 @@ if (!isset($_SESSION['username'])) {
         </div>
 
     </form>
-</div>
+
+   </div>
+
+
+<!-- JavaScript untuk membuka dan menutup modal serta memilih username dan kelas -->
+<script>
+// Fungsi untuk membuka dan menutup modal username
+function openAccountModal() {
+    document.getElementById("modalOverlay").style.display = "block";
+    document.getElementById("accountModal").style.display = "block";
+}
+
+function closeAccountModal() {
+    document.getElementById("modalOverlay").style.display = "none";
+    document.getElementById("accountModal").style.display = "none";
+}
+
+// Fungsi untuk memilih username dan menutup modal
+function selectUsername(username) {
+    // Mengisi input username dengan username yang dipilih
+    document.getElementById("username").value = username;
+    closeAccountModal();
+}
+
+// Fungsi untuk membuka dan menutup modal kelas (jika diperlukan)
+function openKelasModal() {
+    document.getElementById("kelasModalOverlay").style.display = "block";
+    document.getElementById("kelasModal").style.display = "block";
+}
+
+function closeKelasModal() {
+    document.getElementById("kelasModalOverlay").style.display = "none";
+    document.getElementById("kelasModal").style.display = "none";
+}
+
+// Fungsi untuk memilih kelas dan memasukkan ID kelas ke input
+function pilihKelas(id_kelas) {
+    document.getElementById("kelasInput").value = id_kelas;
+    closeKelasModal();
+}
+
+
+// Fungsi untuk membuka dan menutup modal mata pelajaran
+function openMapelModal() {
+    document.getElementById("mapelModalOverlay").style.display = "block";
+    document.getElementById("mapelModal").style.display = "block";
+}
+
+function closeMapelModal() {
+    document.getElementById("mapelModalOverlay").style.display = "none";
+    document.getElementById("mapelModal").style.display = "none";
+}
+
+// Fungsi untuk memilih mata pelajaran dan memasukkan kode mata pelajaran ke input
+function pilihMapel(kode_mata_pelajaran) {
+    document.getElementById("mapelInput").value = kode_mata_pelajaran;
+    closeMapelModal();
+}
+</script>
+
+
+<!-- JavaScript untuk memastikan input hanya angka -->
+<script type="text/javascript">
+function hanyaAngka(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    return (charCode >= 48 && charCode <= 57);
+}
+</script>
 
 <!-- Overlay dan Modal untuk Pilih Kelas -->
 <div id="kelasModalOverlay" onclick="closeKelasModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
@@ -166,6 +230,8 @@ if (!isset($_SESSION['username'])) {
     <button type="button" class="btn btn-secondary" onclick="closeKelasModal()">Tutup</button>
 </div>
 
+
+
 <!-- Overlay dan Modal untuk Pilih Mata Pelajaran -->
 <div id="mapelModalOverlay" onclick="closeMapelModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5);"></div>
 <div id="mapelModal" style="display:none; position:fixed; top:20%; left:50%; transform:translate(-50%, 0); background:white; padding:20px; border-radius:8px;">
@@ -178,14 +244,9 @@ if (!isset($_SESSION['username'])) {
             </tr>
         </thead>
         <tbody>
-            <?php
-            $username = $_SESSION['username']; // Mendapatkan username dari session
-            
+            <?php            
             // Query untuk mengambil data mata pelajaran dan nama kelas terkait
-            $tampil_mapel = "SELECT mp.kode_mata_pelajaran, mp.nama_matapelajaran, k.nama_kelas
-                            FROM mata_pelajaran mp 
-                            JOIN kelas k ON mp.id_kelas = k.id_kelas";
-            
+            $tampil_mapel = "SELECT * FROM `mata_pelajaran`";
             $hasil_mapel = mysqli_query($koneksi, $tampil_mapel);
 
             while ($data_mapel = mysqli_fetch_array($hasil_mapel)) {
@@ -201,76 +262,7 @@ if (!isset($_SESSION['username'])) {
     <button type="button" class="btn btn-secondary" onclick="closeMapelModal()">Tutup</button>
 </div>
 
-<!-- JavaScript untuk membuka dan menutup modal serta memilih username dan kelas -->
-<script>
-// Fungsi untuk membuka dan menutup modal kelas (jika diperlukan)
-function openKelasModal() {
-    document.getElementById("kelasModalOverlay").style.display = "block";
-    document.getElementById("kelasModal").style.display = "block";
-}
-
-function closeKelasModal() {
-    document.getElementById("kelasModalOverlay").style.display = "none";
-    document.getElementById("kelasModal").style.display = "none";
-}
-
-// Fungsi untuk memilih kelas dan memasukkan ID kelas ke input
-function pilihKelas(id_kelas) {
-    document.getElementById("kelasInput").value = id_kelas;
-    closeKelasModal();
-}
-
-// Fungsi untuk membuka dan menutup modal mata pelajaran
-function openMapelModal() {
-    document.getElementById("mapelModalOverlay").style.display = "block";
-    document.getElementById("mapelModal").style.display = "block";
-}
-
-function closeMapelModal() {
-    document.getElementById("mapelModalOverlay").style.display = "none";
-    document.getElementById("mapelModal").style.display = "none";
-}
-
-// Fungsi untuk memilih mata pelajaran dan memasukkan kode mata pelajaran ke input
-function pilihMapel(kode_mata_pelajaran) {
-    document.getElementById("mapelInput").value = kode_mata_pelajaran;
-    closeMapelModal();
-}
-</script>
-
- <!-- Modal Konfirmasi Hapus -->
-
- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header justify-content-center">
-                <!-- Icon Peringatan Besar -->
-                <i class="fas fa-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
-            </div>
-            <div class="modal-body text-center">
-                <h5 class="modal-title mb-3" id="deleteModalLabel">Konfirmasi Hapus</h5>
-                <p>Apakah Anda yakin ingin menghapus data ini?</p>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <a id="confirmDeleteBtn" href="#" class="btn btn-primary">Ya, Hapus</a>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- JavaScript untuk Modal Hapus -->
-<script>
-    function showDeleteModal(id) {
-        // Set URL dengan ID data untuk dihapus
-        document.getElementById('confirmDeleteBtn').href = 'hapus_kutipan.php?kode=' + id;
-        
-        // Tampilkan modal
-        $('#deleteModal').modal('show');
-    }
-</script>
-        <!-- akhir dari konten -->
-
+<!-- konten yang ingin diubah -->
 
 
       </div>

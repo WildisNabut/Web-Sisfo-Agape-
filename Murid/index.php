@@ -87,118 +87,115 @@ if (!isset($_SESSION['username'])) {
         </div>
         <div class="card-body">
         <div class="row">
-    <?php
-    // Pastikan pengguna sudah login
-    if (!isset($_SESSION['username'])) {
-        header("Location: login.php");
-        exit();
-    }
-
-    include('../koneksi.php');
-
-    // Ambil username dari session
-    $username = $_SESSION['username'];
-
-    // Mengambil id_kelas dari tabel siswa yang terkait dengan username
-    $query_siswa = "SELECT id_kelas FROM murid WHERE username = '$username'";
-    $result_siswa = mysqli_query($koneksi, $query_siswa);
-    $data_siswa = mysqli_fetch_assoc($result_siswa);
-
-    // Mengambil id_kelas siswa
-    $id_kelas_siswa = $data_siswa['id_kelas'];
-
-    // Query untuk mengambil mata pelajaran yang memiliki tugas berdasarkan id_kelas, diurutkan dari tanggal tugas yang terbaru
-    $query_mapel_tugas = "SELECT DISTINCT mp.nama_matapelajaran, mp.kode_mata_pelajaran, t.tanggal_selesai
-                          FROM tugas t
-                          JOIN mata_pelajaran mp ON t.kode_mata_pelajaran = mp.kode_mata_pelajaran
-                          WHERE t.id_kelas = '$id_kelas_siswa'
-                          ORDER BY t.tanggal_selesai DESC";
-
-    $result_mapel_tugas = mysqli_query($koneksi, $query_mapel_tugas);
-
-    // Menampilkan nama mata pelajaran yang memiliki tugas dalam bentuk card
-    while ($data_mapel = mysqli_fetch_array($result_mapel_tugas)) {
-        $nama_mata_pelajaran = $data_mapel['nama_matapelajaran'];
-        $kode_mata_pelajaran = $data_mapel['kode_mata_pelajaran'];
-        $tanggal_selesai = $data_mapel['tanggal_selesai'];
-
-        // Menghitung sisa waktu
-        $current_date = new DateTime();
-        $due_date = new DateTime($tanggal_selesai);
-        $interval = $current_date->diff($due_date);
-
-        // Format sisa waktu
-        if ($interval->invert == 1) {
-            $sisa_waktu = "Waktu telah habis";
-        } else {
-            $sisa_waktu = $interval->days . " hari " . $interval->h . " jam " . $interval->i . " menit ";
+        <?php
+        if (!isset($_SESSION['username'])) {
+            header("Location: login.php");
+            exit();
         }
 
-        echo "<div class='col-md-4 mb-4'>
-                <div class='card card-border-left shadow-lg'> <!-- Tambahkan kelas card-border-left untuk efek pembatas -->
-                    <div class='card-body'>
-                        <h5 class='card-title'><i class='fas fa-book'></i> $nama_mata_pelajaran</h5>
-                        <p class='card-text'><i class='fas fa-calendar-alt'></i> Batas Akhir: $tanggal_selesai</p>
-                        <p class='card-text'><i class='fas fa-hourglass-half'></i> Sisa Waktu: $sisa_waktu</p>
-                        <button onclick='lihatTugas(\"$kode_mata_pelajaran\", \"$nama_mata_pelajaran\")' class='btn btn-primary'><i class='fas fa-eye'></i> Lihat Tugas</button>
-                    </div>
-                </div>
-              </div>";
-    }
-    ?>
-</div>
+        include('../koneksi.php');
+        $username = mysqli_real_escape_string($koneksi, $_SESSION['username']);
 
+        // Ambil id_kelas
+        $query_siswa = "SELECT id_kelas FROM murid WHERE username = ?";
+        $stmt = mysqli_prepare($koneksi, $query_siswa);
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+        $result_siswa = mysqli_stmt_get_result($stmt);
+        $data_siswa = mysqli_fetch_assoc($result_siswa);
+        $id_kelas_siswa = $data_siswa['id_kelas'];
+        mysqli_stmt_close($stmt);
+
+        // Ambil daftar tugas
+        $query_tugas = "SELECT mp.nama_matapelajaran, mp.kode_mata_pelajaran, t.tanggal_selesai, t.nama_tugas, t.id_tugas
+                        FROM tugas t
+                        JOIN mata_pelajaran mp ON t.kode_mata_pelajaran = mp.kode_mata_pelajaran
+                        WHERE t.id_kelas = ?
+                        ORDER BY t.tanggal_selesai DESC";
+        $stmt_tugas = mysqli_prepare($koneksi, $query_tugas);
+        mysqli_stmt_bind_param($stmt_tugas, "i", $id_kelas_siswa);
+        mysqli_stmt_execute($stmt_tugas);
+        $result_mapel_tugas = mysqli_stmt_get_result($stmt_tugas);
+
+        while ($data_tugas = mysqli_fetch_assoc($result_mapel_tugas)) {
+            $nama_mata_pelajaran = htmlspecialchars($data_tugas['nama_matapelajaran']);
+            $judul_tugas = htmlspecialchars($data_tugas['nama_tugas']);
+            $tanggal_selesai = htmlspecialchars($data_tugas['tanggal_selesai']);
+            $id_tugas = htmlspecialchars($data_tugas['id_tugas']);
+
+            // Hitung sisa waktu
+            $current_date = new DateTime();
+            $due_date = new DateTime($tanggal_selesai);
+            $interval = $current_date->diff($due_date);
+            
+            // Tentukan apakah tugas telah berakhir
+            if ($interval->invert == 1) {
+                $sisa_waktu = "<span style='background-color: #ffcccc; color: #ff0000; padding: 3px 5px; border-radius: 5px;'>Berakhir</span>";
+            } else {
+                $sisa_waktu = "{$interval->days} hari {$interval->h} jam {$interval->i} menit";
+            }
+            
+            // Tampilkan kartu tugas
+            echo "<div class='col-md-4 mb-4'>
+                    <div class='card card-border-left shadow-lg'>
+                        <div class='card-body'>
+                            <h5 class='card-title'><i class='fas fa-book'></i> $nama_mata_pelajaran</h5>
+                            <h6 class='card-subtitle mb-2 text-muted'><i class='fas fa-tasks'></i> $judul_tugas</h6>
+                            <p class='card-text'><i class='fas fa-calendar-alt'></i> Batas Akhir: $tanggal_selesai</p>
+                            <p class='card-text'><i class='fas fa-hourglass-half'></i> Sisa Waktu: $sisa_waktu</p>
+                            <button onclick='lihatTugas(\"$id_tugas\")' class='btn btn-primary'><i class='fas fa-eye'></i> Lihat Tugas</button>
+                        </div>
+                    </div>
+                </div>";
+            
+        }
+        mysqli_stmt_close($stmt_tugas);
+        ?>
+        </div>
         </div>
     </div>
-
 
     <!-- Modal -->
-<div class="modal fade" id="tugasModal" tabindex="-1" aria-labelledby="tugasModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="tugasModalLabel">Daftar Tugas</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <h5 id="namaMataPelajaran"></h5>
-                <div id="tugasContent">
-                    <!-- Konten tugas akan dimuat di sini melalui AJAX -->
+    <div class="modal fade" id="tugasModal" tabindex="-1" aria-labelledby="tugasModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tugasModalLabel">Detail Tugas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <a href="index.php">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                </a>
+                <div class="modal-body">
+                    <h5 id="namaMataPelajaran"></h5>
+                    <div id="tugasContent">
+                        <!-- Konten akan dimuat melalui AJAX -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="index.php">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function lihatTugas(idTugas) {
+            document.getElementById("tugasContent").innerHTML = "Loading...";
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "ambil_tugas.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.getElementById("tugasContent").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send("id_tugas=" + idTugas);
+            var myModal = new bootstrap.Modal(document.getElementById('tugasModal'));
+            myModal.show();
+        }
+    </script>
 </div>
 
-<script>
-    // Fungsi untuk membuka modal dan mengambil data tugas
-    function lihatTugas(kodeMataPelajaran, namaMataPelajaran) {
-        document.getElementById("namaMataPelajaran").innerText = namaMataPelajaran;
-        document.getElementById("tugasContent").innerHTML = "Loading...";
-
-        // Menggunakan AJAX untuk mengambil data tugas
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "ambil_tugas.php", true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById("tugasContent").innerHTML = xhr.responseText;
-            }
-        };
-        xhr.send("kode_mata_pelajaran=" + kodeMataPelajaran);
-
-        // Membuka modal
-        var myModal = new bootstrap.Modal(document.getElementById('tugasModal'));
-        myModal.show();
-    }
-</script>
-    <!-- End of Main Content -->
-</div>
 
     <!-- End of Content Wrapper -->
   </div>

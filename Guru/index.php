@@ -82,72 +82,73 @@ if (!isset($_SESSION['username'])) {
     <div class="card-body">
     <div class="table-responsive">
     <?php
+// Pastikan pengguna sudah login
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
 
-    // Pastikan pengguna sudah login (jika session username tidak ada, redirect ke login)
-    if (!isset($_SESSION['username'])) {
-        header("Location: login.php");
-        exit();
+include('../koneksi.php');
+$i = 1;
+$username = $_SESSION['username']; // Mendapatkan username dari session
+
+// Mengambil data tugas berdasarkan username yang sedang login, diurutkan berdasarkan data terbaru
+$tampil = "SELECT t.id_tugas, t.id_kelas, t.kode_mata_pelajaran, t.nama_tugas, t.deskripsi, t.tanggal_selesai, t.status, k.nama_kelas, mp.nama_matapelajaran
+           FROM tugas t 
+           JOIN kelas k ON t.id_kelas = k.id_kelas
+           JOIN mata_pelajaran mp ON t.kode_mata_pelajaran = mp.kode_mata_pelajaran
+           WHERE t.username = '$username'
+           ORDER BY t.id_tugas DESC"; // Mengurutkan berdasarkan ID tugas terbaru
+
+$hasil = mysqli_query($koneksi, $tampil);
+
+?>
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th class='text-center'> No </th>
+            <th class='text-center'> Kelas </th>
+            <th class='text-center'> Mata Pelajaran </th>
+            <th class='text-center'> Nama Tugas </th>
+            <th class='text-center'> Deskripsi </th>
+            <th class='text-center'> Tanggal Selesai </th>
+            <th class='text-center'> Status </th>
+            <th colspan="2" class='text-center'><b> Aksi </b></th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+    while ($data = mysqli_fetch_array($hasil)) {
+        // Mendapatkan tanggal hari ini
+        $currentDate = date('Y-m-d');
+
+        // Tentukan status berdasarkan tanggal selesai
+        if ($data['tanggal_selesai'] < $currentDate) {
+            $status = 'Berakhir'; // Tugas sudah selesai
+            $statusIcon = "<span class='text-danger'>•</span>";
+        } else {
+            $status = 'Sedang Berlangsung'; // Tugas belum selesai
+            $statusIcon = "<span class='text-success'>•</span>";
+        }
+
+        echo "<tr>
+                <th class='text-center'>" . $i++ . "</th>
+                <td class='text-center'> $data[nama_kelas] </td>  <!-- Menampilkan nama kelas -->
+                <td class='text-center'> $data[nama_matapelajaran] </td>  <!-- Menampilkan nama mata pelajaran -->
+                <td class='text-center'> $data[nama_tugas] </td>
+                <td class='text-left'> $data[deskripsi] </td>
+                <td class='text-center'> $data[tanggal_selesai] </td>
+                <td class='text-center'> $statusIcon $status </td>
+                <td width='100'><a href='tugas_edit.php?kode=$data[id_tugas]' class='btn btn-success'> Edit </a></td>
+                <td width='80'>
+                    <button class='btn btn-danger' onclick='showDeleteModal(\"$data[id_tugas]\")'>Hapus</button>
+                </td>
+            </tr>";
     }
-
-    include('../koneksi.php');
-    $i = 1;
-    $username = $_SESSION['username']; // Mendapatkan username dari session
-
-    // Mengambil data tugas berdasarkan username yang sedang login
-    $tampil = "SELECT t.id_tugas, t.id_kelas, t.kode_mata_pelajaran, t.nama_tugas, t.deskripsi, t.tanggal_selesai, t.status, k.nama_kelas, mp.nama_matapelajaran
-               FROM tugas t 
-               JOIN kelas k ON t.id_kelas = k.id_kelas
-               JOIN mata_pelajaran mp ON t.kode_mata_pelajaran = mp.kode_mata_pelajaran
-               WHERE t.username = '$username'"; // Menyaring data berdasarkan username
-
-    $hasil = mysqli_query($koneksi, $tampil);
-
     ?>
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-            <tr>
-                <th class='text-center'> No </th>
-                <th class='text-center'> Kelas </th>
-                <th class='text-center'> Mata Pelajaran </th>
-                <th class='text-center'> Nama Tugas </th>
-                <th class='text-center'> Deskripsi </th>
-                <th class='text-center'> Tanggal Selesai </th>
-                <th class='text-center'> Status </th>
-                <th colspan="2" class='text-center'><b> Aksi </b></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            while ($data = mysqli_fetch_array($hasil)) {
-                // Tentukan status berdasarkan tanggal_selesai
-                $currentDate = date('Y-m-d'); // Mendapatkan tanggal hari ini
+    </tbody>
+</table>
 
-                if ($data['tanggal_selesai'] < $currentDate) {
-                    $status = 'Berakhir'; // Tugas sudah selesai
-                } else {
-                    $status = 'Sedang Berlangsung'; // Tugas belum selesai
-                }
-
-                // Tentukan titik hijau untuk status
-                $statusIcon = ($status == 'Sedang Berlangsung') ? "<span class='text-success'>•</span>" : "<span class='text-danger'>•</span>";
-
-                echo "<tr>
-                        <th class='text-center'>" . $i++ . "</th>
-                        <td class='text-center'> $data[nama_kelas] </td>  <!-- Menampilkan nama kelas -->
-                        <td class='text-center'> $data[nama_matapelajaran] </td>  <!-- Menampilkan nama mata pelajaran -->
-                        <td class='text-center'> $data[nama_tugas] </td>
-                        <td class='text-center'> $data[deskripsi] </td>
-                        <td class='text-center'> $data[tanggal_selesai] </td>
-                        <td class='text-center'> $data[status] </td>
-                        <td width='100'><a href='tugas_edit.php?kode=$data[id_tugas]' class='btn btn-success'> Edit </a></td>
-                        <td width='80'>
-                            <button class='btn btn-danger' onclick='showDeleteModal(\"$data[id_tugas]\")'>Hapus</button>
-                        </td>
-                    </tr>";
-            }
-            ?>
-        </tbody>
-    </table>
     </div>
     <div class="clearfix margin-bawah"></div>
 </div>
